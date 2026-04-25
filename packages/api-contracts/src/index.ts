@@ -1,5 +1,9 @@
 import { initContract } from "@ts-rest/core";
 import { z } from "zod";
+import {
+  badRequestResponse,
+  internalServerErrorResponse,
+} from "./common-responses.js";
 
 const c = initContract();
 
@@ -17,6 +21,8 @@ export const contract = c.router({
     path: "/hello",
     responses: {
       200: z.object({ message: z.string() }),
+      400: badRequestResponse,
+      500: internalServerErrorResponse,
     },
     summary: "Hello world",
   },
