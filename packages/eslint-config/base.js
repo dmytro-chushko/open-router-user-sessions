@@ -1,6 +1,7 @@
+/// <reference path="./types/eslint-plugin-only-warn.d.ts" />
 import js from "@eslint/js";
 import eslintConfigPrettier from "eslint-config-prettier";
-import importPlugin from "eslint-plugin-import";
+import pluginImport from "eslint-plugin-import";
 import turboPlugin from "eslint-plugin-turbo";
 import tseslint from "typescript-eslint";
 import onlyWarn from "eslint-plugin-only-warn";
@@ -17,7 +18,7 @@ export const config = [
   {
     plugins: {
       turbo: turboPlugin,
-      import: importPlugin,
+      import: pluginImport,
     },
     rules: {
       "turbo/no-undeclared-env-vars": "warn",
