@@ -1,6 +1,6 @@
 import { Controller } from '@nestjs/common';
-import { TsRestHandler, tsRestHandler } from '@ts-rest/nest';
 import { contract } from '@repo/api-contracts';
+import { TsRestHandler, tsRestHandler } from '@ts-rest/nest';
 
 @Controller()
 export class ApiContractController {

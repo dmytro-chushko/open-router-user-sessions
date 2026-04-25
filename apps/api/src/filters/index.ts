@@ -44,6 +44,7 @@ export class AllExceptionsFilter implements ExceptionFilter {
 
     if (exception instanceof HttpException) {
       this.respondWithHttpException(response, exception);
+
       return;
     }
 
@@ -124,6 +125,7 @@ export class AllExceptionsFilter implements ExceptionFilter {
         status,
         error: 'Something went wrong',
       });
+
       return;
     }
 
@@ -146,6 +148,7 @@ export class AllExceptionsFilter implements ExceptionFilter {
         error: errorText,
         issues,
       });
+
       return;
     }
 
@@ -174,9 +177,11 @@ export class AllExceptionsFilter implements ExceptionFilter {
       'message' in exceptionResponse
     ) {
       const msg = (exceptionResponse as { message?: unknown }).message;
+
       if (Array.isArray(msg)) {
         return msg.join('; ');
       }
+
       if (typeof msg === 'string') {
         return msg;
       }
