@@ -11,7 +11,10 @@
     "format:check": "prettier --check \"**/*.{ts,tsx,md}\"",
     "fix": "pnpm format && turbo run lint -- --fix",
     "precheck": "pnpm format:check && pnpm lint",
-    "prepare": "husky"
+    "prepare": "husky",
+    "db:generate": "pnpm --filter api run prisma:generate",
+    "db:migrate:dev": "pnpm --filter api run prisma:migrate:dev",
+    "db:migrate:deploy": "pnpm --filter api run prisma:migrate:deploy"
   },
   "devDependencies": {
     "husky": "^9.1.7",
