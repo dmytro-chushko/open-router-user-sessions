@@ -1,9 +1,11 @@
 import "@repo/ui/styles.css";
 import "./globals.css";
+import { TopBar } from "@repo/ui";
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
 
 import { QueryProvider } from "@/shared/providers/query-provider";
+import { ThemeProvider } from "@/shared/providers/theme-provider";
 
 const geist = Geist({ subsets: ["latin"] });
 
@@ -18,9 +20,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="uk" suppressHydrationWarning>
       <body className={geist.className}>
-        <QueryProvider>{children}</QueryProvider>
+        <ThemeProvider>
+          <TopBar>
+            <span className="truncate text-sm font-medium text-foreground">
+              Open Router Sessions
+            </span>
+          </TopBar>
+          <QueryProvider>{children}</QueryProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
