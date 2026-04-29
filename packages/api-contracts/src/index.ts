@@ -3,7 +3,7 @@ import { z } from "zod";
 import {
   badRequestResponse,
   internalServerErrorResponse,
-} from "./common-responses.js";
+} from "./common-responders.js";
 
 const c = initContract();
 
