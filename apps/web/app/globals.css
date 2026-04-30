@@ -1,2 +1,8 @@
 @import "tailwindcss";
 @import "@repo/tailwind-config";
+
+:root {
+  --header-height: calc(--spacing(16));
+  --header-tablet-height: calc(--spacing(14));
+  --header-mobile-height: calc(--spacing(18));
+}

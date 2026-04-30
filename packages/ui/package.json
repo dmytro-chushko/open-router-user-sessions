@@ -10,10 +10,38 @@
   ],
   "exports": {
     ".": {
+      "development": {
+        "types": "./src/index.ts",
+        "default": "./src/index.ts"
+      },
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
     },
     "./styles.css": "./dist/index.css",
+    "./card": {
+      "development": {
+        "types": "./src/card.tsx",
+        "default": "./src/card.tsx"
+      },
+      "types": "./dist/card.d.ts",
+      "default": "./dist/card.js"
+    },
+    "./gradient": {
+      "development": {
+        "types": "./src/gradient.tsx",
+        "default": "./src/gradient.tsx"
+      },
+      "types": "./dist/gradient.d.ts",
+      "default": "./dist/gradient.js"
+    },
+    "./turborepo-logo": {
+      "development": {
+        "types": "./src/turborepo-logo.tsx",
+        "default": "./src/turborepo-logo.tsx"
+      },
+      "types": "./dist/turborepo-logo.d.ts",
+      "default": "./dist/turborepo-logo.js"
+    },
     "./*": {
       "types": "./dist/*.d.ts",
       "default": "./dist/*.js"
@@ -22,7 +50,7 @@
   "license": "MIT",
   "scripts": {
     "build:styles": "tailwindcss -i ./src/styles.css -o ./dist/index.css",
-    "build:components": "tsc",
+    "build:components": "tsc && node ./scripts/rewrite-declaration-imports.mjs",
     "check-types": "tsc --noEmit",
     "dev:styles": "tailwindcss -i ./src/styles.css -o ./dist/index.css --watch",
     "dev:components": "tsc --watch",

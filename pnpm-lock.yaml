@@ -223,6 +223,9 @@ importers:
       '@ts-rest/core':
         specifier: 3.52.1
         version: 3.52.1(@types/node@22.18.12)(zod@3.25.76)
+      lucide-react:
+        specifier: ^1.14.0
+        version: 1.14.0(react@19.2.0)
       next:
         specifier: 16.2.0
         version: 16.2.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0)

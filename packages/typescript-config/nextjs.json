@@ -5,6 +5,8 @@
     "plugins": [{ "name": "next" }],
     "module": "ESNext",
     "moduleResolution": "Bundler",
+    "allowImportingTsExtensions": true,
+    "customConditions": ["development"],
     "allowJs": true,
     "jsx": "preserve",
     "noEmit": true
