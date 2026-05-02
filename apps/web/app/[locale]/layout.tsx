@@ -1,6 +1,8 @@
 import "@repo/ui/styles.css";
 import "../globals.css";
 
+import { ThemeProvider } from "@teispace/next-themes";
+import { getTheme } from "@teispace/next-themes/server";
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
 import { notFound } from "next/navigation";
@@ -14,7 +16,6 @@ import type { ReactNode } from "react";
 
 import { routing } from "@/i18n/routing";
 import { QueryProvider } from "@/shared/providers/query-provider";
-import { ThemeProvider } from "@/shared/providers/theme-provider";
 import { WebTopBar } from "@/shared/shell/ui/web-top-bar";
 
 const geist = Geist({ subsets: ["latin"] });
@@ -53,12 +54,20 @@ export default async function LocaleLayout({
   }
   setRequestLocale(locale);
   const messages = await getMessages();
+  const initialTheme = await getTheme();
 
   return (
     <html lang={locale} suppressHydrationWarning>
       <body className={geist.className}>
         <NextIntlClientProvider messages={messages}>
-          <ThemeProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+            storage="hybrid"
+            initialTheme={initialTheme ?? undefined}
+          >
             <div className="min-h-dvh">
               <header className="sticky top-0 z-50">
                 <WebTopBar />
