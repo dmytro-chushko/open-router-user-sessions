@@ -1,0 +1,23 @@
+{
+  "metadata": {
+    "title": "Open Router Sessions",
+    "description": "Turborepo web app"
+  },
+  "header": {
+    "appTitle": "Open Router Sessions",
+    "themeDark": "Dark theme",
+    "themeLight": "Light theme",
+    "themeSystem": "Match system",
+    "localeUk": "Українська",
+    "localeEn": "English",
+    "localeSwitcherLabel": "Language"
+  },
+  "hello": {
+    "loading": "Loading…"
+  },
+  "errors": {
+    "generic": "Something went wrong. Please try again.",
+    "notFoundTitle": "Page not found",
+    "notFoundBack": "Back to home"
+  }
+}

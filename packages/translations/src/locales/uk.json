@@ -1,0 +1,23 @@
+{
+  "metadata": {
+    "title": "Open Router Sessions",
+    "description": "Вебзастосунок Turborepo"
+  },
+  "header": {
+    "appTitle": "Open Router Sessions",
+    "themeDark": "Темна тема",
+    "themeLight": "Світла тема",
+    "themeSystem": "Як у системі",
+    "localeUk": "Українська",
+    "localeEn": "English",
+    "localeSwitcherLabel": "Мова"
+  },
+  "hello": {
+    "loading": "Завантаження…"
+  },
+  "errors": {
+    "generic": "Щось пішло не так. Спробуйте ще раз.",
+    "notFoundTitle": "Сторінку не знайдено",
+    "notFoundBack": "На головну"
+  }
+}
