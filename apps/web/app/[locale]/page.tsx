@@ -1,9 +1,9 @@
 import { HelloDemo } from "@/views/hello-demo";
 
-export default function Page() {
+export default function HomePage() {
   return (
-    <main className="p-6">
+    <div className="p-6">
       <HelloDemo />
-    </main>
+    </div>
   );
 }
