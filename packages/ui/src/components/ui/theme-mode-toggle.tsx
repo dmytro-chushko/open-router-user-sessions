@@ -2,7 +2,6 @@
 
 import { useTheme } from "@teispace/next-themes";
 import { Monitor, Moon, Sun } from "lucide-react";
-import { useEffect, useState } from "react";
 
 import { Button } from "./button.tsx";
 
@@ -16,20 +15,11 @@ export function ThemeModeToggle({
   systemLabel: string;
 }) {
   const { theme, setTheme } = useTheme();
-  const [isMounted, setIsMounted] = useState(false);
   const modes = [
     { id: "light" as const, icon: Sun, label: lightLabel },
     { id: "dark" as const, icon: Moon, label: darkLabel },
     { id: "system" as const, icon: Monitor, label: systemLabel },
   ];
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
-  if (!isMounted) {
-    return <div className="flex h-9 items-center gap-1" aria-hidden />;
-  }
 
   return (
     <div

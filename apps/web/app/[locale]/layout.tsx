@@ -15,8 +15,9 @@ import {
 import type { ReactNode } from "react";
 
 import { routing } from "@/i18n/routing";
-import { resolveSsrColorScheme } from "@/shared/lib/resolve-ssr-color-scheme";
+import { getSsrHtmlThemeProps } from "@/shared/lib/get-ssr-html-theme-props";
 import { QueryProvider } from "@/shared/providers/query-provider";
+import { SystemSsrThemeCleanup } from "@/shared/providers/system-ssr-theme-cleanup";
 import { WebTopBar } from "@/shared/shell/ui/web-top-bar";
 
 const geist = Geist({ subsets: ["latin"] });
@@ -56,13 +57,18 @@ export default async function LocaleLayout({
   setRequestLocale(locale);
   const messages = await getMessages();
   const initialTheme = await getTheme();
-  const ssrScheme = await resolveSsrColorScheme();
+  const ssrHtml = await getSsrHtmlThemeProps();
 
   return (
     <html
       lang={locale}
-      className={ssrScheme === "dark" ? "dark" : undefined}
-      style={{ colorScheme: ssrScheme }}
+      className={ssrHtml.htmlClassName}
+      data-ssr-theme={ssrHtml.dataSsrTheme}
+      style={
+        ssrHtml.colorScheme !== undefined
+          ? { colorScheme: ssrHtml.colorScheme }
+          : undefined
+      }
       suppressHydrationWarning
     >
       <body className={geist.className}>
@@ -76,6 +82,7 @@ export default async function LocaleLayout({
             storage="hybrid"
             initialTheme={initialTheme ?? undefined}
           >
+            <SystemSsrThemeCleanup />
             <div className="min-h-dvh">
               <header className="sticky top-0 z-50">
                 <WebTopBar />
