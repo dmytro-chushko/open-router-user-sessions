@@ -15,6 +15,7 @@ import {
 import type { ReactNode } from "react";
 
 import { routing } from "@/i18n/routing";
+import { resolveSsrColorScheme } from "@/shared/lib/resolve-ssr-color-scheme";
 import { QueryProvider } from "@/shared/providers/query-provider";
 import { WebTopBar } from "@/shared/shell/ui/web-top-bar";
 
@@ -55,9 +56,15 @@ export default async function LocaleLayout({
   setRequestLocale(locale);
   const messages = await getMessages();
   const initialTheme = await getTheme();
+  const ssrScheme = await resolveSsrColorScheme();
 
   return (
-    <html lang={locale} suppressHydrationWarning>
+    <html
+      lang={locale}
+      className={ssrScheme === "dark" ? "dark" : undefined}
+      style={{ colorScheme: ssrScheme }}
+      suppressHydrationWarning
+    >
       <body className={geist.className}>
         <NextIntlClientProvider messages={messages}>
           <ThemeProvider
@@ -65,6 +72,7 @@ export default async function LocaleLayout({
             defaultTheme="system"
             enableSystem
             disableTransitionOnChange
+            noScript
             storage="hybrid"
             initialTheme={initialTheme ?? undefined}
           >
