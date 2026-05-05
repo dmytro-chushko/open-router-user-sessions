@@ -14,6 +14,7 @@ export async function WebTopBar() {
           darkLabel={t("themeDark")}
           lightLabel={t("themeLight")}
           systemLabel={t("themeSystem")}
+          ariaLabel={t("themeModeAriaLabel")}
         />
       }
     >

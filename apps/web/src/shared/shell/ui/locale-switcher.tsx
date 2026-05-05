@@ -13,7 +13,7 @@ export function LocaleSwitcher() {
 
   return (
     <div
-      className="flex shrink-0 items-center gap-1 text-sm"
+      className="flex items-center gap-1 rounded-md border border-border bg-muted/30 p-1"
       role="navigation"
       aria-label={t("localeSwitcherLabel")}
     >
@@ -25,8 +25,8 @@ export function LocaleSwitcher() {
           scroll={false}
           className={
             activeLocale === target
-              ? "rounded-md px-2 py-1 font-semibold text-foreground"
-              : "rounded-md px-2 py-1 text-muted-foreground hover:text-foreground"
+              ? "rounded-md px-2 py-1 font-semibold text-foreground bg-secondary"
+              : "rounded-md px-2 py-1 text-muted-foreground hover:text-foreground hover:bg-accent"
           }
         >
           {target === "uk" ? t("localeUk") : t("localeEn")}

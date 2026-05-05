@@ -8,9 +8,10 @@
     "themeDark": "Темна тема",
     "themeLight": "Світла тема",
     "themeSystem": "Як у системі",
-    "localeUk": "Українська",
-    "localeEn": "English",
-    "localeSwitcherLabel": "Мова"
+    "localeUk": "UA",
+    "localeEn": "EN",
+    "localeSwitcherLabel": "Мова",
+    "themeModeAriaLabel": "Режим теми"
   },
   "hello": {
     "loading": "Завантаження…"
