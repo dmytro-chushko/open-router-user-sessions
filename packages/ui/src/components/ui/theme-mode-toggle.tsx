@@ -9,10 +9,12 @@ export function ThemeModeToggle({
   darkLabel,
   lightLabel,
   systemLabel,
+  ariaLabel,
 }: {
   darkLabel: string;
   lightLabel: string;
   systemLabel: string;
+  ariaLabel: string;
 }) {
   const { theme, setTheme } = useTheme();
   const modes = [
@@ -25,7 +27,7 @@ export function ThemeModeToggle({
     <div
       className="flex items-center gap-1 rounded-md border border-border bg-muted/30 p-1"
       role="group"
-      aria-label="Режим теми"
+      aria-label={ariaLabel}
     >
       {modes.map(({ id, icon: Icon, label }) => (
         <Button

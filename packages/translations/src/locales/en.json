@@ -8,9 +8,10 @@
     "themeDark": "Dark theme",
     "themeLight": "Light theme",
     "themeSystem": "Match system",
-    "localeUk": "Українська",
-    "localeEn": "English",
-    "localeSwitcherLabel": "Language"
+    "localeUk": "UA",
+    "localeEn": "EN",
+    "localeSwitcherLabel": "Language",
+    "themeModeAriaLabel": "Theme mode"
   },
   "hello": {
     "loading": "Loading…"
