@@ -1,12 +1,16 @@
 "use client";
 
+import { toast } from "@repo/ui";
 import { useQuery } from "@tanstack/react-query";
+import { useTranslations } from "next-intl";
+import { useEffect } from "react";
 
 import { publicApiClient } from "@/shared/api/api-client";
 import { getApiErrorMessage } from "@/shared/api/get-api-error-message";
 
 export function useHelloWorldQuery() {
-  return useQuery({
+  const tErrors = useTranslations("errors.entities.hello");
+  const query = useQuery({
     queryKey: ["hello-world"],
     queryFn: async () => {
       const result = await publicApiClient.hello();
@@ -17,11 +21,19 @@ export function useHelloWorldQuery() {
 
       const data = result.body;
 
-      if (data == null) {
-        throw new Error("Invalid response from hello API");
+      if (data === null || data === undefined) {
+        throw new Error(tErrors("invalidResponse"));
       }
 
       return data;
     },
   });
+
+  useEffect(() => {
+    if (query.isError && query.error !== null) {
+      toast.error(query.error.message);
+    }
+  }, [query.error, query.isError]);
+
+  return query;
 }

@@ -1,6 +1,7 @@
 import "@repo/ui/styles.css";
 import "../globals.css";
 
+import { Toaster } from "@repo/ui";
 import { ThemeProvider } from "@teispace/next-themes";
 import { getTheme } from "@teispace/next-themes/server";
 import type { Metadata } from "next";
@@ -83,6 +84,7 @@ export default async function LocaleLayout({
             initialTheme={initialTheme ?? undefined}
           >
             <SystemSsrThemeCleanup />
+            <Toaster />
             <div className="min-h-dvh">
               <header className="sticky top-0 z-50">
                 <WebTopBar />

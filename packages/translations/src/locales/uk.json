@@ -19,6 +19,11 @@
   "errors": {
     "generic": "Щось пішло не так. Спробуйте ще раз.",
     "notFoundTitle": "Сторінку не знайдено",
-    "notFoundBack": "На головну"
+    "notFoundBack": "На головну",
+    "entities": {
+      "hello": {
+        "invalidResponse": "Неправильна відповідь від API hello"
+      }
+    }
   }
 }
