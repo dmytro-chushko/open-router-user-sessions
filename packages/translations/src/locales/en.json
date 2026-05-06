@@ -19,6 +19,11 @@
   "errors": {
     "generic": "Something went wrong. Please try again.",
     "notFoundTitle": "Page not found",
-    "notFoundBack": "Back to home"
+    "notFoundBack": "Back to home",
+    "entities": {
+      "hello": {
+        "invalidResponse": "Invalid response from hello API"
+      }
+    }
   }
 }
