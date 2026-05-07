@@ -13,8 +13,118 @@ datasource db {
   provider = "postgresql"
 }
 
+enum Role {
+  USER
+  ADMIN
+}
+
+enum Status {
+  ACTIVE
+  INACTIVE
+  CANCELLED
+  PENDING
+  EXPIRED
+}
+
+enum Provider {
+  GOOGLE
+  GITHUB
+}
+
 model User {
+  id                  String    @id @default(cuid())
+  email               String    @unique
+  passwordHash        String?
+  emailVerifiedAt     DateTime?
+  name                String?
+  avatar              String?
+  role                Role      @default(USER)
+  createdAt           DateTime  @default(now())
+  updatedAt           DateTime  @updatedAt
+
+  accounts                  Account[]
+  sessions                  Session[]
+  emailVerificationTokens   EmailVerificationToken[]
+  passwordResetTokens       PasswordResetToken[]
+  subscriptions             Subscription[]
+}
+
+model Account {
+  id                String   @id @default(cuid())
+  userId            String
+  provider          Provider
+  providerAccountId String
+  refreshToken      String?
+  accessToken       String?
+  expiresAt         Int?
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id])
+
+  @@unique([provider, providerAccountId])
+  @@index([userId])
+}
+
+model Session {
   id        String   @id @default(cuid())
-  email     String   @unique
+  tokenHash String   @unique
+  userId    String
+  userAgent String?
+  ipAddress String?
+  expiresAt DateTime
   createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id])
+
+  @@index([userId])
+}
+
+model EmailVerificationToken {
+  id          String    @id @default(cuid())
+  tokenHash   String    @unique
+  userId      String
+  expiresAt   DateTime
+  consumedAt  DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  user User @relation(fields: [userId], references: [id])
+
+  @@index([userId])
+}
+
+model PasswordResetToken {
+  id         String    @id @default(cuid())
+  tokenHash  String    @unique
+  userId     String
+  expiresAt  DateTime
+  consumedAt DateTime?
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+
+  user User @relation(fields: [userId], references: [id])
+
+  @@index([userId])
+}
+
+model Subscription {
+  id                   String    @id @default(cuid())
+  userId               String
+  stripeCustomerId     String    @unique
+  stripeSubscriptionId String    @unique
+  createdAt            DateTime  @default(now())
+  updatedAt            DateTime  @updatedAt
+  planId               String
+  status               Status
+  currentPeriodStart   DateTime
+  currentPeriodEnd     DateTime
+  cancelAtPeriodEnd    Boolean
+  cancelAt             DateTime?
+  canceledAt           DateTime?
+
+  user User @relation(fields: [userId], references: [id])
+
+  @@index([userId])
 }
