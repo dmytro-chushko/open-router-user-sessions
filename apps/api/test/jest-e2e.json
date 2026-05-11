@@ -4,6 +4,8 @@
   "testEnvironment": "node",
   "testMatch": ["<rootDir>/test/**/*.e2e-spec.ts"],
   "moduleNameMapper": {
+    "^@/(.*)$": "<rootDir>/src/$1",
+    "^@generated/prisma/client$": "<rootDir>/generated/prisma/client",
     "^@repo/api-contracts$": "<rootDir>/../../packages/api-contracts/src/index.ts"
   },
   "transform": {
