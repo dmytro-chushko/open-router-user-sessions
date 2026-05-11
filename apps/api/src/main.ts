@@ -1,11 +1,13 @@
+import 'tsconfig-paths/register';
+
 import { NestFactory } from '@nestjs/core';
 import { contract } from '@repo/api-contracts';
 import { generateOpenApi } from '@ts-rest/open-api';
 import cookieParser from 'cookie-parser';
 import * as swaggerUi from 'swagger-ui-express';
 
-import { AppModule } from './app.module';
-import { AppConfigService } from './common/app-config.service';
+import { AppModule } from '@/app.module';
+import { AppConfigService } from '@/common/app-config.service';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
