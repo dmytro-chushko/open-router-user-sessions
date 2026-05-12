@@ -1,13 +1,16 @@
 import type { Session } from '@generated/prisma/client';
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 
 import { createOpaqueToken } from '@/auth/crypto/random-token';
 import { hashOpaqueToken } from '@/auth/crypto/token-hash';
 import { SessionsRepository } from '@/auth/repositories';
 import { AppConfigService } from '@/common/app-config.service';
+import { withErrorHandling } from '@/common/utils/error/error-handler';
 
 @Injectable()
 export class SessionService {
+  private readonly logger = new Logger(SessionService.name);
+
   constructor(
     private readonly sessionsRepository: SessionsRepository,
     private readonly appConfig: AppConfigService,
@@ -18,42 +21,79 @@ export class SessionService {
     userAgent?: string | null;
     ip?: string | null;
   }): Promise<{ rawToken: string; expiresAt: Date }> {
-    const rawToken = createOpaqueToken();
-    const tokenHash = hashOpaqueToken(rawToken, this.appConfig.sessionSecret);
-    const maxAgeSeconds = this.appConfig.sessionCookieMaxAge;
-    const expiresAt = new Date(Date.now() + maxAgeSeconds * 1000);
-    await this.sessionsRepository.create({
-      tokenHash,
-      userId: input.userId,
-      userAgent: input.userAgent,
-      ipAddress: input.ip,
-      expiresAt,
-    });
+    return withErrorHandling(
+      async () => {
+        const rawToken = createOpaqueToken();
+        const tokenHash = hashOpaqueToken(
+          rawToken,
+          this.appConfig.sessionSecret,
+        );
+        const maxAgeSeconds = this.appConfig.sessionCookieMaxAge;
+        const expiresAt = new Date(Date.now() + maxAgeSeconds * 1000);
+        await this.sessionsRepository.create({
+          tokenHash,
+          userId: input.userId,
+          userAgent: input.userAgent,
+          ipAddress: input.ip,
+          expiresAt,
+        });
 
-    return { rawToken, expiresAt };
+        return { rawToken, expiresAt };
+      },
+      { logger: this.logger, context: 'SessionService.createSession' },
+    );
   }
 
   async findValidSessionByRawToken(rawToken: string): Promise<Session | null> {
-    const tokenHash = hashOpaqueToken(rawToken, this.appConfig.sessionSecret);
-    const session = await this.sessionsRepository.findByTokenHash(tokenHash);
+    return withErrorHandling(
+      async () => {
+        const tokenHash = hashOpaqueToken(
+          rawToken,
+          this.appConfig.sessionSecret,
+        );
+        const session =
+          await this.sessionsRepository.findByTokenHash(tokenHash);
 
-    if (session === null) {
-      return null;
-    }
+        if (session === null) {
+          return null;
+        }
 
-    if (session.expiresAt.getTime() <= Date.now()) {
-      return null;
-    }
+        if (session.expiresAt.getTime() <= Date.now()) {
+          return null;
+        }
 
-    return session;
+        return session;
+      },
+      {
+        logger: this.logger,
+        context: 'SessionService.findValidSessionByRawToken',
+      },
+    );
   }
 
   async deleteSessionByRawToken(rawToken: string): Promise<void> {
-    const tokenHash = hashOpaqueToken(rawToken, this.appConfig.sessionSecret);
-    await this.sessionsRepository.deleteByTokenHash(tokenHash);
+    return withErrorHandling(
+      async () => {
+        const tokenHash = hashOpaqueToken(
+          rawToken,
+          this.appConfig.sessionSecret,
+        );
+        await this.sessionsRepository.deleteByTokenHash(tokenHash);
+      },
+      {
+        logger: this.logger,
+        context: 'SessionService.deleteSessionByRawToken',
+      },
+    );
   }
 
   async deleteAllSessionsForUser(userId: string): Promise<number> {
-    return this.sessionsRepository.deleteAllForUser(userId);
+    return withErrorHandling(
+      async () => this.sessionsRepository.deleteAllForUser(userId),
+      {
+        logger: this.logger,
+        context: 'SessionService.deleteAllSessionsForUser',
+      },
+    );
   }
 }
