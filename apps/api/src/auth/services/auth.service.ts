@@ -2,6 +2,7 @@ import {
   ConflictException,
   ForbiddenException,
   Injectable,
+  Logger,
   UnauthorizedException,
 } from '@nestjs/common';
 
@@ -12,11 +13,14 @@ import { SessionService } from '@/auth/services/session.service';
 import { UsersService } from '@/auth/services/users.service';
 import type { PublicUser } from '@/auth/types/public-user';
 import { AppConfigService } from '@/common/app-config.service';
+import { withErrorHandling } from '@/common/utils/error/error-handler';
 
 const EMAIL_VERIFICATION_TTL_MS = 24 * 60 * 60 * 1000;
 
 @Injectable()
 export class AuthService {
+  private readonly logger = new Logger(AuthService.name);
+
   constructor(
     private readonly usersService: UsersService,
     private readonly sessionService: SessionService,
@@ -29,39 +33,46 @@ export class AuthService {
     password: string;
     name?: string | null;
   }): Promise<PublicUser> {
-    const email = this.usersService.normalizeEmail(input.email);
-    const existing = await this.usersService.findByEmail(email);
+    return withErrorHandling(
+      async () => {
+        const email = this.usersService.normalizeEmail(input.email);
+        const existing = await this.usersService.findByEmail(email);
 
-    if (existing !== null) {
-      throw new ConflictException('Email is already registered');
-    }
-    const user = await this.usersService.createUserWithPassword({
-      email,
-      password: input.password,
-      name: input.name,
-    });
-    const rawVerifyToken = createOpaqueToken();
-    const verifyHash = hashOpaqueToken(
-      rawVerifyToken,
-      this.appConfig.sessionSecret,
+        if (existing !== null) {
+          throw new ConflictException('Email is already registered');
+        }
+        const user = await this.usersService.createUserWithPassword({
+          email,
+          password: input.password,
+          name: input.name,
+        });
+        const rawVerifyToken = createOpaqueToken();
+        const verifyHash = hashOpaqueToken(
+          rawVerifyToken,
+          this.appConfig.sessionSecret,
+        );
+        const verifyExpiresAt = new Date(
+          Date.now() + EMAIL_VERIFICATION_TTL_MS,
+        );
+        await this.emailVerificationTokensRepository.create({
+          userId: user.id,
+          tokenHash: verifyHash,
+          expiresAt: verifyExpiresAt,
+        });
+        console.warn(
+          '[mail stub] verification email would be sent; token:',
+          rawVerifyToken,
+        );
+        const publicUser = await this.usersService.findPublicById(user.id);
+
+        if (publicUser === null) {
+          throw new Error('User missing after registration');
+        }
+
+        return publicUser;
+      },
+      { logger: this.logger, context: 'AuthService.register' },
     );
-    const verifyExpiresAt = new Date(Date.now() + EMAIL_VERIFICATION_TTL_MS);
-    await this.emailVerificationTokensRepository.create({
-      userId: user.id,
-      tokenHash: verifyHash,
-      expiresAt: verifyExpiresAt,
-    });
-    console.warn(
-      '[mail stub] verification email would be sent; token:',
-      rawVerifyToken,
-    );
-    const publicUser = await this.usersService.findPublicById(user.id);
-
-    if (publicUser === null) {
-      throw new Error('User missing after registration');
-    }
-
-    return publicUser;
   }
 
   async login(input: {
@@ -70,42 +81,57 @@ export class AuthService {
     userAgent?: string | null;
     ip?: string | null;
   }): Promise<{ rawToken: string; expiresAt: Date; user: PublicUser }> {
-    const user = await this.usersService.findByEmail(input.email);
+    return withErrorHandling(
+      async () => {
+        const user = await this.usersService.findByEmail(input.email);
 
-    if (user === null) {
-      throw new UnauthorizedException('Invalid credentials');
-    }
+        if (user === null) {
+          throw new UnauthorizedException('Invalid credentials');
+        }
 
-    if (user.emailVerifiedAt === null) {
-      throw new ForbiddenException('Email not verified');
-    }
-    const passwordOk = await this.usersService.verifyPasswordForUser(
-      user,
-      input.password,
+        if (user.emailVerifiedAt === null) {
+          throw new ForbiddenException('Email not verified');
+        }
+        const passwordOk = await this.usersService.verifyPasswordForUser(
+          user,
+          input.password,
+        );
+
+        if (!passwordOk) {
+          throw new UnauthorizedException('Invalid credentials');
+        }
+        const { rawToken, expiresAt } = await this.sessionService.createSession(
+          {
+            userId: user.id,
+            userAgent: input.userAgent,
+            ip: input.ip,
+          },
+        );
+        const publicUser = await this.usersService.findPublicById(user.id);
+
+        if (publicUser === null) {
+          throw new UnauthorizedException('Invalid credentials');
+        }
+
+        return { rawToken, expiresAt, user: publicUser };
+      },
+      { logger: this.logger, context: 'AuthService.login' },
     );
-
-    if (!passwordOk) {
-      throw new UnauthorizedException('Invalid credentials');
-    }
-    const { rawToken, expiresAt } = await this.sessionService.createSession({
-      userId: user.id,
-      userAgent: input.userAgent,
-      ip: input.ip,
-    });
-    const publicUser = await this.usersService.findPublicById(user.id);
-
-    if (publicUser === null) {
-      throw new UnauthorizedException('Invalid credentials');
-    }
-
-    return { rawToken, expiresAt, user: publicUser };
   }
 
   async logout(rawToken: string): Promise<void> {
-    await this.sessionService.deleteSessionByRawToken(rawToken);
+    return withErrorHandling(
+      async () => {
+        await this.sessionService.deleteSessionByRawToken(rawToken);
+      },
+      { logger: this.logger, context: 'AuthService.logout' },
+    );
   }
 
   async getMe(userId: string): Promise<PublicUser | null> {
-    return this.usersService.findPublicById(userId);
+    return withErrorHandling(
+      async () => this.usersService.findPublicById(userId),
+      { logger: this.logger, context: 'AuthService.getMe' },
+    );
   }
 }
