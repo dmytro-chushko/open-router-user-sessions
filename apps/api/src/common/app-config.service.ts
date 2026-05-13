@@ -39,7 +39,7 @@ export class AppConfigService {
     return this.config.get<string>('SESSION_SECRET') ?? 'session-secret';
   }
 
-  get sessionCookoeName(): string {
+  get sessionCookieName(): string {
     return this.config.get<string>('SESSION_COOKIE_NAME') ?? 'session';
   }
 
