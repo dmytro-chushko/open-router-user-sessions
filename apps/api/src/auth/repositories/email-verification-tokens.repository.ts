@@ -20,4 +20,36 @@ export class EmailVerificationTokensRepository {
       },
     });
   }
+
+  findActiveByTokenHash(
+    tokenHash: string,
+  ): Promise<EmailVerificationToken | null> {
+    return this.prisma.emailVerificationToken.findFirst({
+      where: {
+        tokenHash,
+        consumedAt: null,
+        expiresAt: { gt: new Date() },
+      },
+    });
+  }
+
+  async markConsumed(id: string): Promise<void> {
+    await this.prisma.emailVerificationToken.update({
+      where: { id },
+      data: { consumedAt: new Date() },
+    });
+  }
+
+  findLatestByUserId(userId: string): Promise<EmailVerificationToken | null> {
+    return this.prisma.emailVerificationToken.findFirst({
+      where: { userId },
+      orderBy: { createdAt: 'desc' },
+    });
+  }
+
+  async deleteManyUnconsumedByUserId(userId: string): Promise<void> {
+    await this.prisma.emailVerificationToken.deleteMany({
+      where: { userId, consumedAt: null },
+    });
+  }
 }

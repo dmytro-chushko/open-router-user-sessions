@@ -6,16 +6,11 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 
-import { createOpaqueToken } from '@/auth/crypto/random-token';
-import { hashOpaqueToken } from '@/auth/crypto/token-hash';
-import { EmailVerificationTokensRepository } from '@/auth/repositories';
+import { EmailVerificationService } from '@/auth/email-verification.service';
 import { SessionService } from '@/auth/services/session.service';
 import { UsersService } from '@/auth/services/users.service';
 import type { PublicUser } from '@/auth/types/public-user';
-import { AppConfigService } from '@/common/app-config.service';
 import { withErrorHandling } from '@/common/utils/error/error-handler';
-
-const EMAIL_VERIFICATION_TTL_MS = 24 * 60 * 60 * 1000;
 
 @Injectable()
 export class AuthService {
@@ -24,8 +19,7 @@ export class AuthService {
   constructor(
     private readonly usersService: UsersService,
     private readonly sessionService: SessionService,
-    private readonly emailVerificationTokensRepository: EmailVerificationTokensRepository,
-    private readonly appConfig: AppConfigService,
+    private readonly emailVerificationService: EmailVerificationService,
   ) {}
 
   async register(input: {
@@ -46,23 +40,10 @@ export class AuthService {
           password: input.password,
           name: input.name,
         });
-        const rawVerifyToken = createOpaqueToken();
-        const verifyHash = hashOpaqueToken(
-          rawVerifyToken,
-          this.appConfig.sessionSecret,
-        );
-        const verifyExpiresAt = new Date(
-          Date.now() + EMAIL_VERIFICATION_TTL_MS,
-        );
-        await this.emailVerificationTokensRepository.create({
+        await this.emailVerificationService.createAndSendForNewUser({
           userId: user.id,
-          tokenHash: verifyHash,
-          expiresAt: verifyExpiresAt,
+          email: user.email,
         });
-        console.warn(
-          '[mail stub] verification email would be sent; token:',
-          rawVerifyToken,
-        );
         const publicUser = await this.usersService.findPublicById(user.id);
 
         if (publicUser === null) {
