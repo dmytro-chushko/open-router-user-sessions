@@ -5,8 +5,10 @@ import { SESSION_COOKIE_STRATEGY_NAME } from '@/auth/constants/session-cookie-st
 import { EmailVerificationService } from '@/auth/email-verification.service';
 import { SessionAuthGuard } from '@/auth/guards/session-auth.guard';
 import { SessionCookieStrategy } from '@/auth/passport/session-cookie.strategy';
+import { PasswordResetService } from '@/auth/password-reset.service';
 import {
   EmailVerificationTokensRepository,
+  PasswordResetTokensRepository,
   SessionsRepository,
   UsersRepository,
 } from '@/auth/repositories';
@@ -28,16 +30,19 @@ import { PrismaModule } from '@/prisma/prisma.module';
     UsersRepository,
     SessionsRepository,
     EmailVerificationTokensRepository,
+    PasswordResetTokensRepository,
     UsersService,
     SessionService,
     AuthService,
     EmailVerificationService,
+    PasswordResetService,
     SessionCookieStrategy,
     SessionAuthGuard,
   ],
   exports: [
     AuthService,
     EmailVerificationService,
+    PasswordResetService,
     UsersService,
     SessionService,
     PassportModule,
