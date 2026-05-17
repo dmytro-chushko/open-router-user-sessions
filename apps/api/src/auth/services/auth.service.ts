@@ -6,7 +6,7 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 
-import { EmailVerificationService } from '@/auth/email-verification.service';
+import { EmailVerificationService } from '@/auth/services/email-verification.service';
 import { SessionService } from '@/auth/services/session.service';
 import { UsersService } from '@/auth/services/users.service';
 import type { PublicUser } from '@/auth/types/public-user';
