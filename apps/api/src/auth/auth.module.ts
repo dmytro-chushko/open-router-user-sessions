@@ -10,9 +10,13 @@ import {
   SessionsRepository,
   UsersRepository,
 } from '@/auth/repositories';
-import { AuthService, SessionService, UsersService } from '@/auth/services';
-import { EmailVerificationService } from '@/auth/services/email-verification.service';
-import { PasswordResetService } from '@/auth/services/password-reset.service';
+import {
+  AuthService,
+  EmailVerificationService,
+  PasswordResetService,
+  SessionService,
+  UsersService,
+} from '@/auth/services';
 import { CommonModule } from '@/common/common.module';
 import { MailModule } from '@/mail/mail.module';
 import { PrismaModule } from '@/prisma/prisma.module';
