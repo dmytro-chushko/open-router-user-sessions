@@ -46,6 +46,23 @@ export class UsersRepository {
     });
   }
 
+  createOAuthUser(input: {
+    email: string;
+    name?: string | null;
+    avatar?: string | null;
+    emailVerifiedAt?: Date | null;
+  }): Promise<User> {
+    return this.prisma.user.create({
+      data: {
+        email: input.email,
+        passwordHash: null,
+        name: input.name ?? null,
+        avatar: input.avatar ?? null,
+        emailVerifiedAt: input.emailVerifiedAt ?? null,
+      },
+    });
+  }
+
   setEmailVerifiedAt(userId: string, at: Date): Promise<User> {
     return this.prisma.user.update({
       where: { id: userId },
