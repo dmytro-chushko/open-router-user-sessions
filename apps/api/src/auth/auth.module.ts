@@ -2,12 +2,13 @@ import { Module } from '@nestjs/common';
 import { PassportModule } from '@nestjs/passport';
 
 import { SESSION_COOKIE_STRATEGY_NAME } from '@/auth/constants/session-cookie-strategy-name';
+import { OAuthController } from '@/auth/controllers';
 import { SessionAuthGuard } from '@/auth/guards/session-auth.guard';
-import { GitHubStrategy } from '@/auth/oauth/github.strategy';
-import { GoogleStrategy } from '@/auth/oauth/google.strategy';
-import { OAuthController } from '@/auth/oauth/oauth.controller';
-import { OAuthService } from '@/auth/oauth/oauth.service';
-import { SessionCookieStrategy } from '@/auth/passport/session-cookie.strategy';
+import {
+  GitHubStrategy,
+  GoogleStrategy,
+  SessionCookieStrategy,
+} from '@/auth/passport';
 import {
   AccountsRepository,
   EmailVerificationTokensRepository,
@@ -18,6 +19,7 @@ import {
 import {
   AuthService,
   EmailVerificationService,
+  OAuthService,
   PasswordResetService,
   SessionService,
   UsersService,

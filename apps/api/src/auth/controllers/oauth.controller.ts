@@ -5,8 +5,8 @@ import type { Request, Response } from 'express';
 import { GITHUB_OAUTH_STRATEGY_NAME } from '@/auth/constants/github-oauth-strategy-name';
 import { GOOGLE_OAUTH_STRATEGY_NAME } from '@/auth/constants/google-oauth-strategy-name';
 import { Public } from '@/auth/decorators/public.decorator';
+import { buildSessionCookieOptions } from '@/auth/helpers/session-cookie';
 import { SessionService } from '@/auth/services/session.service';
-import { buildSessionCookieOptions } from '@/auth/session-cookie';
 import type { PublicUser } from '@/auth/types/public-user';
 import { AppConfigService } from '@/common/app-config.service';
 

@@ -4,7 +4,7 @@ import { PassportStrategy } from '@nestjs/passport';
 import { Strategy, type Profile } from 'passport-github2';
 
 import { GITHUB_OAUTH_STRATEGY_NAME } from '@/auth/constants/github-oauth-strategy-name';
-import { OAuthService } from '@/auth/oauth/oauth.service';
+import { OAuthService } from '@/auth/services/oauth.service';
 import type { PublicUser } from '@/auth/types/public-user';
 import { AppConfigService } from '@/common/app-config.service';
 
