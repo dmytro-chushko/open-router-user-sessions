@@ -1,5 +1,5 @@
-import type { Provider } from '@generated/prisma/client';
-import { Injectable, Logger } from '@nestjs/common';
+import type { Provider, User } from '@generated/prisma/client';
+import { ConflictException, Injectable, Logger } from '@nestjs/common';
 
 import { AccountsRepository } from '@/auth/repositories/accounts.repository';
 import { UsersRepository } from '@/auth/repositories/users.repository';
@@ -20,8 +20,11 @@ export type OAuthProfileInput = {
 };
 
 /**
- * C1: resolve User by OAuth Account or create User + Account.
- * C2: link Account to existing User when email already registered.
+ * OAuth account resolution:
+ * 1. Existing `Account` (provider + providerAccountId) → login that User.
+ * 2. No Account, but `User` with same email → link new `Account` (no duplicate User).
+ * 3. Otherwise → create `User` + `Account`.
+ * If the User already has this provider linked to a different provider id → conflict.
  */
 @Injectable()
 export class OAuthService {
@@ -49,6 +52,12 @@ export class OAuthService {
           return this.requirePublicUser(existingAccount.userId);
         }
 
+        const existingUser = await this.usersService.findByEmail(email);
+
+        if (existingUser !== null) {
+          return this.linkOAuthToExistingUser(existingUser, input);
+        }
+
         const emailVerifiedAt = input.emailVerified ? new Date() : null;
         const user = await this.usersRepository.createOAuthUser({
           email,
@@ -73,6 +82,43 @@ export class OAuthService {
         context: 'OAuthService.findOrCreateUserFromOAuthProfile',
       },
     );
+  }
+
+  private async linkOAuthToExistingUser(
+    existingUser: User,
+    input: OAuthProfileInput,
+  ): Promise<PublicUser> {
+    const accountForProvider =
+      await this.accountsRepository.findByUserIdAndProvider(
+        existingUser.id,
+        input.provider,
+      );
+
+    if (
+      accountForProvider !== null &&
+      accountForProvider.providerAccountId !== input.providerAccountId
+    ) {
+      throw new ConflictException(
+        'This email is already linked to another account for this provider',
+      );
+    }
+
+    if (accountForProvider === null) {
+      await this.accountsRepository.create({
+        userId: existingUser.id,
+        provider: input.provider,
+        providerAccountId: input.providerAccountId,
+        accessToken: input.accessToken,
+        refreshToken: input.refreshToken,
+        expiresAt: input.expiresAt,
+      });
+    }
+
+    if (input.emailVerified && existingUser.emailVerifiedAt === null) {
+      await this.usersService.setEmailVerified(existingUser.id, new Date());
+    }
+
+    return this.requirePublicUser(existingUser.id);
   }
 
   private async requirePublicUser(userId: string): Promise<PublicUser> {

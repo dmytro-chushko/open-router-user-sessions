@@ -18,6 +18,15 @@ export class AccountsRepository {
     });
   }
 
+  findByUserIdAndProvider(
+    userId: string,
+    provider: Provider,
+  ): Promise<Account | null> {
+    return this.prisma.account.findFirst({
+      where: { userId, provider },
+    });
+  }
+
   create(input: {
     userId: string;
     provider: Provider;
