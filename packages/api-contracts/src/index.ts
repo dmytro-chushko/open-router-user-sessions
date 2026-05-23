@@ -1,5 +1,6 @@
 import { initContract } from "@ts-rest/core";
 import { z } from "zod";
+import { authContract } from "./auth.contract.js";
 import {
   badRequestResponse,
   internalServerErrorResponse,
@@ -7,7 +8,7 @@ import {
 
 const c = initContract();
 
-export const contract = c.router({
+const appContract = c.router({
   health: {
     method: "GET",
     path: "/health",
@@ -28,4 +29,14 @@ export const contract = c.router({
   },
 });
 
+export const contract = c.router({
+  ...appContract,
+  ...authContract,
+});
+
 export type AppContract = typeof contract;
+
+export { authContract } from "./auth.contract.js";
+export type { AuthContract } from "./auth.contract.js";
+export { userPublicSchema, roleSchema } from "./schemas/user.js";
+export type { UserPublic } from "./schemas/user.js";
