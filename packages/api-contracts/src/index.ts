@@ -8,7 +8,7 @@ import {
 
 const c = initContract();
 
-const appContract = c.router({
+export const appContract = c.router({
   health: {
     method: "GET",
     path: "/health",
@@ -35,6 +35,7 @@ export const contract = c.router({
 });
 
 export type AppContract = typeof contract;
+export type AppRoutesContract = typeof appContract;
 
 export { authContract } from "./auth.contract.js";
 export type { AuthContract } from "./auth.contract.js";

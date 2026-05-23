@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { PassportModule } from '@nestjs/passport';
 
 import { SESSION_COOKIE_STRATEGY_NAME } from '@/auth/constants/session-cookie-strategy-name';
-import { OAuthController } from '@/auth/controllers';
+import { AuthContractController, OAuthController } from '@/auth/controllers';
 import { SessionAuthGuard } from '@/auth/guards/session-auth.guard';
 import {
   GitHubStrategy,
@@ -37,7 +37,7 @@ import { PrismaModule } from '@/prisma/prisma.module';
     CommonModule,
     MailModule,
   ],
-  controllers: [OAuthController],
+  controllers: [AuthContractController, OAuthController],
   providers: [
     UsersRepository,
     AccountsRepository,
