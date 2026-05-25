@@ -1,0 +1,5 @@
+# tsc must emit to ../dist only — never commit build output under src/
+src/**/*.js
+src/**/*.d.ts
+src/**/*.js.map
+src/**/*.d.ts.map

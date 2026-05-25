@@ -17,11 +17,20 @@ describe('ApiContract (e2e)', () => {
     await app.init();
   });
 
-  it('/health (GET)', () => {
+  it('/health (GET) liveness', () => {
     return request(app.getHttpServer())
       .get('/health')
       .expect(200)
       .expect({ ok: true });
+  });
+
+  it('/health/ready (GET) readiness', () => {
+    return request(app.getHttpServer())
+      .get('/health/ready')
+      .expect((res) => {
+        expect([200, 503]).toContain(res.status);
+        expect(res.body).toHaveProperty('ok');
+      });
   });
 
   it('/hello (GET)', () => {

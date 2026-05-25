@@ -30,12 +30,13 @@ export class PrismaService
   }
 
   async onModuleInit(): Promise<void> {
-    await withErrorHandling(
-      async () => {
-        await this.$connect();
-      },
-      { logger: this.logger, context: 'PrismaService.onModuleInit' },
-    );
+    await this.$connect();
+    await this.ping();
+    this.logger.log('Database connection verified');
+  }
+
+  async ping(): Promise<void> {
+    await this.$executeRawUnsafe('SELECT 1');
   }
 
   async onModuleDestroy(): Promise<void> {

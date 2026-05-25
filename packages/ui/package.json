@@ -49,6 +49,7 @@
   },
   "license": "MIT",
   "scripts": {
+    "dev": "pnpm run dev:styles",
     "build:styles": "tailwindcss -i ./src/styles.css -o ./dist/index.css",
     "build:components": "tsc && node ./scripts/rewrite-declaration-imports.mjs",
     "check-types": "tsc --noEmit",

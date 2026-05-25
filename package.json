@@ -4,7 +4,7 @@
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev",
-    "dev:api-web": "turbo run dev --filter=api --filter=web",
+    "dev:api-web": "turbo run dev --filter=api --filter=web --filter=@repo/ui --filter=@repo/api-contracts",
     "start:api-web": "turbo run start --filter=api --filter=web",
     "lint": "turbo run lint",
     "check-types": "turbo run check-types",

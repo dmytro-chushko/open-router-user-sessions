@@ -8,14 +8,30 @@ import {
 
 const c = initContract();
 
+const healthOkResponse = z.object({ ok: z.literal(true) });
+
+const healthNotReadyResponse = z.object({
+  ok: z.literal(false),
+  error: z.string(),
+});
+
 export const appContract = c.router({
   health: {
     method: "GET",
     path: "/health",
     responses: {
-      200: z.object({ ok: z.literal(true) }),
+      200: healthOkResponse,
     },
-    summary: "Health check",
+    summary: "Liveness — process is up (no database check)",
+  },
+  healthReady: {
+    method: "GET",
+    path: "/health/ready",
+    responses: {
+      200: healthOkResponse,
+      503: healthNotReadyResponse,
+    },
+    summary: "Readiness — database is reachable",
   },
   hello: {
     method: "GET",
