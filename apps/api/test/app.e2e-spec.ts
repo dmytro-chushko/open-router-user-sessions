@@ -14,28 +14,29 @@ describe('ApiContract (e2e)', () => {
     }).compile();
 
     app = moduleFixture.createNestApplication();
+    app.setGlobalPrefix('api');
     await app.init();
   });
 
-  it('/health (GET) liveness', () => {
+  it('/api/health (GET) liveness', () => {
     return request(app.getHttpServer())
-      .get('/health')
+      .get('/api/health')
       .expect(200)
       .expect({ ok: true });
   });
 
-  it('/health/ready (GET) readiness', () => {
+  it('/api/health/ready (GET) readiness', () => {
     return request(app.getHttpServer())
-      .get('/health/ready')
+      .get('/api/health/ready')
       .expect((res) => {
         expect([200, 503]).toContain(res.status);
         expect(res.body).toHaveProperty('ok');
       });
   });
 
-  it('/hello (GET)', () => {
+  it('/api/hello (GET)', () => {
     return request(app.getHttpServer())
-      .get('/hello')
+      .get('/api/hello')
       .expect(200)
       .expect({ message: 'Hello world' });
   });

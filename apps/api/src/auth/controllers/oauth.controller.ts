@@ -11,7 +11,7 @@ import type { PublicUser } from '@/auth/types/public-user';
 import { AppConfigService } from '@/common/app-config.service';
 
 @Public()
-@Controller('api/auth')
+@Controller('auth')
 export class OAuthController {
   constructor(
     private readonly sessionService: SessionService,

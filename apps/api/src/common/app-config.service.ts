@@ -19,7 +19,7 @@ export class AppConfigService {
   get apiUrl(): string {
     const v = this.config.get<string>('API_URL')?.trim();
 
-    return v && v.length > 0 ? v : 'http://localhost:3002';
+    return v && v.length > 0 ? v : 'http://localhost:3002/api';
   }
 
   get webOrigins(): string[] {

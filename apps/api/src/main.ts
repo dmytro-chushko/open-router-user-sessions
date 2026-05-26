@@ -11,6 +11,9 @@ import { AppConfigService } from '@/common/app-config.service';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+
+  app.setGlobalPrefix('api');
+
   app.use(cookieParser());
 
   const appConfig = app.get(AppConfigService);
