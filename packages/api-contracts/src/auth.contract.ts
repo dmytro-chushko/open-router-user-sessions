@@ -52,7 +52,10 @@ export const authContract = c.router(
         403: forbiddenResponse,
         500: internalServerErrorResponse,
       },
-      summary: "Login (session cookie set by API, not in JSON)",
+      summary: "Login (sets session cookie)",
+      description:
+        "Response body: { user }. Session cookie is set via Set-Cookie (not in JSON). " +
+        "Requires verified email (403 otherwise).",
     },
 
     logout: {
@@ -64,7 +67,8 @@ export const authContract = c.router(
         401: unauthorizedResponse,
         500: internalServerErrorResponse,
       },
-      summary: "Logout (clears session cookie)",
+      summary: "Logout",
+      description: "Clears session cookie. Requires active session.",
     },
 
     me: {
@@ -75,7 +79,8 @@ export const authContract = c.router(
         401: unauthorizedResponse,
         500: internalServerErrorResponse,
       },
-      summary: "Current user from session cookie",
+      summary: "Current user",
+      description: "Requires session cookie from login.",
     },
 
     verifyEmail: {

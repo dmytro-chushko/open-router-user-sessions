@@ -1,5 +1,6 @@
 import 'tsconfig-paths/register';
 
+import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { contract } from '@repo/api-contracts';
 import { generateOpenApi } from '@ts-rest/open-api';
@@ -8,8 +9,11 @@ import * as swaggerUi from 'swagger-ui-express';
 
 import { AppModule } from '@/app.module';
 import { AppConfigService } from '@/common/app-config.service';
+import { enrichOpenApiSessionAuth } from '@/common/utils/openapi/enrich-openapi-session-auth';
+import { SWAGGER_UI_CUSTOM_CSS } from '@/common/utils/openapi/swagger-ui-custom-css';
 
 async function bootstrap() {
+  const logger = new Logger('MainBootstrap');
   const app = await NestFactory.create(AppModule);
 
   app.setGlobalPrefix('api');
@@ -23,35 +27,47 @@ async function bootstrap() {
     credentials: true,
   });
 
-  const openApiDocument = generateOpenApi(
-    contract,
-    {
-      info: {
-        title: 'API',
-        version: '1.0.0',
-      },
-      servers: [
-        {
-          url: appConfig.apiUrl,
-          description: 'API Server',
+  const openApiDocument = enrichOpenApiSessionAuth(
+    generateOpenApi(
+      contract,
+      {
+        info: {
+          title: 'API',
+          version: '1.0.0',
+          description:
+            'Session auth: POST /auth/login sets an HttpOnly cookie; ' +
+            'GET /auth/me and POST /auth/logout require it. OAuth is browser-only (not in this spec).',
         },
-      ],
-    },
-    { setOperationId: true },
+        servers: [
+          {
+            url: appConfig.apiUrl,
+            description: 'API Server',
+          },
+        ],
+      },
+      { setOperationId: true },
+    ),
+    appConfig.sessionCookieName,
   );
 
   app.use(
     '/api-docs',
     swaggerUi.serve,
     swaggerUi.setup(openApiDocument, {
-      customCss: '.swagger-ui .topbar { display: none }',
+      customCss: SWAGGER_UI_CUSTOM_CSS,
       swaggerOptions: {
         persistAuthorization: true,
         displayRequestDuration: true,
+        withCredentials: true,
       },
     }),
   );
 
+  logger.log(
+    `🚀 API Docs running on http://localhost:${appConfig.port}/api-docs`,
+  );
+
   await app.listen(appConfig.port);
+  logger.log(`🚀 API running on ${appConfig.apiUrl}`);
 }
 void bootstrap();

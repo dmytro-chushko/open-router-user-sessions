@@ -46,8 +46,8 @@ export const appContract = c.router({
 });
 
 export const contract = c.router({
-  ...appContract,
-  ...authContract,
+  common: appContract,
+  auth: authContract,
 });
 
 export type AppContract = typeof contract;
