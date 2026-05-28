@@ -40,7 +40,7 @@ async function bootstrap() {
         },
         servers: [
           {
-            url: appConfig.apiUrl,
+            url: `${appConfig.apiUrl}/api`,
             description: 'API Server',
           },
         ],
