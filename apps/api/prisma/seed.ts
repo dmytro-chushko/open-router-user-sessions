@@ -2,8 +2,8 @@ import 'dotenv/config';
 
 import { PrismaPg } from '@prisma/adapter-pg';
 
-import { hashPassword } from '../src/auth/crypto/password-hash';
 import { PrismaClient, Role } from '../generated/prisma/client';
+import { hashPassword } from '../src/auth/crypto/password-hash';
 
 /** Timestamps set in the same DB write can differ by a few ms between fields. */
 const CREATED_UPDATED_EQUAL_MS = 5;
@@ -73,6 +73,7 @@ async function seedAdmin(prisma: PrismaClient): Promise<void> {
 async function main(): Promise<void> {
   if (process.env.ENABLE_ADMIN_SEED !== 'true') {
     console.log('Admin seed skipped (ENABLE_ADMIN_SEED is not "true")');
+
     return;
   }
 

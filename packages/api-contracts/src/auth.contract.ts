@@ -61,9 +61,9 @@ export const authContract = c.router(
     logout: {
       method: "POST",
       path: "/logout",
-      body: c.noBody(),
+      body: z.void(),
       responses: {
-        204: c.noBody(),
+        204: z.void(),
         401: unauthorizedResponse,
         500: internalServerErrorResponse,
       },

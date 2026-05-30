@@ -13,7 +13,7 @@ export function useHelloWorldQuery() {
   const query = useQuery({
     queryKey: ["hello-world"],
     queryFn: async () => {
-      const result = await publicApiClient.hello();
+      const result = await publicApiClient.common.hello();
 
       if (result.status !== 200) {
         throw new Error(getApiErrorMessage(result.status, result.body));

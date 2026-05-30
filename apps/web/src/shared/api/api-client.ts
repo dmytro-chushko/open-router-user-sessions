@@ -6,4 +6,5 @@ import { getPublicApiBaseUrl } from "@/shared/config/public-api-url";
 export const publicApiClient = initClient(contract, {
   baseUrl: getPublicApiBaseUrl(),
   baseHeaders: { "Content-Type": "application/json" },
+  credentials: "include",
 });
