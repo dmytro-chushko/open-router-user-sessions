@@ -16,6 +16,10 @@
   "hello": {
     "loading": "Loading…"
   },
+  "home": {
+    "signIn": "Sign in",
+    "signUp": "Sign up"
+  },
   "errors": {
     "generic": "Something went wrong. Please try again.",
     "notFoundTitle": "Page not found",
