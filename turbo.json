@@ -20,6 +20,16 @@
     "start": {
       "cache": false,
       "persistent": true
+    },
+    "db:seed": {
+      "cache": false,
+      "env": [
+        "DATABASE_URL",
+        "ENABLE_ADMIN_SEED",
+        "ADMIN_EMAIL",
+        "ADMIN_SEED_PASSWORD"
+      ],
+      "inputs": [".env", ".env.*", "prisma/**"]
     }
   }
 }
