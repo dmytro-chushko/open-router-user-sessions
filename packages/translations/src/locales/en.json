@@ -20,6 +20,87 @@
     "signIn": "Sign in",
     "signUp": "Sign up"
   },
+  "auth": {
+    "common": {
+      "unknownError": "Something went wrong. Please try again."
+    },
+    "login": {
+      "title": "Sign in",
+      "emailLabel": "Email",
+      "emailPlaceholder": "you@example.com",
+      "passwordLabel": "Password",
+      "passwordPlaceholder": "Enter your password",
+      "submit": "Sign in",
+      "submitting": "Signing in…",
+      "success": "Signed in successfully.",
+      "forgotPassword": "Forgot password?",
+      "signUp": "Create account",
+      "continueGoogle": "Continue with Google",
+      "continueGithub": "Continue with GitHub",
+      "emailNotVerifiedHint": "Your email is not verified yet. Check your inbox or resend verification email.",
+      "resendVerification": "Resend verification email",
+      "resending": "Resending…",
+      "resendSuccess": "If an account exists, we sent a verification email.",
+      "resendCooldown": "Try again in {seconds}s"
+    },
+    "register": {
+      "title": "Create account",
+      "nameLabel": "Name",
+      "namePlaceholder": "Your name",
+      "emailLabel": "Email",
+      "emailPlaceholder": "you@example.com",
+      "passwordLabel": "Password",
+      "passwordPlaceholder": "At least 8 characters",
+      "submit": "Sign up",
+      "submitting": "Creating account…",
+      "success": "Account created. Check your email to verify it.",
+      "signIn": "Already have an account? Sign in"
+    },
+    "verifyEmail": {
+      "title": "Verify email",
+      "submitting": "Verifying…",
+      "retry": "Try again",
+      "autoVerifying": "Verifying your email automatically…",
+      "autoVerifyDone": "If verification fails, retry manually.",
+      "verifiedHint": "Email verified successfully.",
+      "success": "Email verified. You can sign in now.",
+      "goToLogin": "Go to sign in",
+      "missingToken": "Verification token is missing in the URL.",
+      "backToLogin": "Back to sign in"
+    },
+    "verifyEmailPending": {
+      "title": "Verify your email",
+      "description": "Check your inbox and click the verification link. If you did not receive it, resend the email below.",
+      "emailLabel": "Email",
+      "emailPlaceholder": "you@example.com",
+      "resendButton": "Resend verification email",
+      "resending": "Resending…",
+      "resendSuccess": "If an account exists, we sent a verification email.",
+      "resendCooldown": "Try again in {seconds}s",
+      "goToLogin": "Go to sign in"
+    },
+    "forgotPassword": {
+      "title": "Forgot password",
+      "emailLabel": "Email",
+      "emailPlaceholder": "you@example.com",
+      "submit": "Send reset link",
+      "submitting": "Sending…",
+      "success": "If an account exists, we sent a password reset email.",
+      "submittedHint": "Check your inbox for the reset link."
+    },
+    "resetPassword": {
+      "title": "Reset password",
+      "newPasswordLabel": "New password",
+      "newPasswordPlaceholder": "At least 8 characters",
+      "confirmPasswordLabel": "Confirm new password",
+      "confirmPasswordPlaceholder": "Repeat new password",
+      "submit": "Set new password",
+      "submitting": "Saving…",
+      "success": "Password updated. You can sign in now.",
+      "missingToken": "Reset token is missing in the URL.",
+      "backToForgot": "Request reset link again"
+    }
+  },
   "errors": {
     "generic": "Something went wrong. Please try again.",
     "notFoundTitle": "Page not found",

@@ -20,6 +20,87 @@
     "signIn": "Увійти",
     "signUp": "Зареєструватися"
   },
+  "auth": {
+    "common": {
+      "unknownError": "Щось пішло не так. Спробуйте ще раз."
+    },
+    "login": {
+      "title": "Вхід",
+      "emailLabel": "Email",
+      "emailPlaceholder": "you@example.com",
+      "passwordLabel": "Пароль",
+      "passwordPlaceholder": "Введіть пароль",
+      "submit": "Увійти",
+      "submitting": "Входимо…",
+      "success": "Вхід виконано успішно.",
+      "forgotPassword": "Забули пароль?",
+      "signUp": "Створити акаунт",
+      "continueGoogle": "Продовжити з Google",
+      "continueGithub": "Продовжити з GitHub",
+      "emailNotVerifiedHint": "Ваш email ще не підтверджено. Перевірте пошту або надішліть лист повторно.",
+      "resendVerification": "Надіслати лист підтвердження повторно",
+      "resending": "Надсилаємо повторно…",
+      "resendSuccess": "Якщо акаунт існує, ми надіслали лист для підтвердження email.",
+      "resendCooldown": "Спробуйте знову через {seconds}с"
+    },
+    "register": {
+      "title": "Створення акаунту",
+      "nameLabel": "Ім'я",
+      "namePlaceholder": "Ваше ім'я",
+      "emailLabel": "Email",
+      "emailPlaceholder": "you@example.com",
+      "passwordLabel": "Пароль",
+      "passwordPlaceholder": "Щонайменше 8 символів",
+      "submit": "Зареєструватися",
+      "submitting": "Створюємо акаунт…",
+      "success": "Акаунт створено. Перевірте пошту для підтвердження.",
+      "signIn": "Вже маєте акаунт? Увійти"
+    },
+    "verifyEmail": {
+      "title": "Підтвердження email",
+      "submitting": "Підтверджуємо…",
+      "retry": "Спробувати ще раз",
+      "autoVerifying": "Автоматично підтверджуємо ваш email…",
+      "autoVerifyDone": "Якщо підтвердження не вдалось, повторіть вручну.",
+      "verifiedHint": "Email успішно підтверджено.",
+      "success": "Email підтверджено. Тепер можна увійти.",
+      "goToLogin": "Перейти до входу",
+      "missingToken": "У URL відсутній токен підтвердження.",
+      "backToLogin": "Повернутися до входу"
+    },
+    "verifyEmailPending": {
+      "title": "Підтвердіть ваш email",
+      "description": "Перевірте пошту та перейдіть за посиланням для підтвердження email. Якщо лист не надійшов, надішліть його повторно.",
+      "emailLabel": "Email",
+      "emailPlaceholder": "you@example.com",
+      "resendButton": "Надіслати лист підтвердження повторно",
+      "resending": "Надсилаємо повторно…",
+      "resendSuccess": "Якщо акаунт існує, ми надіслали лист для підтвердження email.",
+      "resendCooldown": "Спробуйте знову через {seconds}с",
+      "goToLogin": "Перейти до входу"
+    },
+    "forgotPassword": {
+      "title": "Відновлення пароля",
+      "emailLabel": "Email",
+      "emailPlaceholder": "you@example.com",
+      "submit": "Надіслати посилання",
+      "submitting": "Надсилаємо…",
+      "success": "Якщо акаунт існує, ми надіслали лист для відновлення пароля.",
+      "submittedHint": "Перевірте вхідні повідомлення."
+    },
+    "resetPassword": {
+      "title": "Скидання пароля",
+      "newPasswordLabel": "Новий пароль",
+      "newPasswordPlaceholder": "Щонайменше 8 символів",
+      "confirmPasswordLabel": "Підтвердіть новий пароль",
+      "confirmPasswordPlaceholder": "Повторіть новий пароль",
+      "submit": "Зберегти новий пароль",
+      "submitting": "Зберігаємо…",
+      "success": "Пароль оновлено. Тепер можна увійти.",
+      "missingToken": "У URL відсутній токен для скидання пароля.",
+      "backToForgot": "Запросити посилання ще раз"
+    }
+  },
   "errors": {
     "generic": "Щось пішло не так. Спробуйте ще раз.",
     "notFoundTitle": "Сторінку не знайдено",
