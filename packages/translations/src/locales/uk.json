@@ -101,6 +101,17 @@
       "backToForgot": "Запросити посилання ще раз"
     }
   },
+  "protected": {
+    "dashboard": {
+      "title": "Панель",
+      "welcome": "Ви увійшли як {email}"
+    },
+    "profile": {
+      "title": "Профіль",
+      "email": "Email",
+      "role": "Роль"
+    }
+  },
   "errors": {
     "generic": "Щось пішло не так. Спробуйте ще раз.",
     "notFoundTitle": "Сторінку не знайдено",

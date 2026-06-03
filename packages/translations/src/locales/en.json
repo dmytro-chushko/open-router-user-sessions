@@ -101,6 +101,17 @@
       "backToForgot": "Request reset link again"
     }
   },
+  "protected": {
+    "dashboard": {
+      "title": "Dashboard",
+      "welcome": "Signed in as {email}"
+    },
+    "profile": {
+      "title": "Profile",
+      "email": "Email",
+      "role": "Role"
+    }
+  },
   "errors": {
     "generic": "Something went wrong. Please try again.",
     "notFoundTitle": "Page not found",
