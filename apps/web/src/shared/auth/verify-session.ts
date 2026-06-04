@@ -51,7 +51,6 @@ async function fetchCurrentUser(): Promise<UserPublic | null> {
   return userPublicSchema.parse(json);
 }
 
-/** Secure session check. Redirects to /login when unauthenticated. */
 export const verifySession = cache(async (): Promise<UserPublic | null> => {
   const user = await fetchCurrentUser();
 
@@ -62,7 +61,6 @@ export const verifySession = cache(async (): Promise<UserPublic | null> => {
   return user;
 });
 
-/** Returns null instead of redirecting (for optional UI). */
 export const getOptionalSession = cache(
   async (): Promise<UserPublic | null> => {
     return fetchCurrentUser();
