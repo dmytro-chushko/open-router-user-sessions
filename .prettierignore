@@ -1,0 +1,11 @@
+# Dependencies and build output
+node_modules
+dist
+.next
+out
+build
+.turbo
+coverage
+
+# Generated code (do not format or check)
+apps/api/generated

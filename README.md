@@ -56,3 +56,13 @@ This Turborepo has some additional tools already setup for you:
 - [TypeScript](https://www.typescriptlang.org/) for static type checking
 - [ESLint](https://eslint.org/) for code linting
 - [Prettier](https://prettier.io) for code formatting
+
+### Database scripts
+
+Run from the repository root. Each command delegates to Prisma in `apps/api`:
+
+- `pnpm db:generate` — regenerate Prisma Client after schema changes
+- `pnpm db:migrate:dev` — create and apply migrations in development
+- `pnpm db:migrate:deploy` — apply pending migrations (staging/production)
+- `pnpm db:seed` — seed the database (admin user)
+- `pnpm db:studio` — open Prisma Studio (database GUI)

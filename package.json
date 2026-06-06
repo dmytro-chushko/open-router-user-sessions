@@ -10,7 +10,7 @@
     "check-types": "turbo run check-types",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "format:check": "prettier --check \"**/*.{ts,tsx,md}\"",
-    "fix": "pnpm format && turbo run lint -- --fix",
+    "fix": "turbo run lint -- --fix && pnpm format",
     "precheck": "pnpm format:check && pnpm lint",
     "prepare": "husky",
     "db:studio": "pnpm --filter api run prisma:studio",
