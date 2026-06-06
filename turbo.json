@@ -8,11 +8,17 @@
       "outputs": ["dist/**", ".next/**", "!.next/cache/**"],
       "env": ["NEXT_PUBLIC_API_URL", "SESSION_COOKIE_NAME"]
     },
+    "prisma:generate": {
+      "inputs": ["prisma/**", "prisma.config.ts"],
+      "outputs": ["generated/prisma/**"]
+    },
     "lint": {
-      "dependsOn": ["^lint"]
+      "dependsOn": ["^lint", "prisma:generate"],
+      "inputs": ["$TURBO_DEFAULT$", "prisma/**", "prisma.config.ts", "generated/prisma/**"]
     },
     "check-types": {
-      "dependsOn": ["^check-types"]
+      "dependsOn": ["^check-types", "prisma:generate"],
+      "inputs": ["$TURBO_DEFAULT$", "prisma/**", "prisma.config.ts", "generated/prisma/**"]
     },
     "dev": {
       "cache": false,
