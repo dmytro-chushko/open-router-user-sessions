@@ -51,14 +51,16 @@ async function fetchCurrentUser(): Promise<UserPublic | null> {
   return userPublicSchema.parse(json);
 }
 
-export const verifySession = cache(async (): Promise<UserPublic | null> => {
-  const user = await fetchCurrentUser();
-
-  if (user === null) {
-    redirect({ href: "/login", locale: "en" });
+function requireAuthenticated(user: UserPublic | null): UserPublic {
+  if (user !== null) {
+    return user;
   }
 
-  return user;
+  return redirect({ href: "/login", locale: "en" });
+}
+
+export const verifySession = cache(async (): Promise<UserPublic> => {
+  return requireAuthenticated(await fetchCurrentUser());
 });
 
 export const getOptionalSession = cache(

@@ -11,7 +11,8 @@
     "localeUk": "UA",
     "localeEn": "EN",
     "localeSwitcherLabel": "Мова",
-    "themeModeAriaLabel": "Режим теми"
+    "themeModeAriaLabel": "Режим теми",
+    "admin": "Адмін"
   },
   "hello": {
     "loading": "Завантаження…"
@@ -110,6 +111,11 @@
       "title": "Профіль",
       "email": "Email",
       "role": "Роль"
+    },
+    "admin": {
+      "title": "Адмін",
+      "welcome": "Ви увійшли як {email}",
+      "description": "Доступ лише для адміністраторів."
     }
   },
   "errors": {
