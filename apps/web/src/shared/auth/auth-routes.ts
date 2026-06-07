@@ -1,5 +1,5 @@
 /** Path segments without locale prefix, e.g. "/dashboard" not "/en/dashboard". */
-export const PROTECTED_PATHS = ["/dashboard", "/profile"] as const;
+export const PROTECTED_PATHS = ["/dashboard", "/profile", "/admin"] as const;
 
 export const PUBLIC_AUTH_PATHS = [
   "/login",

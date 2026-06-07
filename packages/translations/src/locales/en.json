@@ -11,7 +11,8 @@
     "localeUk": "UA",
     "localeEn": "EN",
     "localeSwitcherLabel": "Language",
-    "themeModeAriaLabel": "Theme mode"
+    "themeModeAriaLabel": "Theme mode",
+    "admin": "Admin"
   },
   "hello": {
     "loading": "Loading…"
@@ -110,6 +111,11 @@
       "title": "Profile",
       "email": "Email",
       "role": "Role"
+    },
+    "admin": {
+      "title": "Admin",
+      "welcome": "Signed in as {email}",
+      "description": "Restricted to administrators."
     }
   },
   "errors": {
