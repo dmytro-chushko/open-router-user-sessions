@@ -3,6 +3,23 @@ export { Gradient } from "./gradient.tsx";
 export { TurborepoLogo } from "./turborepo-logo.tsx";
 export { Button, buttonVariants } from "./components/ui/button.tsx";
 export {
+  DropdownMenu,
+  DropdownMenuCheckboxItem,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuPortal,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuSeparator,
+  DropdownMenuShortcut,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
+  DropdownMenuTrigger,
+} from "./components/ui/dropdown-menu.tsx";
+export {
   Form,
   FormControl,
   FormDescription,

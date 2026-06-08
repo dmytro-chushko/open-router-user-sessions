@@ -21,7 +21,7 @@ export function TopBar({
     <div
       role="banner"
       className={cn(
-        "flex h-14 w-full items-center gap-4 border-b border-border bg-background/95 px-4 backdrop-blur supports-[backdrop-filter]:bg-background/80",
+        "flex h-14 w-full items-center gap-2 border-b border-border bg-background/95 px-4 backdrop-blur supports-[backdrop-filter]:bg-background/80",
         className,
       )}
     >

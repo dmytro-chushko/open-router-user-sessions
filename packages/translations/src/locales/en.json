@@ -12,6 +12,8 @@
     "localeEn": "EN",
     "localeSwitcherLabel": "Language",
     "themeModeAriaLabel": "Theme mode",
+    "userMenuAriaLabel": "User menu",
+    "profile": "Profile",
     "admin": "Admin"
   },
   "hello": {
