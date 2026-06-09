@@ -85,14 +85,16 @@ export default async function LocaleLayout({
           >
             <SystemSsrThemeCleanup />
             <Toaster />
-            <div className="min-h-dvh">
-              <header className="sticky top-0 z-50">
-                <WebTopBar />
-              </header>
-              <main className="h-[calc(100dvh-var(--header-mobile-height))] min-h-0 flex-1 overflow-x-clip overflow-y-auto sm:h-[calc(100dvh-var(--header-tablet-height))] md:h-[calc(100dvh-var(--header-height))]">
-                <QueryProvider>{children}</QueryProvider>
-              </main>
-            </div>
+            <QueryProvider>
+              <div className="min-h-dvh">
+                <header className="sticky top-0 z-50">
+                  <WebTopBar />
+                </header>
+                <main className="h-[calc(100dvh-var(--header-mobile-height))] min-h-0 flex-1 overflow-x-clip overflow-y-auto sm:h-[calc(100dvh-var(--header-tablet-height))] md:h-[calc(100dvh-var(--header-height))]">
+                  {children}
+                </main>
+              </div>
+            </QueryProvider>
           </ThemeProvider>
         </NextIntlClientProvider>
       </body>

@@ -14,7 +14,9 @@
     "themeModeAriaLabel": "Режим теми",
     "userMenuAriaLabel": "Меню користувача",
     "profile": "Профіль",
-    "admin": "Адмін"
+    "admin": "Адмін",
+    "logOut": "Вийти",
+    "logOutSuccess": "Вихід виконано успішно."
   },
   "hello": {
     "loading": "Завантаження…"

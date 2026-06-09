@@ -14,7 +14,9 @@
     "themeModeAriaLabel": "Theme mode",
     "userMenuAriaLabel": "User menu",
     "profile": "Profile",
-    "admin": "Admin"
+    "admin": "Admin",
+    "logOut": "Log out",
+    "logOutSuccess": "Signed out successfully."
   },
   "hello": {
     "loading": "Loading…"

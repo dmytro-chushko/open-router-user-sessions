@@ -5,12 +5,14 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@repo/ui";
 import { User } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 import { Link } from "@/i18n/navigation";
+import { useUserDropdown } from "@/shared/shell/hooks/use-user-dropdown";
 
 type UserDropdownProps = {
   isAdmin: boolean;
@@ -18,6 +20,7 @@ type UserDropdownProps = {
 
 export function UserDropdown({ isAdmin }: UserDropdownProps) {
   const t = useTranslations("header");
+  const { handleLogout, isLoggingOut } = useUserDropdown();
 
   return (
     <DropdownMenu>
@@ -40,6 +43,17 @@ export function UserDropdown({ isAdmin }: UserDropdownProps) {
             <Link href="/admin">{t("admin")}</Link>
           </DropdownMenuItem>
         ) : null}
+        <DropdownMenuSeparator />
+        <DropdownMenuItem
+          variant="destructive"
+          disabled={isLoggingOut}
+          onSelect={(event) => {
+            event.preventDefault();
+            void handleLogout();
+          }}
+        >
+          {t("logOut")}
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );

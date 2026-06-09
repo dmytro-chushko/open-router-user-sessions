@@ -1,15 +1,11 @@
 import { TopBar, ThemeModeToggle } from "@repo/ui";
 import { getTranslations } from "next-intl/server";
 
+import { AuthHeaderAction } from "./auth-header-action";
 import { LocaleSwitcher } from "./locale-switcher";
-import { UserDropdown } from "./user-dropdown";
-
-import { getOptionalSession } from "@/shared/auth/verify-session";
 
 export async function WebTopBar() {
   const t = await getTranslations("header");
-  const user = await getOptionalSession();
-  const isAdmin = user?.role === "ADMIN";
 
   return (
     <TopBar
@@ -27,7 +23,7 @@ export async function WebTopBar() {
         {t("appTitle")}
       </span>
       <LocaleSwitcher />
-      {user !== null ? <UserDropdown isAdmin={isAdmin} /> : null}
+      <AuthHeaderAction />
     </TopBar>
   );
 }
