@@ -2,11 +2,13 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "@repo/ui";
+import { useQueryClient } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 
 import {
+  currentUserQueryKey,
   useLoginMutation,
   useResendVerificationMutation,
 } from "@/entities/auth";
@@ -23,6 +25,7 @@ export function useLoginForm() {
   const t = useTranslations("auth.login");
   const tCommon = useTranslations("auth.common");
   const router = useRouter();
+  const queryClient = useQueryClient();
   const loginMutation = useLoginMutation();
   const resendVerificationMutation = useResendVerificationMutation();
   const { isCooldownActive, secondsLeft, startCooldown } = useResendCooldown();
@@ -40,7 +43,8 @@ export function useLoginForm() {
   const handleSubmit = form.handleSubmit(async (values) => {
     try {
       setShowEmailNotVerifiedHint(false);
-      await loginMutation.mutateAsync(values);
+      const user = await loginMutation.mutateAsync(values);
+      queryClient.setQueryData(currentUserQueryKey, user);
       toast.success(t("success"));
       router.push("/");
     } catch (error) {

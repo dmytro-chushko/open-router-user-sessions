@@ -12,7 +12,11 @@
     "localeEn": "EN",
     "localeSwitcherLabel": "Мова",
     "themeModeAriaLabel": "Режим теми",
-    "admin": "Адмін"
+    "userMenuAriaLabel": "Меню користувача",
+    "profile": "Профіль",
+    "admin": "Адмін",
+    "logOut": "Вийти",
+    "logOutSuccess": "Вихід виконано успішно."
   },
   "hello": {
     "loading": "Завантаження…"

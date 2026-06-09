@@ -12,7 +12,11 @@
     "localeEn": "EN",
     "localeSwitcherLabel": "Language",
     "themeModeAriaLabel": "Theme mode",
-    "admin": "Admin"
+    "userMenuAriaLabel": "User menu",
+    "profile": "Profile",
+    "admin": "Admin",
+    "logOut": "Log out",
+    "logOutSuccess": "Signed out successfully."
   },
   "hello": {
     "loading": "Loading…"
