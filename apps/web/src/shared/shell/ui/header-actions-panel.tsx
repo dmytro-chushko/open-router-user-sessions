@@ -74,13 +74,13 @@ export function HeaderActionsPanel({
 
         <Separator decorative />
 
-        <div className="flex flex-col gap-2">
+        <div className="flex w-full flex-col gap-2">
           {sectionLabels ? (
             <p className={sectionLabelClassName} aria-hidden="true">
               {sectionLabels.locale}
             </p>
           ) : null}
-          <LocaleSwitcher onLocaleChange={onNavigate} />
+          <LocaleSwitcher fullWidth onLocaleChange={onNavigate} />
         </div>
 
         {showAccountSection ? (

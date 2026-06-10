@@ -31,6 +31,18 @@ export {
 export { Input } from "./components/ui/input.tsx";
 export { Label } from "./components/ui/label.tsx";
 export {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectScrollDownButton,
+  SelectScrollUpButton,
+  SelectSeparator,
+  SelectTrigger,
+  SelectValue,
+} from "./components/ui/select.tsx";
+export {
   Sheet,
   SheetClose,
   SheetContent,
