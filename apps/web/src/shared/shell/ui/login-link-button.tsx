@@ -6,12 +6,16 @@ import { useTranslations } from "next-intl";
 
 import { Link } from "@/i18n/navigation";
 
-export function LoginLinkButton() {
+type LoginLinkButtonProps = {
+  onNavigate?: () => void;
+};
+
+export function LoginLinkButton({ onNavigate }: LoginLinkButtonProps = {}) {
   const t = useTranslations("home");
 
   return (
     <Button variant="default" size="icon" className="shrink-0" asChild>
-      <Link href="/login" aria-label={t("signIn")}>
+      <Link href="/login" aria-label={t("signIn")} onClick={onNavigate}>
         <LogIn />
       </Link>
     </Button>

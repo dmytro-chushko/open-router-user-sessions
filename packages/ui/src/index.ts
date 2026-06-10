@@ -30,6 +30,29 @@ export {
 } from "./components/ui/form.tsx";
 export { Input } from "./components/ui/input.tsx";
 export { Label } from "./components/ui/label.tsx";
+export {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectScrollDownButton,
+  SelectScrollUpButton,
+  SelectSeparator,
+  SelectTrigger,
+  SelectValue,
+} from "./components/ui/select.tsx";
+export {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetDescription,
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "./components/ui/sheet.tsx";
+export { Separator } from "./components/ui/separator.tsx";
 export { TopBar, type TopBarProps } from "./components/ui/top-bar.tsx";
 export { ThemeModeToggle } from "./components/ui/theme-mode-toggle.tsx";
 export { Toaster } from "./components/ui/sonner.tsx";

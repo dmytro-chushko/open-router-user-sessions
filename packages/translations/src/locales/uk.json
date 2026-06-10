@@ -16,7 +16,13 @@
     "profile": "Профіль",
     "admin": "Адмін",
     "logOut": "Вийти",
-    "logOutSuccess": "Вихід виконано успішно."
+    "logOutSuccess": "Вихід виконано успішно.",
+    "mobileMenuOpenAriaLabel": "Відкрити меню налаштувань",
+    "mobileMenuCloseLabel": "Закрити",
+    "mobileMenuTitle": "Налаштування",
+    "mobileMenuThemeSection": "Тема",
+    "mobileMenuLocaleSection": "Мова",
+    "mobileMenuAccountSection": "Обліковий запис"
   },
   "hello": {
     "loading": "Завантаження…"
