@@ -16,7 +16,13 @@
     "profile": "Profile",
     "admin": "Admin",
     "logOut": "Log out",
-    "logOutSuccess": "Signed out successfully."
+    "logOutSuccess": "Signed out successfully.",
+    "mobileMenuOpenAriaLabel": "Open settings menu",
+    "mobileMenuCloseLabel": "Close",
+    "mobileMenuTitle": "Settings",
+    "mobileMenuThemeSection": "Theme",
+    "mobileMenuLocaleSection": "Language",
+    "mobileMenuAccountSection": "Account"
   },
   "hello": {
     "loading": "Loading…"

@@ -6,7 +6,11 @@ import { useLocale, useTranslations } from "next-intl";
 
 import { Link, usePathname } from "@/i18n/navigation";
 
-export function LocaleSwitcher() {
+type LocaleSwitcherProps = {
+  onLocaleChange?: () => void;
+};
+
+export function LocaleSwitcher({ onLocaleChange }: LocaleSwitcherProps = {}) {
   const pathname = usePathname();
   const activeLocale = useLocale() as Locale;
   const t = useTranslations("header");
@@ -14,7 +18,7 @@ export function LocaleSwitcher() {
   return (
     <div
       className="flex items-center gap-1 rounded-md border border-border bg-muted/30 p-1"
-      role="navigation"
+      role="group"
       aria-label={t("localeSwitcherLabel")}
     >
       {locales.map((target) => (
@@ -23,6 +27,9 @@ export function LocaleSwitcher() {
           href={pathname}
           locale={target}
           scroll={false}
+          onClick={onLocaleChange}
+          lang={target}
+          aria-current={activeLocale === target ? "true" : undefined}
           className={
             activeLocale === target
               ? "rounded-md px-2 py-1 font-semibold text-foreground bg-secondary"

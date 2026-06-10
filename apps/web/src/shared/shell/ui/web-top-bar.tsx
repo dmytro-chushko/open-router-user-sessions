@@ -1,29 +1,29 @@
-import { TopBar, ThemeModeToggle } from "@repo/ui";
 import { getTranslations } from "next-intl/server";
 
-import { AuthHeaderAction } from "./auth-header-action";
-import { LocaleSwitcher } from "./locale-switcher";
+import { ShellHeader } from "./shell-header";
 
 export async function WebTopBar() {
   const t = await getTranslations("header");
 
   return (
-    <TopBar
-      className="h-(--header-mobile-height) sm:h-(--header-tablet-height) md:h-(--header-height)"
-      themeModesSwitcher={
-        <ThemeModeToggle
-          darkLabel={t("themeDark")}
-          lightLabel={t("themeLight")}
-          systemLabel={t("themeSystem")}
-          ariaLabel={t("themeModeAriaLabel")}
-        />
-      }
-    >
-      <span className="min-w-0 flex-1 truncate text-sm font-medium text-foreground">
-        {t("appTitle")}
-      </span>
-      <LocaleSwitcher />
-      <AuthHeaderAction />
-    </TopBar>
+    <ShellHeader
+      title={t("appTitle")}
+      themeLabels={{
+        darkLabel: t("themeDark"),
+        lightLabel: t("themeLight"),
+        systemLabel: t("themeSystem"),
+        ariaLabel: t("themeModeAriaLabel"),
+      }}
+      mobileMenuLabels={{
+        closeLabel: t("mobileMenuCloseLabel"),
+        openAriaLabel: t("mobileMenuOpenAriaLabel"),
+        title: t("mobileMenuTitle"),
+      }}
+      sectionLabels={{
+        theme: t("mobileMenuThemeSection"),
+        locale: t("mobileMenuLocaleSection"),
+        account: t("mobileMenuAccountSection"),
+      }}
+    />
   );
 }
