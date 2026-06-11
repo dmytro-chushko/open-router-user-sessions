@@ -1,5 +1,5 @@
-import type { UserPublic } from "@repo/api-contracts";
-import { userPublicSchema } from "@repo/api-contracts";
+import type { UserMe } from "@repo/api-contracts";
+import { userMeSchema } from "@repo/api-contracts";
 import { cookies } from "next/headers";
 import { cache } from "react";
 
@@ -22,14 +22,14 @@ async function buildCookieHeader(): Promise<string | null> {
     .join("; ");
 }
 
-async function fetchCurrentUser(): Promise<UserPublic | null> {
+async function fetchCurrentUser(): Promise<UserMe | null> {
   const cookieHeader = await buildCookieHeader();
 
   if (cookieHeader === null) {
     return null;
   }
 
-  const response = await fetch(`${getPublicApiBaseUrl()}/auth/me`, {
+  const response = await fetch(`${getPublicApiBaseUrl()}/users/me`, {
     method: "GET",
     headers: {
       Cookie: cookieHeader,
@@ -43,15 +43,15 @@ async function fetchCurrentUser(): Promise<UserPublic | null> {
   }
 
   if (!response.ok) {
-    throw new Error(`Auth me failed with status ${response.status}`);
+    throw new Error(`Users me failed with status ${response.status}`);
   }
 
   const json: unknown = await response.json();
 
-  return userPublicSchema.parse(json);
+  return userMeSchema.parse(json);
 }
 
-function requireAuthenticated(user: UserPublic | null): UserPublic {
+function requireAuthenticated(user: UserMe | null): UserMe {
   if (user !== null) {
     return user;
   }
@@ -59,12 +59,10 @@ function requireAuthenticated(user: UserPublic | null): UserPublic {
   return redirect({ href: "/login", locale: "en" });
 }
 
-export const verifySession = cache(async (): Promise<UserPublic> => {
+export const verifySession = cache(async (): Promise<UserMe> => {
   return requireAuthenticated(await fetchCurrentUser());
 });
 
-export const getOptionalSession = cache(
-  async (): Promise<UserPublic | null> => {
-    return fetchCurrentUser();
-  },
-);
+export const getOptionalSession = cache(async (): Promise<UserMe | null> => {
+  return fetchCurrentUser();
+});

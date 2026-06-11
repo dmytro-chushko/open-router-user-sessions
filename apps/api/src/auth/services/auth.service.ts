@@ -8,9 +8,9 @@ import {
 
 import { EmailVerificationService } from '@/auth/services/email-verification.service';
 import { SessionService } from '@/auth/services/session.service';
-import { UsersService } from '@/auth/services/users.service';
-import type { PublicUser } from '@/auth/types/public-user';
 import { withErrorHandling } from '@/common/utils/error/error-handler';
+import { UsersService } from '@/user/services/users.service';
+import type { PublicUser } from '@/user/types/public-user';
 
 @Injectable()
 export class AuthService {
@@ -106,13 +106,6 @@ export class AuthService {
         await this.sessionService.deleteSessionByRawToken(rawToken);
       },
       { logger: this.logger, context: 'AuthService.logout' },
-    );
-  }
-
-  async getMe(userId: string): Promise<PublicUser | null> {
-    return withErrorHandling(
-      async () => this.usersService.findPublicById(userId),
-      { logger: this.logger, context: 'AuthService.getMe' },
     );
   }
 }

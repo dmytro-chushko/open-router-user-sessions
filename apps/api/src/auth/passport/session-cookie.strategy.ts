@@ -7,9 +7,9 @@ import Strategy = require('passport-custom');
 
 import { SESSION_COOKIE_STRATEGY_NAME } from '@/auth/constants/session-cookie-strategy-name';
 import { SessionService } from '@/auth/services/session.service';
-import { UsersService } from '@/auth/services/users.service';
-import type { PublicUser } from '@/auth/types/public-user';
 import { AppConfigService } from '@/common/app-config.service';
+import { UsersService } from '@/user/services/users.service';
+import type { PublicUser } from '@/user/types/public-user';
 
 /**
  * Reads HTTP-only session cookie, resolves DB session, loads `PublicUser` for `req.user`.

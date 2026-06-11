@@ -8,17 +8,25 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@repo/ui";
-import { User } from "lucide-react";
 import { useTranslations } from "next-intl";
 
 import { Link } from "@/i18n/navigation";
 import { useUserDropdown } from "@/shared/shell/hooks/use-user-dropdown";
+import { UserAvatar } from "@/shared/ui/user-avatar";
 
 type UserDropdownProps = {
   isAdmin: boolean;
+  name?: string | null;
+  email: string;
+  avatarUrl?: string | null;
 };
 
-export function UserDropdown({ isAdmin }: UserDropdownProps) {
+export function UserDropdown({
+  isAdmin,
+  name,
+  email,
+  avatarUrl,
+}: UserDropdownProps) {
   const t = useTranslations("header");
   const { handleLogout, isLoggingOut } = useUserDropdown();
 
@@ -29,9 +37,15 @@ export function UserDropdown({ isAdmin }: UserDropdownProps) {
           variant="default"
           size="icon"
           aria-label={t("userMenuAriaLabel")}
-          className="shrink-0"
+          className="size-10 shrink-0 overflow-hidden rounded-full p-0"
         >
-          <User />
+          <UserAvatar
+            name={name}
+            email={email}
+            avatarUrl={avatarUrl}
+            size="md"
+            className="size-10"
+          />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">

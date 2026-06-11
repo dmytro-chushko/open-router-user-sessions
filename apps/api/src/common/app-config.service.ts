@@ -109,4 +109,23 @@ export class AppConfigService {
   get adminSeedPassword(): string {
     return this.config.get<string>('ADMIN_SEED_PASSWORD') ?? '';
   }
+
+  get supabaseUrl(): string {
+    return this.config.get<string>('SUPABASE_URL') ?? '';
+  }
+
+  get supabaseServiceRoleKey(): string {
+    return this.config.get<string>('SUPABASE_SERVICE_ROLE_KEY') ?? '';
+  }
+
+  get supabaseStorageBucket(): string {
+    return (
+      this.config.get<string>('SUPABASE_STORAGE_BUCKET') ??
+      'open-router-sessions'
+    );
+  }
+
+  get supabaseAvatarsPrefix(): string {
+    return this.config.get<string>('SUPABASE_AVATARS_PREFIX') ?? 'avatars';
+  }
 }

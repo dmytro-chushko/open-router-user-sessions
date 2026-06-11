@@ -60,12 +60,22 @@ export function AuthHeaderAction({
       return (
         <UserAccountFlatActions
           isAdmin={user.role === "ADMIN"}
+          name={user.name}
+          email={user.email}
+          avatarUrl={user.avatar}
           onNavigate={onNavigate}
         />
       );
     }
 
-    return <UserDropdown isAdmin={user.role === "ADMIN"} />;
+    return (
+      <UserDropdown
+        isAdmin={user.role === "ADMIN"}
+        name={user.name}
+        email={user.email}
+        avatarUrl={user.avatar}
+      />
+    );
   }
 
   return <LoginLinkButton onNavigate={onNavigate} />;

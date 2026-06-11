@@ -27,6 +27,13 @@ export class AccountsRepository {
     });
   }
 
+  findByUserId(userId: string): Promise<Array<{ provider: Provider }>> {
+    return this.prisma.account.findMany({
+      where: { userId },
+      select: { provider: true },
+    });
+  }
+
   create(input: {
     userId: string;
     provider: Provider;

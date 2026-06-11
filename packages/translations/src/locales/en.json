@@ -119,8 +119,41 @@
     },
     "profile": {
       "title": "Profile",
+      "avatarSectionTitle": "Profile photo",
+      "avatarSectionDescription": "Upload a photo up to 5 MB (JPEG, PNG, or WebP).",
+      "detailsSectionTitle": "Account details",
+      "name": "Name",
       "email": "Email",
-      "role": "Role"
+      "role": "Role",
+      "roleUser": "User",
+      "roleAdmin": "Administrator",
+      "emailStatus": "Email status",
+      "emailVerified": "Verified",
+      "emailNotVerified": "Not verified",
+      "memberSince": "Member since",
+      "changeAvatar": "Change photo",
+      "deleteAvatar": "Remove photo",
+      "deleteAvatarConfirm": "This will remove your profile photo. You can upload a new one anytime.",
+      "cancel": "Cancel",
+      "uploading": "Uploading…",
+      "deleting": "Removing…",
+      "uploadSuccess": "Profile photo updated.",
+      "deleteSuccess": "Profile photo removed.",
+      "saveName": "Save name",
+      "savingName": "Saving…",
+      "nameUpdateSuccess": "Name updated.",
+      "nameUpdateError": "Could not update name.",
+      "uploadErrors": {
+        "generic": "Could not upload photo. Please try again.",
+        "tooLarge": "Photo must be 5 MB or smaller.",
+        "invalidType": "Use a JPEG, PNG, or WebP image."
+      },
+      "connectedAccounts": {
+        "title": "Connected accounts",
+        "google": "Google",
+        "github": "GitHub",
+        "none": "No connected accounts"
+      }
     },
     "admin": {
       "title": "Admin",

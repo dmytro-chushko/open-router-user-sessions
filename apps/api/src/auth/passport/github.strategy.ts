@@ -5,8 +5,8 @@ import { Strategy, type Profile } from 'passport-github2';
 
 import { GITHUB_OAUTH_STRATEGY_NAME } from '@/auth/constants/github-oauth-strategy-name';
 import { OAuthService } from '@/auth/services/oauth.service';
-import type { PublicUser } from '@/auth/types/public-user';
 import { AppConfigService } from '@/common/app-config.service';
+import type { PublicUser } from '@/user/types/public-user';
 
 @Injectable()
 export class GitHubStrategy extends PassportStrategy(

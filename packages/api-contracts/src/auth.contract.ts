@@ -71,18 +71,6 @@ export const authContract = c.router(
       description: "Clears session cookie. Requires active session.",
     },
 
-    me: {
-      method: "GET",
-      path: "/me",
-      responses: {
-        200: userPublicSchema,
-        401: unauthorizedResponse,
-        500: internalServerErrorResponse,
-      },
-      summary: "Current user",
-      description: "Requires session cookie from login.",
-    },
-
     verifyEmail: {
       method: "POST",
       path: "/verify-email",

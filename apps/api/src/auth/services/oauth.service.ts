@@ -1,11 +1,11 @@
 import type { Provider, User } from '@generated/prisma/client';
 import { ConflictException, Injectable, Logger } from '@nestjs/common';
 
-import { AccountsRepository } from '@/auth/repositories/accounts.repository';
-import { UsersRepository } from '@/auth/repositories/users.repository';
-import { UsersService } from '@/auth/services/users.service';
-import type { PublicUser } from '@/auth/types/public-user';
 import { withErrorHandling } from '@/common/utils/error/error-handler';
+import { AccountsRepository } from '@/user/repositories/accounts.repository';
+import { UsersRepository } from '@/user/repositories/users.repository';
+import { UsersService } from '@/user/services/users.service';
+import type { PublicUser } from '@/user/types/public-user';
 
 export type OAuthProfileInput = {
   provider: Provider;

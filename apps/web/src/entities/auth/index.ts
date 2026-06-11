@@ -1,5 +1,5 @@
-export { currentUserQueryKey } from "./api/current-user-query-key";
-export { useCurrentUserQuery } from "./api/use-current-user-query";
+export { currentUserQueryKey } from "@/entities/user";
+export { useCurrentUserQuery } from "@/entities/user";
 export { useForgotPasswordMutation } from "./api/use-forgot-password-mutation";
 export { useLoginMutation } from "./api/use-login-mutation";
 export { useLogoutMutation } from "./api/use-logout-mutation";

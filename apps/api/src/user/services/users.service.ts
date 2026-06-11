@@ -2,9 +2,9 @@ import type { User } from '@generated/prisma/client';
 import { Injectable, Logger } from '@nestjs/common';
 
 import { hashPassword, verifyPassword } from '@/auth/crypto/password-hash';
-import { UsersRepository } from '@/auth/repositories';
-import type { PublicUser } from '@/auth/types/public-user';
 import { withErrorHandling } from '@/common/utils/error/error-handler';
+import { UsersRepository } from '@/user/repositories/users.repository';
+import type { PublicUser } from '@/user/types/public-user';
 
 @Injectable()
 export class UsersService {
@@ -80,6 +80,20 @@ export class UsersService {
     return withErrorHandling(
       () => this.usersRepository.updatePasswordHash(userId, passwordHash),
       { logger: this.logger, context: 'UsersService.updatePasswordHash' },
+    );
+  }
+
+  updateName(userId: string, name: string | null): Promise<User> {
+    return withErrorHandling(
+      () => this.usersRepository.updateName(userId, name),
+      { logger: this.logger, context: 'UsersService.updateName' },
+    );
+  }
+
+  updateAvatar(userId: string, avatar: string | null): Promise<User> {
+    return withErrorHandling(
+      () => this.usersRepository.updateAvatar(userId, avatar),
+      { logger: this.logger, context: 'UsersService.updateAvatar' },
     );
   }
 
