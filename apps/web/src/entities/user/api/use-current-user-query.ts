@@ -1,6 +1,7 @@
 "use client";
 
-import type { UserPublic } from "@repo/api-contracts";
+import type { UserMe } from "@repo/api-contracts";
+import { userMeSchema } from "@repo/api-contracts";
 import { useQuery } from "@tanstack/react-query";
 
 import { currentUserQueryKey } from "./current-user-query-key";
@@ -12,10 +13,10 @@ import { getApiErrorMessage } from "@/shared/api/get-api-error-message";
 const CURRENT_USER_RETRY_COUNT = 5;
 
 export function useCurrentUserQuery() {
-  return useQuery<UserPublic | null>({
+  return useQuery<UserMe | null>({
     queryKey: currentUserQueryKey,
     queryFn: async () => {
-      const result = await publicApiClient.auth.me();
+      const result = await publicApiClient.users.me();
 
       if (result.status === 401) {
         return null;
@@ -28,7 +29,7 @@ export function useCurrentUserQuery() {
         );
       }
 
-      return result.body;
+      return userMeSchema.parse(result.body);
     },
     retry: (failureCount, error) => {
       if (failureCount >= CURRENT_USER_RETRY_COUNT) {

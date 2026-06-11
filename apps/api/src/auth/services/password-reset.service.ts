@@ -11,10 +11,10 @@ import { createOpaqueToken } from '@/auth/crypto/random-token';
 import { hashOpaqueToken } from '@/auth/crypto/token-hash';
 import { PasswordResetTokensRepository } from '@/auth/repositories/password-reset-tokens.repository';
 import { SessionService } from '@/auth/services/session.service';
-import { UsersService } from '@/auth/services/users.service';
 import { AppConfigService } from '@/common/app-config.service';
 import { withErrorHandling } from '@/common/utils/error/error-handler';
 import { MailService } from '@/mail/mail.service';
+import { UsersService } from '@/user/services/users.service';
 
 const PASSWORD_RESET_TTL_MS = 60 * 60 * 1000;
 const RESEND_COOLDOWN_MS = 90 * 1000;

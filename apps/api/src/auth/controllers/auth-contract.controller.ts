@@ -1,9 +1,8 @@
-import { Controller, Req, Res, UnauthorizedException } from '@nestjs/common';
+import { Controller, Req, Res } from '@nestjs/common';
 import { authContract } from '@repo/api-contracts';
 import { TsRestHandler, tsRestHandler } from '@ts-rest/nest';
 import type { Request, Response } from 'express';
 
-import { CurrentUser } from '@/auth/decorators/current-user.decorator';
 import { Public } from '@/auth/decorators/public.decorator';
 import {
   buildClearSessionCookieOptions,
@@ -12,7 +11,6 @@ import {
 import { AuthService } from '@/auth/services/auth.service';
 import { EmailVerificationService } from '@/auth/services/email-verification.service';
 import { PasswordResetService } from '@/auth/services/password-reset.service';
-import type { PublicUser } from '@/auth/types/public-user';
 import { AppConfigService } from '@/common/app-config.service';
 
 @Controller()
@@ -75,20 +73,6 @@ export class AuthContractController {
       );
 
       return { status: 204 as const, body: undefined };
-    });
-  }
-
-  @TsRestHandler(authContract.me)
-  me(@CurrentUser() user: PublicUser | undefined) {
-    return tsRestHandler(authContract.me, async () => {
-      if (user === undefined) {
-        throw new UnauthorizedException();
-      }
-
-      return Promise.resolve({
-        status: 200 as const,
-        body: user,
-      });
     });
   }
 

@@ -1,6 +1,7 @@
 import { initContract } from "@ts-rest/core";
 import { z } from "zod";
 import { authContract } from "./auth.contract.js";
+import { userContract } from "./user.contract.js";
 import {
   badRequestResponse,
   internalServerErrorResponse,
@@ -48,6 +49,7 @@ export const appContract = c.router({
 export const contract = c.router({
   common: appContract,
   auth: authContract,
+  users: userContract,
 });
 
 export type AppContract = typeof contract;
@@ -55,5 +57,15 @@ export type AppRoutesContract = typeof appContract;
 
 export { authContract } from "./auth.contract.js";
 export type { AuthContract } from "./auth.contract.js";
-export { userPublicSchema, roleSchema } from "./schemas/user.js";
-export type { UserPublic } from "./schemas/user.js";
+export { userContract } from "./user.contract.js";
+export type { UserContract } from "./user.contract.js";
+export {
+  avatarContentTypeSchema,
+  avatarUploadIntentSchema,
+  AVATAR_MAX_BYTES,
+  providerSchema,
+  roleSchema,
+  userMeSchema,
+  userPublicSchema,
+} from "./schemas/user.js";
+export type { AvatarUploadIntent, UserMe, UserPublic } from "./schemas/user.js";

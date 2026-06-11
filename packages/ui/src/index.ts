@@ -3,6 +3,23 @@ export { Gradient } from "./gradient.tsx";
 export { TurborepoLogo } from "./turborepo-logo.tsx";
 export { Button, buttonVariants } from "./components/ui/button.tsx";
 export {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "./components/ui/alert-dialog.tsx";
+export {
+  Avatar,
+  AvatarFallback,
+  AvatarImage,
+} from "./components/ui/avatar.tsx";
+export { Badge, badgeVariants } from "./components/ui/badge.tsx";
+export {
   DropdownMenu,
   DropdownMenuCheckboxItem,
   DropdownMenuContent,
@@ -30,6 +47,13 @@ export {
 } from "./components/ui/form.tsx";
 export { Input } from "./components/ui/input.tsx";
 export { Label } from "./components/ui/label.tsx";
+export {
+  ProfileCard,
+  ProfileCardContent,
+  ProfileCardDescription,
+  ProfileCardHeader,
+  ProfileCardTitle,
+} from "./components/ui/profile-card.tsx";
 export {
   Select,
   SelectContent,

@@ -9,10 +9,10 @@ import {
 import { createOpaqueToken } from '@/auth/crypto/random-token';
 import { hashOpaqueToken } from '@/auth/crypto/token-hash';
 import { EmailVerificationTokensRepository } from '@/auth/repositories';
-import { UsersService } from '@/auth/services/users.service';
 import { AppConfigService } from '@/common/app-config.service';
 import { withErrorHandling } from '@/common/utils/error/error-handler';
 import { MailService } from '@/mail/mail.service';
+import { UsersService } from '@/user/services/users.service';
 
 const EMAIL_VERIFICATION_TTL_MS = 24 * 60 * 60 * 1000;
 const RESEND_COOLDOWN_MS = 90 * 1000;

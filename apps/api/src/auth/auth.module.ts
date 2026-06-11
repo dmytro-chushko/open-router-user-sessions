@@ -10,11 +10,9 @@ import {
   SessionCookieStrategy,
 } from '@/auth/passport';
 import {
-  AccountsRepository,
   EmailVerificationTokensRepository,
   PasswordResetTokensRepository,
   SessionsRepository,
-  UsersRepository,
 } from '@/auth/repositories';
 import {
   AuthService,
@@ -22,11 +20,11 @@ import {
   OAuthService,
   PasswordResetService,
   SessionService,
-  UsersService,
 } from '@/auth/services';
 import { CommonModule } from '@/common/common.module';
 import { MailModule } from '@/mail/mail.module';
 import { PrismaModule } from '@/prisma/prisma.module';
+import { UserModule } from '@/user/user.module';
 
 @Module({
   imports: [
@@ -36,15 +34,13 @@ import { PrismaModule } from '@/prisma/prisma.module';
     PrismaModule,
     CommonModule,
     MailModule,
+    UserModule,
   ],
   controllers: [AuthContractController, OAuthController],
   providers: [
-    UsersRepository,
-    AccountsRepository,
     SessionsRepository,
     EmailVerificationTokensRepository,
     PasswordResetTokensRepository,
-    UsersService,
     SessionService,
     AuthService,
     EmailVerificationService,
@@ -60,7 +56,6 @@ import { PrismaModule } from '@/prisma/prisma.module';
     EmailVerificationService,
     PasswordResetService,
     OAuthService,
-    UsersService,
     SessionService,
     PassportModule,
     SessionAuthGuard,

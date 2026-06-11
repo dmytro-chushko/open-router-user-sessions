@@ -26,7 +26,11 @@ const PROTECTED_OPERATIONS: ReadonlyArray<{
   path: string;
   method: HttpMethod;
 }> = [
-  { path: '/auth/me', method: 'get' },
+  { path: '/users/me', method: 'get' },
+  { path: '/users/me', method: 'patch' },
+  { path: '/users/me/avatar/upload-intent', method: 'post' },
+  { path: '/users/me/avatar/confirm', method: 'post' },
+  { path: '/users/me/avatar', method: 'delete' },
   { path: '/auth/logout', method: 'post' },
 ];
 

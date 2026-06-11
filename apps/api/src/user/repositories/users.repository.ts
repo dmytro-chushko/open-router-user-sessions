@@ -1,8 +1,8 @@
 import type { User } from '@generated/prisma/client';
 import { Injectable } from '@nestjs/common';
 
-import type { PublicUser } from '@/auth/types/public-user';
 import { PrismaService } from '@/prisma/prisma.service';
+import type { PublicUser } from '@/user/types/public-user';
 
 @Injectable()
 export class UsersRepository {
@@ -67,6 +67,20 @@ export class UsersRepository {
     return this.prisma.user.update({
       where: { id: userId },
       data: { emailVerifiedAt: at },
+    });
+  }
+
+  updateName(userId: string, name: string | null): Promise<User> {
+    return this.prisma.user.update({
+      where: { id: userId },
+      data: { name },
+    });
+  }
+
+  updateAvatar(userId: string, avatar: string | null): Promise<User> {
+    return this.prisma.user.update({
+      where: { id: userId },
+      data: { avatar },
     });
   }
 

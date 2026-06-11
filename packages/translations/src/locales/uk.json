@@ -119,8 +119,41 @@
     },
     "profile": {
       "title": "Профіль",
+      "avatarSectionTitle": "Фото профілю",
+      "avatarSectionDescription": "Завантажте фото до 5 МБ (JPEG, PNG або WebP).",
+      "detailsSectionTitle": "Дані облікового запису",
+      "name": "Імʼя",
       "email": "Email",
-      "role": "Роль"
+      "role": "Роль",
+      "roleUser": "Користувач",
+      "roleAdmin": "Адміністратор",
+      "emailStatus": "Статус email",
+      "emailVerified": "Підтверджено",
+      "emailNotVerified": "Не підтверджено",
+      "memberSince": "У системі з",
+      "changeAvatar": "Змінити фото",
+      "deleteAvatar": "Видалити фото",
+      "deleteAvatarConfirm": "Фото профілю буде видалено. Ви зможете завантажити нове будь-коли.",
+      "cancel": "Скасувати",
+      "uploading": "Завантаження…",
+      "deleting": "Видалення…",
+      "uploadSuccess": "Фото профілю оновлено.",
+      "deleteSuccess": "Фото профілю видалено.",
+      "saveName": "Зберегти імʼя",
+      "savingName": "Збереження…",
+      "nameUpdateSuccess": "Імʼя оновлено.",
+      "nameUpdateError": "Не вдалося оновити імʼя.",
+      "uploadErrors": {
+        "generic": "Не вдалося завантажити фото. Спробуйте ще раз.",
+        "tooLarge": "Фото має бути не більше 5 МБ.",
+        "invalidType": "Використовуйте зображення JPEG, PNG або WebP."
+      },
+      "connectedAccounts": {
+        "title": "Підключені акаунти",
+        "google": "Google",
+        "github": "GitHub",
+        "none": "Немає підключених акаунтів"
+      }
     },
     "admin": {
       "title": "Адмін",

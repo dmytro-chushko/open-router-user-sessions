@@ -36,7 +36,7 @@ async function bootstrap() {
           version: '1.0.0',
           description:
             'Session auth: POST /auth/login sets an HttpOnly cookie; ' +
-            'GET /auth/me and POST /auth/logout require it. OAuth is browser-only (not in this spec).',
+            'GET /users/me and POST /auth/logout require it. OAuth is browser-only (not in this spec).',
         },
         servers: [
           {

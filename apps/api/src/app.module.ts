@@ -8,12 +8,14 @@ import { SessionAuthGuard } from '@/auth/guards/session-auth.guard';
 import { CommonModule } from '@/common/common.module';
 import { AllExceptionsFilter } from '@/filters';
 import { PrismaModule } from '@/prisma/prisma.module';
+import { UserModule } from '@/user/user.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
     CommonModule,
     PrismaModule,
+    UserModule,
     AuthModule,
   ],
   controllers: [ApiContractController],
