@@ -11,15 +11,18 @@ import {
 } from "@repo/ui";
 import { useFormatter, useTranslations } from "next-intl";
 
+import { useCurrentUserQuery } from "@/entities/user";
 import { AvatarEditor } from "@/features/profile/ui/avatar-editor";
 import { ConnectedAccountsList } from "@/features/profile/ui/connected-accounts-list";
 import { ProfileNameForm } from "@/features/profile/ui/profile-name-form";
 
 type ProfileViewProps = {
-  user: UserMe;
+  initialUser: UserMe;
 };
 
-export function ProfileView({ user }: ProfileViewProps) {
+export function ProfileView({ initialUser }: ProfileViewProps) {
+  const { data } = useCurrentUserQuery({ initialData: initialUser });
+  const user: UserMe = data ?? initialUser;
   const t = useTranslations("protected.profile");
   const format = useFormatter();
 
