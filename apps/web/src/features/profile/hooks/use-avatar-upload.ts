@@ -3,7 +3,7 @@
 import type { UserMe } from "@repo/api-contracts";
 import { toast } from "@repo/ui";
 import { useTranslations } from "next-intl";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 import {
   uploadAvatarToSignedUrl,
@@ -17,9 +17,7 @@ export function useAvatarUpload() {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const uploadIntentMutation = useAvatarUploadIntentMutation();
   const confirmMutation = useAvatarConfirmMutation();
-
-  const isUploading =
-    uploadIntentMutation.isPending || confirmMutation.isPending;
+  const [isUploading, setIsUploading] = useState(false);
 
   const openFilePicker = () => {
     fileInputRef.current?.click();
@@ -52,6 +50,7 @@ export function useAvatarUpload() {
     }
 
     try {
+      setIsUploading(true);
       const intent = await uploadIntentMutation.mutateAsync({
         contentType: parsed.data.type as
           | "image/jpeg"
@@ -67,6 +66,8 @@ export function useAvatarUpload() {
       const message =
         error instanceof Error ? error.message : t("uploadErrors.generic");
       toast.error(message);
+    } finally {
+      setIsUploading(false);
     }
   };
 

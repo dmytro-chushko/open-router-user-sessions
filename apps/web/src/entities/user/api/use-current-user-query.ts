@@ -12,9 +12,14 @@ import { getApiErrorMessage } from "@/shared/api/get-api-error-message";
 
 const CURRENT_USER_RETRY_COUNT = 5;
 
-export function useCurrentUserQuery() {
+type UseCurrentUserQueryOptions = {
+  initialData?: UserMe;
+};
+
+export function useCurrentUserQuery(options: UseCurrentUserQueryOptions = {}) {
   return useQuery<UserMe | null>({
     queryKey: currentUserQueryKey,
+    initialData: options.initialData,
     queryFn: async () => {
       const result = await publicApiClient.users.me();
 
