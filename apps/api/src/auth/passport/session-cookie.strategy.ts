@@ -6,8 +6,8 @@ import type { Request } from 'express';
 import Strategy = require('passport-custom');
 
 import { SESSION_COOKIE_STRATEGY_NAME } from '@/auth/constants/session-cookie-strategy-name';
-import { SessionService } from '@/auth/services/session.service';
 import { AppConfigService } from '@/common/app-config.service';
+import { SessionService } from '@/sessions/session.service';
 import { UsersService } from '@/user/services/users.service';
 import type { PublicUser } from '@/user/types/public-user';
 

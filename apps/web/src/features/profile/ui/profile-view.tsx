@@ -15,6 +15,7 @@ import { useCurrentUserQuery } from "@/entities/user";
 import { AvatarEditor } from "@/features/profile/ui/avatar-editor";
 import { ConnectedAccountsList } from "@/features/profile/ui/connected-accounts-list";
 import { ProfileNameForm } from "@/features/profile/ui/profile-name-form";
+import { ProfilePasswordSection } from "@/features/profile/ui/profile-password-section";
 
 type ProfileViewProps = {
   initialUser: UserMe;
@@ -84,6 +85,18 @@ export function ProfileView({ initialUser }: ProfileViewProps) {
               </dd>
             </div>
           </dl>
+        </ProfileCardContent>
+      </ProfileCard>
+
+      <ProfileCard>
+        <ProfileCardHeader>
+          <ProfileCardTitle>{t("passwordSectionTitle")}</ProfileCardTitle>
+          <ProfileCardDescription>
+            {t("passwordSectionDescription")}
+          </ProfileCardDescription>
+        </ProfileCardHeader>
+        <ProfileCardContent>
+          <ProfilePasswordSection hasPassword={user.hasPassword} />
         </ProfileCardContent>
       </ProfileCard>
     </div>

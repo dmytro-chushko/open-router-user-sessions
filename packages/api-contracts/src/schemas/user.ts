@@ -20,6 +20,7 @@ export type UserPublic = z.infer<typeof userPublicSchema>;
 
 export const userMeSchema = userPublicSchema.extend({
   connectedProviders: z.array(providerSchema),
+  hasPassword: z.boolean(),
 });
 
 export type UserMe = z.infer<typeof userMeSchema>;

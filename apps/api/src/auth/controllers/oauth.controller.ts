@@ -6,8 +6,8 @@ import { GITHUB_OAUTH_STRATEGY_NAME } from '@/auth/constants/github-oauth-strate
 import { GOOGLE_OAUTH_STRATEGY_NAME } from '@/auth/constants/google-oauth-strategy-name';
 import { Public } from '@/auth/decorators/public.decorator';
 import { buildSessionCookieOptions } from '@/auth/helpers/session-cookie';
-import { SessionService } from '@/auth/services/session.service';
 import { AppConfigService } from '@/common/app-config.service';
+import { SessionService } from '@/sessions/session.service';
 import type { PublicUser } from '@/user/types/public-user';
 
 @Public()

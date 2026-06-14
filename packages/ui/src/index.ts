@@ -46,6 +46,7 @@ export {
   FormMessage,
 } from "./components/ui/form.tsx";
 export { Input } from "./components/ui/input.tsx";
+export { PasswordInput } from "./components/ui/password-input.tsx";
 export { Label } from "./components/ui/label.tsx";
 export {
   ProfileCard,

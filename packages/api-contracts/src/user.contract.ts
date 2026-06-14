@@ -7,6 +7,7 @@ import {
   unauthorizedResponse,
   unprocessableEntityResponse,
 } from "./common-responders.js";
+import { passwordSchema } from "./schemas/password.js";
 import {
   avatarContentTypeSchema,
   avatarUploadIntentSchema,
@@ -90,6 +91,25 @@ export const userContract = c.router(
         500: internalServerErrorResponse,
       },
       summary: "Remove avatar from profile",
+    },
+
+    changePassword: {
+      method: "POST",
+      path: "/me/password",
+      body: z.object({
+        currentPassword: z.string().min(1).max(128).optional(),
+        newPassword: passwordSchema,
+      }),
+      responses: {
+        200: z.object({ ok: z.literal(true) }),
+        400: badRequestResponse,
+        401: unauthorizedResponse,
+        422: unprocessableEntityResponse,
+        500: internalServerErrorResponse,
+      },
+      summary: "Change or set account password",
+      description:
+        "Requires session cookie. OAuth-only users may omit currentPassword.",
     },
   },
   {

@@ -32,6 +32,36 @@ export class UsersRepository {
     });
   }
 
+  async findMeById(
+    id: string,
+  ): Promise<(PublicUser & { hasPassword: boolean }) | null> {
+    const user = await this.prisma.user.findUnique({
+      where: { id },
+      select: {
+        id: true,
+        email: true,
+        name: true,
+        avatar: true,
+        role: true,
+        emailVerifiedAt: true,
+        createdAt: true,
+        updatedAt: true,
+        passwordHash: true,
+      },
+    });
+
+    if (user === null) {
+      return null;
+    }
+
+    const { passwordHash, ...publicUser } = user;
+
+    return {
+      ...publicUser,
+      hasPassword: passwordHash !== null && passwordHash.length > 0,
+    };
+  }
+
   createUser(input: {
     email: string;
     passwordHash: string;

@@ -3,9 +3,9 @@ import { Injectable, Logger } from '@nestjs/common';
 
 import { createOpaqueToken } from '@/auth/crypto/random-token';
 import { hashOpaqueToken } from '@/auth/crypto/token-hash';
-import { SessionsRepository } from '@/auth/repositories';
 import { AppConfigService } from '@/common/app-config.service';
 import { withErrorHandling } from '@/common/utils/error/error-handler';
+import { SessionsRepository } from '@/sessions/sessions.repository';
 
 @Injectable()
 export class SessionService {
@@ -93,6 +93,29 @@ export class SessionService {
       {
         logger: this.logger,
         context: 'SessionService.deleteAllSessionsForUser',
+      },
+    );
+  }
+
+  async deleteAllSessionsForUserExceptRawToken(
+    userId: string,
+    keepRawToken: string,
+  ): Promise<number> {
+    return withErrorHandling(
+      async () => {
+        const exceptTokenHash = hashOpaqueToken(
+          keepRawToken,
+          this.appConfig.sessionSecret,
+        );
+
+        return this.sessionsRepository.deleteAllForUserExceptTokenHash(
+          userId,
+          exceptTokenHash,
+        );
+      },
+      {
+        logger: this.logger,
+        context: 'SessionService.deleteAllSessionsForUserExceptRawToken',
       },
     );
   }
