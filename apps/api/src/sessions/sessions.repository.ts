@@ -40,4 +40,18 @@ export class SessionsRepository {
 
     return result.count;
   }
+
+  async deleteAllForUserExceptTokenHash(
+    userId: string,
+    exceptTokenHash: string,
+  ): Promise<number> {
+    const result = await this.prisma.session.deleteMany({
+      where: {
+        userId,
+        NOT: { tokenHash: exceptTokenHash },
+      },
+    });
+
+    return result.count;
+  }
 }

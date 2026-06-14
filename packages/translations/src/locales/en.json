@@ -33,7 +33,9 @@
   },
   "auth": {
     "common": {
-      "unknownError": "Something went wrong. Please try again."
+      "unknownError": "Something went wrong. Please try again.",
+      "showPassword": "Show password",
+      "hidePassword": "Hide password"
     },
     "login": {
       "title": "Sign in",
@@ -153,6 +155,27 @@
         "google": "Google",
         "github": "GitHub",
         "none": "No connected accounts"
+      },
+      "passwordSectionTitle": "Password & security",
+      "passwordSectionDescription": "Update your password to keep your account secure.",
+      "password": {
+        "changePassword": "Change password",
+        "setPassword": "Set a password",
+        "currentPassword": "Current password",
+        "newPassword": "New password",
+        "confirmPassword": "Confirm new password",
+        "savePassword": "Update password",
+        "savingPassword": "Updating…",
+        "updateSuccess": "Password updated.",
+        "updateError": "Could not update password.",
+        "forgotCurrentPassword": "Forgot your current password?",
+        "oauthSetPasswordHint": "You signed in with Google or GitHub. Set a password to also sign in with email.",
+        "showPassword": "Show password",
+        "hidePassword": "Hide password",
+        "errors": {
+          "currentPasswordRequired": "Current password is required.",
+          "mismatch": "Passwords do not match."
+        }
       }
     },
     "admin": {

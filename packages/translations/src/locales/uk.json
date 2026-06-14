@@ -33,7 +33,9 @@
   },
   "auth": {
     "common": {
-      "unknownError": "Щось пішло не так. Спробуйте ще раз."
+      "unknownError": "Щось пішло не так. Спробуйте ще раз.",
+      "showPassword": "Показати пароль",
+      "hidePassword": "Приховати пароль"
     },
     "login": {
       "title": "Вхід",
@@ -153,6 +155,27 @@
         "google": "Google",
         "github": "GitHub",
         "none": "Немає підключених акаунтів"
+      },
+      "passwordSectionTitle": "Пароль і безпека",
+      "passwordSectionDescription": "Оновіть пароль, щоб захистити обліковий запис.",
+      "password": {
+        "changePassword": "Змінити пароль",
+        "setPassword": "Встановити пароль",
+        "currentPassword": "Поточний пароль",
+        "newPassword": "Новий пароль",
+        "confirmPassword": "Підтвердіть новий пароль",
+        "savePassword": "Оновити пароль",
+        "savingPassword": "Оновлення…",
+        "updateSuccess": "Пароль оновлено.",
+        "updateError": "Не вдалося оновити пароль.",
+        "forgotCurrentPassword": "Забули поточний пароль?",
+        "oauthSetPasswordHint": "Ви входили через Google або GitHub. Встановіть пароль, щоб також входити через email.",
+        "showPassword": "Показати пароль",
+        "hidePassword": "Приховати пароль",
+        "errors": {
+          "currentPasswordRequired": "Поточний пароль обовʼязковий.",
+          "mismatch": "Паролі не збігаються."
+        }
       }
     },
     "admin": {

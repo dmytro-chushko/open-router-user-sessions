@@ -8,6 +8,7 @@ import {
   unauthorizedResponse,
   unprocessableEntityResponse,
 } from "./common-responders.js";
+import { passwordSchema } from "./schemas/password.js";
 import { userPublicSchema } from "./schemas/user.js";
 
 const c = initContract();
@@ -15,8 +16,6 @@ const c = initContract();
 const emailBodySchema = z.object({
   email: z.string().email(),
 });
-
-const passwordSchema = z.string().min(8).max(128);
 
 export const authContract = c.router(
   {

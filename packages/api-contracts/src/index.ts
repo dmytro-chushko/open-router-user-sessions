@@ -59,6 +59,7 @@ export { authContract } from "./auth.contract.js";
 export type { AuthContract } from "./auth.contract.js";
 export { userContract } from "./user.contract.js";
 export type { UserContract } from "./user.contract.js";
+export { passwordSchema } from "./schemas/password.js";
 export {
   avatarContentTypeSchema,
   avatarUploadIntentSchema,

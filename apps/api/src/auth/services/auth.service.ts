@@ -7,8 +7,8 @@ import {
 } from '@nestjs/common';
 
 import { EmailVerificationService } from '@/auth/services/email-verification.service';
-import { SessionService } from '@/auth/services/session.service';
 import { withErrorHandling } from '@/common/utils/error/error-handler';
+import { SessionService } from '@/sessions/session.service';
 import { UsersService } from '@/user/services/users.service';
 import type { PublicUser } from '@/user/types/public-user';
 

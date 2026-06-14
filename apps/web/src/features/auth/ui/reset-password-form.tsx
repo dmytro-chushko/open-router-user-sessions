@@ -8,7 +8,7 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-  Input,
+  PasswordInput,
 } from "@repo/ui";
 import { useTranslations } from "next-intl";
 
@@ -21,6 +21,7 @@ type ResetPasswordFormProps = {
 
 export function ResetPasswordForm({ token }: ResetPasswordFormProps) {
   const t = useTranslations("auth.resetPassword");
+  const tCommon = useTranslations("auth.common");
   const { form, handleSubmit, isPending } = useResetPasswordForm(token);
 
   if (token.trim() === "") {
@@ -44,10 +45,11 @@ export function ResetPasswordForm({ token }: ResetPasswordFormProps) {
             <FormItem>
               <FormLabel>{t("newPasswordLabel")}</FormLabel>
               <FormControl>
-                <Input
-                  type="password"
+                <PasswordInput
                   placeholder={t("newPasswordPlaceholder")}
                   autoComplete="new-password"
+                  showPasswordLabel={tCommon("showPassword")}
+                  hidePasswordLabel={tCommon("hidePassword")}
                   {...field}
                 />
               </FormControl>
@@ -62,10 +64,11 @@ export function ResetPasswordForm({ token }: ResetPasswordFormProps) {
             <FormItem>
               <FormLabel>{t("confirmPasswordLabel")}</FormLabel>
               <FormControl>
-                <Input
-                  type="password"
+                <PasswordInput
                   placeholder={t("confirmPasswordPlaceholder")}
                   autoComplete="new-password"
+                  showPasswordLabel={tCommon("showPassword")}
+                  hidePasswordLabel={tCommon("hidePassword")}
                   {...field}
                 />
               </FormControl>

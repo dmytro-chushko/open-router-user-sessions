@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 
 import { CommonModule } from '@/common/common.module';
 import { PrismaModule } from '@/prisma/prisma.module';
+import { SessionsModule } from '@/sessions/sessions.module';
 import { SupabaseStorageModule } from '@/storage/supabase-storage.module';
 import { AccountsRepository, UsersRepository } from '@/user/repositories';
 import {
@@ -12,7 +13,7 @@ import {
 import { UserController } from '@/user/user.controller';
 
 @Module({
-  imports: [PrismaModule, CommonModule, SupabaseStorageModule],
+  imports: [PrismaModule, CommonModule, SupabaseStorageModule, SessionsModule],
   controllers: [UserController],
   providers: [
     UsersRepository,

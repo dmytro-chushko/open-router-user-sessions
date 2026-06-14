@@ -9,6 +9,7 @@ import {
   FormLabel,
   FormMessage,
   Input,
+  PasswordInput,
 } from "@repo/ui";
 import { useTranslations } from "next-intl";
 
@@ -17,6 +18,7 @@ import { Link } from "@/i18n/navigation";
 
 export function LoginForm() {
   const t = useTranslations("auth.login");
+  const tCommon = useTranslations("auth.common");
   const {
     form,
     handleSubmit,
@@ -57,10 +59,11 @@ export function LoginForm() {
             <FormItem>
               <FormLabel>{t("passwordLabel")}</FormLabel>
               <FormControl>
-                <Input
-                  type="password"
+                <PasswordInput
                   placeholder={t("passwordPlaceholder")}
                   autoComplete="current-password"
+                  showPasswordLabel={tCommon("showPassword")}
+                  hidePasswordLabel={tCommon("hidePassword")}
                   {...field}
                 />
               </FormControl>

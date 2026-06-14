@@ -12,18 +12,17 @@ import {
 import {
   EmailVerificationTokensRepository,
   PasswordResetTokensRepository,
-  SessionsRepository,
 } from '@/auth/repositories';
 import {
   AuthService,
   EmailVerificationService,
   OAuthService,
   PasswordResetService,
-  SessionService,
 } from '@/auth/services';
 import { CommonModule } from '@/common/common.module';
 import { MailModule } from '@/mail/mail.module';
 import { PrismaModule } from '@/prisma/prisma.module';
+import { SessionsModule } from '@/sessions/sessions.module';
 import { UserModule } from '@/user/user.module';
 
 @Module({
@@ -34,14 +33,13 @@ import { UserModule } from '@/user/user.module';
     PrismaModule,
     CommonModule,
     MailModule,
+    SessionsModule,
     UserModule,
   ],
   controllers: [AuthContractController, OAuthController],
   providers: [
-    SessionsRepository,
     EmailVerificationTokensRepository,
     PasswordResetTokensRepository,
-    SessionService,
     AuthService,
     EmailVerificationService,
     PasswordResetService,
@@ -56,7 +54,6 @@ import { UserModule } from '@/user/user.module';
     EmailVerificationService,
     PasswordResetService,
     OAuthService,
-    SessionService,
     PassportModule,
     SessionAuthGuard,
   ],
