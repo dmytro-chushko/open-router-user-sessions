@@ -9,9 +9,8 @@ import {
   ProfileCardTitle,
   Separator,
 } from "@repo/ui";
-import { useFormatter, useTranslations } from "next-intl";
 
-import { useCurrentUserQuery } from "@/entities/user";
+import { useProfileView } from "@/features/profile/hooks/use-profile-view";
 import { AvatarEditor } from "@/features/profile/ui/avatar-editor";
 import { ConnectedAccountsList } from "@/features/profile/ui/connected-accounts-list";
 import { ProfileNameForm } from "@/features/profile/ui/profile-name-form";
@@ -22,17 +21,15 @@ type ProfileViewProps = {
 };
 
 export function ProfileView({ initialUser }: ProfileViewProps) {
-  const { data } = useCurrentUserQuery({ initialData: initialUser });
-  const user: UserMe = data ?? initialUser;
-  const t = useTranslations("protected.profile");
-  const format = useFormatter();
-
-  const roleLabel = user.role === "ADMIN" ? t("roleAdmin") : t("roleUser");
-  const emailVerifiedLabel =
-    user.emailVerifiedAt !== null ? t("emailVerified") : t("emailNotVerified");
-  const memberSince = format.dateTime(new Date(user.createdAt), {
-    dateStyle: "medium",
-  });
+  const {
+    user,
+    t,
+    roleLabel,
+    emailVerifiedLabel,
+    memberSince,
+    passwordCardRef,
+    scrollPasswordCardIntoView,
+  } = useProfileView(initialUser);
 
   return (
     <div className="mx-auto w-full max-w-2xl space-y-6 p-6">
@@ -88,7 +85,7 @@ export function ProfileView({ initialUser }: ProfileViewProps) {
         </ProfileCardContent>
       </ProfileCard>
 
-      <ProfileCard>
+      <ProfileCard ref={passwordCardRef} className="scroll-mb-6">
         <ProfileCardHeader>
           <ProfileCardTitle>{t("passwordSectionTitle")}</ProfileCardTitle>
           <ProfileCardDescription>
@@ -96,7 +93,10 @@ export function ProfileView({ initialUser }: ProfileViewProps) {
           </ProfileCardDescription>
         </ProfileCardHeader>
         <ProfileCardContent>
-          <ProfilePasswordSection hasPassword={user.hasPassword} />
+          <ProfilePasswordSection
+            hasPassword={user.hasPassword}
+            onExpanded={scrollPasswordCardIntoView}
+          />
         </ProfileCardContent>
       </ProfileCard>
     </div>

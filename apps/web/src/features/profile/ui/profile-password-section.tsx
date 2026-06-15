@@ -11,17 +11,19 @@ import {
   PasswordInput,
 } from "@repo/ui";
 import { useTranslations } from "next-intl";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { useProfilePasswordForm } from "@/features/profile/hooks/use-profile-password-form";
 import { Link } from "@/i18n/navigation";
 
 type ProfilePasswordSectionProps = {
   hasPassword: boolean;
+  onExpanded?: () => void;
 };
 
 export function ProfilePasswordSection({
   hasPassword,
+  onExpanded,
 }: ProfilePasswordSectionProps) {
   const t = useTranslations("protected.profile.password");
   const tProfile = useTranslations("protected.profile");
@@ -32,6 +34,14 @@ export function ProfilePasswordSection({
       setIsExpanded(false);
     },
   });
+
+  useEffect(() => {
+    if (!isExpanded) {
+      return;
+    }
+
+    onExpanded?.();
+  }, [isExpanded, onExpanded]);
 
   if (!isExpanded) {
     return (
