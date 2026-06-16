@@ -1,12 +1,14 @@
-import { Controller, Req, UnauthorizedException } from '@nestjs/common';
+import { Controller, Req, Res, UnauthorizedException } from '@nestjs/common';
 import { userContract } from '@repo/api-contracts';
 import { TsRestHandler, tsRestHandler } from '@ts-rest/nest';
-import type { Request } from 'express';
+import type { Request, Response } from 'express';
 
 import { CurrentUser } from '@/auth/decorators/current-user.decorator';
+import { buildClearSessionCookieOptions } from '@/auth/helpers/session-cookie';
 import { AppConfigService } from '@/common/app-config.service';
 import type { AvatarContentType } from '@/storage/storage.constants';
 import { UserAvatarService } from '@/user/services/user-avatar.service';
+import { UserDeletionService } from '@/user/services/user-deletion.service';
 import { UserProfileService } from '@/user/services/user-profile.service';
 import type { PublicUser } from '@/user/types/public-user';
 
@@ -15,6 +17,7 @@ export class UserController {
   constructor(
     private readonly userProfileService: UserProfileService,
     private readonly userAvatarService: UserAvatarService,
+    private readonly userDeletionService: UserDeletionService,
     private readonly appConfig: AppConfigService,
   ) {}
 
@@ -108,6 +111,29 @@ export class UserController {
         status: 200 as const,
         body: await this.userAvatarService.deleteAvatar(currentUser.id),
       };
+    });
+  }
+
+  @TsRestHandler(userContract.deleteAccount)
+  deleteAccount(
+    @CurrentUser() user: PublicUser | undefined,
+    @Res({ passthrough: true }) res: Response,
+  ) {
+    return tsRestHandler(userContract.deleteAccount, async ({ body }) => {
+      const currentUser = this.requireUser(user);
+
+      await this.userDeletionService.deleteAccount({
+        userId: currentUser.id,
+        emailConfirmation: body.emailConfirmation,
+        currentPassword: body.currentPassword,
+      });
+
+      res.clearCookie(
+        this.appConfig.sessionCookieName,
+        buildClearSessionCookieOptions(this.appConfig),
+      );
+
+      return { status: 204 as const, body: undefined };
     });
   }
 

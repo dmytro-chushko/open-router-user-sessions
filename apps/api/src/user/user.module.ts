@@ -7,6 +7,7 @@ import { SupabaseStorageModule } from '@/storage/supabase-storage.module';
 import { AccountsRepository, UsersRepository } from '@/user/repositories';
 import {
   UserAvatarService,
+  UserDeletionService,
   UserProfileService,
   UsersService,
 } from '@/user/services';
@@ -21,6 +22,7 @@ import { UserController } from '@/user/user.controller';
     UsersService,
     UserProfileService,
     UserAvatarService,
+    UserDeletionService,
   ],
   exports: [UsersRepository, AccountsRepository, UsersService],
 })

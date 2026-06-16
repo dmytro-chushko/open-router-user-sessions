@@ -120,4 +120,8 @@ export class UsersRepository {
       data: { passwordHash },
     });
   }
+
+  deleteById(userId: string): Promise<User> {
+    return this.prisma.user.delete({ where: { id: userId } });
+  }
 }

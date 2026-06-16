@@ -18,6 +18,7 @@
       "default": "./dist/index.js"
     },
     "./styles.css": "./dist/index.css",
+    "./theme.css": "./src/theme.css",
     "./card": {
       "development": {
         "types": "./src/card.tsx",

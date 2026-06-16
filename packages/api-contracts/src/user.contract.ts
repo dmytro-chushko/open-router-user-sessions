@@ -111,6 +111,26 @@ export const userContract = c.router(
       description:
         "Requires session cookie. OAuth-only users may omit currentPassword.",
     },
+
+    deleteAccount: {
+      method: "DELETE",
+      path: "/me",
+      body: z.object({
+        emailConfirmation: z.string().email(),
+        currentPassword: z.string().min(1).max(128).optional(),
+      }),
+      responses: {
+        204: z.void(),
+        400: badRequestResponse,
+        401: unauthorizedResponse,
+        403: forbiddenResponse,
+        422: unprocessableEntityResponse,
+        500: internalServerErrorResponse,
+      },
+      summary: "Permanently delete current user account",
+      description:
+        "Requires session cookie. Email must match account email. Password users must provide currentPassword.",
+    },
   },
   {
     pathPrefix: "/users",

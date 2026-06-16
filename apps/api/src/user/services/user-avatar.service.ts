@@ -66,6 +66,16 @@ export class UserAvatarService {
     return this.userProfileService.getMeWithProviders(userId);
   }
 
+  async cleanupManagedAvatarForUser(userId: string): Promise<void> {
+    const user = await this.usersService.findPublicById(userId);
+
+    if (user === null) {
+      return;
+    }
+
+    await this.deleteManagedAvatarIfPresent(user.avatar);
+  }
+
   private async deleteManagedAvatarIfPresent(
     avatarUrl: string | null,
   ): Promise<void> {

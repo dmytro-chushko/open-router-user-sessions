@@ -70,3 +70,7 @@ export {
   userPublicSchema,
 } from "./schemas/user.js";
 export type { AvatarUploadIntent, UserMe, UserPublic } from "./schemas/user.js";
+export {
+  USER_DELETION_ERROR_MESSAGES,
+  type UserDeletionErrorMessage,
+} from "./errors/user-deletion.js";

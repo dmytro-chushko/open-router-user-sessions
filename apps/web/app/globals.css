@@ -1,5 +1,7 @@
 @import "tailwindcss";
 @import "@repo/tailwind-config";
+@import "@repo/ui/theme.css";
+@source "../src/**/*.{ts,tsx}";
 
 :root {
   --header-height: calc(--spacing(16));
