@@ -31,6 +31,8 @@ const PROTECTED_OPERATIONS: ReadonlyArray<{
   { path: '/users/me/avatar/upload-intent', method: 'post' },
   { path: '/users/me/avatar/confirm', method: 'post' },
   { path: '/users/me/avatar', method: 'delete' },
+  { path: '/users/me/password', method: 'post' },
+  { path: '/users/me', method: 'delete' },
   { path: '/auth/logout', method: 'post' },
 ];
 

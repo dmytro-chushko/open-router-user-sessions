@@ -6,6 +6,10 @@ export {
 } from "./api/use-avatar-upload-intent-mutation";
 export { useAvatarConfirmMutation } from "./api/use-avatar-confirm-mutation";
 export { useChangePasswordMutation } from "./api/use-change-password-mutation";
+export {
+  useDeleteAccountMutation,
+  type DeleteAccountPayload,
+} from "./api/use-delete-account-mutation";
 export type { ChangePasswordPayload } from "./api/use-change-password-mutation";
 export { useCurrentUserQuery } from "./api/use-current-user-query";
 export { useDeleteAvatarMutation } from "./api/use-delete-avatar-mutation";

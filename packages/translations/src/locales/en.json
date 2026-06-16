@@ -176,6 +176,34 @@
           "currentPasswordRequired": "Current password is required.",
           "mismatch": "Passwords do not match."
         }
+      },
+      "dangerZone": {
+        "title": "Danger zone",
+        "subtitle": "Irreversible actions for your account.",
+        "description": "Permanently delete your account and all associated data. This cannot be undone.",
+        "consequences": {
+          "profile": "Your profile, name, and photo will be removed.",
+          "sessions": "All active sessions will be signed out.",
+          "connectedAccounts": "Google and GitHub connections will be removed.",
+          "subscription": "Active subscriptions will be canceled."
+        },
+        "deleteAccount": "Delete account",
+        "dialogTitle": "Delete your account?",
+        "dialogDescription": "This action is permanent. Type your email to confirm.",
+        "emailConfirmationLabel": "Confirm your email",
+        "emailConfirmationHint": "Enter your account email exactly as shown above.",
+        "currentPassword": "Current password",
+        "oauthReauthHint": "You signed in with Google or GitHub. Email confirmation is required to proceed.",
+        "confirmDelete": "Delete my account",
+        "deleting": "Deleting…",
+        "deleteSuccess": "Your account has been deleted.",
+        "deleteError": "Could not delete account. Please try again.",
+        "adminCannotDelete": "Administrator accounts cannot be self-deleted. Contact support if you need to close this account.",
+        "errors": {
+          "emailMismatch": "Email does not match your account.",
+          "currentPasswordRequired": "Current password is required.",
+          "invalidPassword": "Current password is incorrect."
+        }
       }
     },
     "admin": {
