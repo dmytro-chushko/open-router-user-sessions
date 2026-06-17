@@ -1,10 +1,12 @@
 import {
   BadRequestException,
   Injectable,
+  Logger,
   NotFoundException,
 } from '@nestjs/common';
 
 import { AppConfigService } from '@/common/app-config.service';
+import { withErrorHandling } from '@/common/utils/error/error-handler';
 import type { AvatarContentType } from '@/storage/storage.constants';
 import {
   extractStoragePathFromPublicUrl,
@@ -17,6 +19,8 @@ import type { UserMe } from '@/user/types/user-me';
 
 @Injectable()
 export class UserAvatarService {
+  private readonly logger = new Logger(UserAvatarService.name);
+
   constructor(
     private readonly usersService: UsersService,
     private readonly userProfileService: UserProfileService,
@@ -28,52 +32,76 @@ export class UserAvatarService {
     userId: string,
     input: { contentType: AvatarContentType; contentLength: number },
   ) {
-    return this.supabaseStorageService.createAvatarUploadIntent(userId, input);
+    return withErrorHandling(
+      () => this.supabaseStorageService.createAvatarUploadIntent(userId, input),
+      {
+        logger: this.logger,
+        context: 'UserAvatarService.createUploadIntent',
+      },
+    );
   }
 
-  async confirmUpload(userId: string, path: string): Promise<UserMe> {
-    this.supabaseStorageService.assertPathOwnedByUser(path, userId);
-    await this.supabaseStorageService.readAvatarMetadata(path);
+  confirmUpload(userId: string, path: string): Promise<UserMe> {
+    return withErrorHandling(
+      async () => {
+        this.supabaseStorageService.assertPathOwnedByUser(path, userId);
+        await this.supabaseStorageService.readAvatarMetadata(path);
 
-    const user = await this.usersService.findPublicById(userId);
+        const user = await this.usersService.findPublicById(userId);
 
-    if (user === null) {
-      throw new NotFoundException('User not found.');
-    }
+        if (user === null) {
+          throw new NotFoundException('User not found.');
+        }
 
-    await this.deleteManagedAvatarIfPresent(user.avatar);
+        await this.deleteManagedAvatarIfPresent(user.avatar);
 
-    const publicUrl = this.supabaseStorageService.getPublicUrl(path);
-    await this.usersService.updateAvatar(userId, publicUrl);
+        const publicUrl = this.supabaseStorageService.getPublicUrl(path);
+        await this.usersService.updateAvatar(userId, publicUrl);
 
-    return this.userProfileService.getMeWithProviders(userId);
+        return this.userProfileService.getMeWithProviders(userId);
+      },
+      { logger: this.logger, context: 'UserAvatarService.confirmUpload' },
+    );
   }
 
-  async deleteAvatar(userId: string): Promise<UserMe> {
-    const user = await this.usersService.findPublicById(userId);
+  deleteAvatar(userId: string): Promise<UserMe> {
+    return withErrorHandling(
+      async () => {
+        const user = await this.usersService.findPublicById(userId);
 
-    if (user === null) {
-      throw new NotFoundException('User not found.');
-    }
+        if (user === null) {
+          throw new NotFoundException('User not found.');
+        }
 
-    if (user.avatar === null) {
-      return this.userProfileService.getMeWithProviders(userId);
-    }
+        if (user.avatar === null) {
+          return this.userProfileService.getMeWithProviders(userId);
+        }
 
-    await this.deleteManagedAvatarIfPresent(user.avatar);
-    await this.usersService.updateAvatar(userId, null);
+        await this.deleteManagedAvatarIfPresent(user.avatar);
+        await this.usersService.updateAvatar(userId, null);
 
-    return this.userProfileService.getMeWithProviders(userId);
+        return this.userProfileService.getMeWithProviders(userId);
+      },
+      { logger: this.logger, context: 'UserAvatarService.deleteAvatar' },
+    );
   }
 
-  async cleanupManagedAvatarForUser(userId: string): Promise<void> {
-    const user = await this.usersService.findPublicById(userId);
+  cleanupManagedAvatarForUser(userId: string): Promise<void> {
+    return withErrorHandling(
+      async () => {
+        const user = await this.usersService.findPublicById(userId);
 
-    if (user === null) {
-      return;
-    }
+        if (user === null) {
+          return;
+        }
 
-    await this.deleteManagedAvatarIfPresent(user.avatar);
+        await this.deleteManagedAvatarIfPresent(user.avatar);
+      },
+      {
+        logger: this.logger,
+        context: 'UserAvatarService.cleanupManagedAvatarForUser',
+      },
+    );
   }
 
   private async deleteManagedAvatarIfPresent(

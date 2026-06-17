@@ -33,6 +33,15 @@ export class UsersService {
     });
   }
 
+  findMeById(
+    id: string,
+  ): Promise<(PublicUser & { hasPassword: boolean }) | null> {
+    return withErrorHandling(() => this.usersRepository.findMeById(id), {
+      logger: this.logger,
+      context: 'UsersService.findMeById',
+    });
+  }
+
   async createUserWithPassword(input: {
     email: string;
     password: string;
@@ -95,6 +104,13 @@ export class UsersService {
       () => this.usersRepository.updateAvatar(userId, avatar),
       { logger: this.logger, context: 'UsersService.updateAvatar' },
     );
+  }
+
+  deleteById(userId: string): Promise<User> {
+    return withErrorHandling(() => this.usersRepository.deleteById(userId), {
+      logger: this.logger,
+      context: 'UsersService.deleteById',
+    });
   }
 
   normalizeEmail(rawEmail: string): string {
