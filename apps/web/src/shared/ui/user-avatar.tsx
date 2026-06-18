@@ -41,7 +41,9 @@ export function UserAvatar({
     <Avatar
       className={[sizeClassName[size], className].filter(Boolean).join(" ")}
     >
-      {avatarUrl ? <AvatarImage src={avatarUrl} alt="" /> : null}
+      {avatarUrl ? (
+        <AvatarImage src={avatarUrl} alt="" referrerPolicy="no-referrer" />
+      ) : null}
       <AvatarFallback aria-hidden="true">
         {initials.length > 0 ? initials : <User className="size-4" />}
       </AvatarFallback>

@@ -49,6 +49,8 @@ export class OAuthService {
           );
 
         if (existingAccount !== null) {
+          await this.syncOAuthProfileFields(existingAccount.userId, input);
+
           return this.requirePublicUser(existingAccount.userId);
         }
 
@@ -118,7 +120,41 @@ export class OAuthService {
       await this.usersService.setEmailVerified(existingUser.id, new Date());
     }
 
+    await this.syncOAuthProfileFields(existingUser.id, input);
+
     return this.requirePublicUser(existingUser.id);
+  }
+
+  private async syncOAuthProfileFields(
+    userId: string,
+    input: OAuthProfileInput,
+  ): Promise<void> {
+    const user = await this.usersRepository.findById(userId);
+
+    if (user === null) {
+      return;
+    }
+
+    const hasAvatar =
+      input.avatar !== null &&
+      input.avatar !== undefined &&
+      input.avatar.length > 0;
+    const isAvatarMissing =
+      user.avatar === null || user.avatar.trim().length === 0;
+
+    if (isAvatarMissing && hasAvatar) {
+      await this.usersService.updateAvatar(userId, input.avatar ?? null);
+    }
+
+    const hasName =
+      input.name !== null &&
+      input.name !== undefined &&
+      input.name.trim().length > 0;
+    const isNameMissing = user.name === null || user.name.trim().length === 0;
+
+    if (isNameMissing && hasName) {
+      await this.usersService.updateName(userId, input.name ?? null);
+    }
   }
 
   private async requirePublicUser(userId: string): Promise<PublicUser> {

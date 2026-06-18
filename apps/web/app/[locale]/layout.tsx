@@ -17,6 +17,7 @@ import type { ReactNode } from "react";
 
 import { routing } from "@/i18n/routing";
 import { getSsrHtmlThemeProps } from "@/shared/lib/get-ssr-html-theme-props";
+import { ModalProvider } from "@/shared/providers/modal-provider";
 import { QueryProvider } from "@/shared/providers/query-provider";
 import { SystemSsrThemeCleanup } from "@/shared/providers/system-ssr-theme-cleanup";
 import { WebTopBar } from "@/shared/shell/ui/web-top-bar";
@@ -86,14 +87,16 @@ export default async function LocaleLayout({
             <SystemSsrThemeCleanup />
             <Toaster />
             <QueryProvider>
-              <div className="min-h-dvh">
-                <header className="sticky top-0 z-50">
-                  <WebTopBar />
-                </header>
-                <main className="h-[calc(100dvh-var(--header-mobile-height))] min-h-0 flex-1 overflow-x-clip overflow-y-auto sm:h-[calc(100dvh-var(--header-tablet-height))] md:h-[calc(100dvh-var(--header-height))]">
-                  {children}
-                </main>
-              </div>
+              <ModalProvider>
+                <div className="min-h-dvh">
+                  <header className="sticky top-0 z-50">
+                    <WebTopBar />
+                  </header>
+                  <main className="h-[calc(100dvh-var(--header-mobile-height))] min-h-0 flex-1 overflow-x-clip overflow-y-auto sm:h-[calc(100dvh-var(--header-tablet-height))] md:h-[calc(100dvh-var(--header-height))]">
+                    {children}
+                  </main>
+                </div>
+              </ModalProvider>
             </QueryProvider>
           </ThemeProvider>
         </NextIntlClientProvider>
