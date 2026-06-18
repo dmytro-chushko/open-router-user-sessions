@@ -45,10 +45,26 @@ export class GoogleStrategy extends PassportStrategy(
       providerAccountId: profile.id,
       email,
       name: profile.displayName ?? null,
-      avatar: profile.photos?.[0]?.value ?? null,
+      avatar: resolveGoogleAvatar(profile),
       emailVerified,
       accessToken,
       refreshToken,
     });
   }
+}
+
+function resolveGoogleAvatar(profile: Profile): string | null {
+  const photoFromPhotos = profile.photos?.[0]?.value;
+
+  if (photoFromPhotos !== undefined && photoFromPhotos.length > 0) {
+    return photoFromPhotos;
+  }
+
+  const picture = (profile._json as { picture?: string } | undefined)?.picture;
+
+  if (picture !== undefined && picture.length > 0) {
+    return picture;
+  }
+
+  return null;
 }

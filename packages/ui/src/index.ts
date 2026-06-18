@@ -20,6 +20,18 @@ export {
 } from "./components/ui/avatar.tsx";
 export { Badge, badgeVariants } from "./components/ui/badge.tsx";
 export {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogOverlay,
+  DialogPortal,
+  DialogTitle,
+  DialogTrigger,
+} from "./components/ui/dialog.tsx";
+export {
   DropdownMenu,
   DropdownMenuCheckboxItem,
   DropdownMenuContent,
