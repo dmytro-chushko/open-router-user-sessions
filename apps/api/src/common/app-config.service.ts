@@ -110,6 +110,17 @@ export class AppConfigService {
     return this.config.get<string>('ADMIN_SEED_PASSWORD') ?? '';
   }
 
+  get auditLogRetentionDays(): number {
+    const raw = this.config.get<string>('AUDIT_LOG_RETENTION_DAYS');
+
+    if (raw === undefined || raw === '') {
+      return 90;
+    }
+    const n = Number.parseInt(raw, 10);
+
+    return Number.isFinite(n) && n > 0 ? n : 90;
+  }
+
   get supabaseUrl(): string {
     return this.config.get<string>('SUPABASE_URL') ?? '';
   }
