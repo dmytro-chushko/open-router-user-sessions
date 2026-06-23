@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { PassportModule } from '@nestjs/passport';
 
+import { AuditModule } from '@/audit/audit.module';
 import { SESSION_COOKIE_STRATEGY_NAME } from '@/auth/constants/session-cookie-strategy-name';
 import { AuthContractController, OAuthController } from '@/auth/controllers';
 import { SessionAuthGuard } from '@/auth/guards/session-auth.guard';
@@ -32,6 +33,7 @@ import { UserModule } from '@/user/user.module';
     }),
     PrismaModule,
     CommonModule,
+    AuditModule,
     MailModule,
     SessionsModule,
     UserModule,
