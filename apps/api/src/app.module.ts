@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { APP_FILTER, APP_GUARD } from '@nestjs/core';
 
+import { AdminModule } from '@/admin/admin.module';
 import { ApiContractController } from '@/api-contract.controller';
 import { AuthModule } from '@/auth/auth.module';
 import { SessionAuthGuard } from '@/auth/guards/session-auth.guard';
@@ -17,6 +18,7 @@ import { UserModule } from '@/user/user.module';
     PrismaModule,
     UserModule,
     AuthModule,
+    AdminModule,
   ],
   controllers: [ApiContractController],
   providers: [
