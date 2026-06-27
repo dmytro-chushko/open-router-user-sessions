@@ -24,6 +24,11 @@ import { UserController } from '@/user/user.controller';
     UserAvatarService,
     UserDeletionService,
   ],
-  exports: [UsersRepository, AccountsRepository, UsersService],
+  exports: [
+    UsersRepository,
+    AccountsRepository,
+    UsersService,
+    UserAvatarService,
+  ],
 })
 export class UserModule {}
