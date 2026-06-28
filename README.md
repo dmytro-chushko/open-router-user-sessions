@@ -1,4 +1,4 @@
-# Turborepo Tailwind CSS starter
+# Turborepo Tailwind CSS starter.
 
 This Turborepo starter is maintained by the Turborepo core team.
 
