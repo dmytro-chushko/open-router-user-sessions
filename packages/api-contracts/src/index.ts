@@ -1,5 +1,6 @@
 import { initContract } from "@ts-rest/core";
 import { z } from "zod";
+import { adminContract } from "./admin.contract.js";
 import { authContract } from "./auth.contract.js";
 import { userContract } from "./user.contract.js";
 import {
@@ -50,6 +51,7 @@ export const contract = c.router({
   common: appContract,
   auth: authContract,
   users: userContract,
+  admin: adminContract,
 });
 
 export type AppContract = typeof contract;
@@ -59,6 +61,8 @@ export { authContract } from "./auth.contract.js";
 export type { AuthContract } from "./auth.contract.js";
 export { userContract } from "./user.contract.js";
 export type { UserContract } from "./user.contract.js";
+export { adminContract } from "./admin.contract.js";
+export type { AdminContract } from "./admin.contract.js";
 export { passwordSchema } from "./schemas/password.js";
 export {
   avatarContentTypeSchema,
@@ -71,6 +75,40 @@ export {
 } from "./schemas/user.js";
 export type { AvatarUploadIntent, UserMe, UserPublic } from "./schemas/user.js";
 export {
+  adminStatsSchema,
+  adminUpdateUserRoleBodySchema,
+  adminUserDetailSchema,
+  adminUserIdParamsSchema,
+  adminUserListItemSchema,
+  adminUserListResultSchema,
+  adminUserSessionSummarySchema,
+  adminUsersListQuerySchema,
+  auditActionSchema,
+  auditLogItemSchema,
+  auditLogListResultSchema,
+  auditLogUserSummarySchema,
+  auditLogsListQuerySchema,
+} from "./schemas/admin.js";
+export type {
+  AdminStatsOverview,
+  AdminUpdateUserRoleBody,
+  AdminUserDetail,
+  AdminUserIdParams,
+  AdminUserListItem,
+  AdminUserListResult,
+  AdminUserSessionSummary,
+  AdminUsersListQuery,
+  AuditAction,
+  AuditLogItem,
+  AuditLogListResult,
+  AuditLogUserSummary,
+  AuditLogsListQuery,
+} from "./schemas/admin.js";
+export {
   USER_DELETION_ERROR_MESSAGES,
   type UserDeletionErrorMessage,
 } from "./errors/user-deletion.js";
+export {
+  ADMIN_USERS_ERROR_MESSAGES,
+  type AdminUsersErrorMessage,
+} from "./errors/admin-users.js";
