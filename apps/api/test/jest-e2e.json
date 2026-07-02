@@ -6,7 +6,8 @@
   "moduleNameMapper": {
     "^@/(.*)$": "<rootDir>/src/$1",
     "^@generated/prisma/client$": "<rootDir>/generated/prisma/client",
-    "^@repo/api-contracts$": "<rootDir>/../../packages/api-contracts/src/index.ts"
+    "^@repo/api-contracts$": "<rootDir>/../../packages/api-contracts/src/index.ts",
+    "^(\\.{1,2}/.*)\\.js$": "$1"
   },
   "transform": {
     "^.+\\.(t|j)s$": [
