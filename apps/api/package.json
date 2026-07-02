@@ -96,7 +96,8 @@
     ],
     "moduleNameMapper": {
       "^@/(.*)$": "<rootDir>/$1",
-      "^@generated/prisma/client$": "<rootDir>/../generated/prisma/client"
+      "^@generated/prisma/client$": "<rootDir>/../generated/prisma/client",
+      "^(\\.{1,2}/.*)\\.js$": "$1"
     },
     "rootDir": "src",
     "testRegex": ".*\\.spec\\.ts$",
