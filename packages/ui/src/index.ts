@@ -90,6 +90,16 @@ export {
   SheetTrigger,
 } from "./components/ui/sheet.tsx";
 export { Separator } from "./components/ui/separator.tsx";
+export {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableFooter,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "./components/ui/table.tsx";
 export { TopBar, type TopBarProps } from "./components/ui/top-bar.tsx";
 export { ThemeModeToggle } from "./components/ui/theme-mode-toggle.tsx";
 export { Toaster } from "./components/ui/sonner.tsx";
