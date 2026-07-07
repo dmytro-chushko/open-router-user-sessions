@@ -34,6 +34,13 @@ export function isProtectedPath(pathnameWithoutLocale: string): boolean {
   );
 }
 
+export function isAdminPath(pathnameWithoutLocale: string): boolean {
+  return (
+    pathnameWithoutLocale === "/admin" ||
+    pathnameWithoutLocale.startsWith("/admin/")
+  );
+}
+
 export function isPublicAuthPath(pathnameWithoutLocale: string): boolean {
   return PUBLIC_AUTH_PATHS.some(
     (path) =>

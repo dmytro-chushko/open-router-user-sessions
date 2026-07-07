@@ -1,6 +1,7 @@
 "use client";
 
 import { Separator, ThemeModeToggle } from "@repo/ui";
+import type { ReactNode } from "react";
 import { useId } from "react";
 
 import { AuthHeaderAction } from "./auth-header-action";
@@ -29,6 +30,7 @@ type HeaderActionsPanelProps = {
   layout: "row" | "stack";
   themeLabels: ThemeLabels;
   sectionLabels?: SectionLabels;
+  adminNav?: ReactNode;
   onNavigate?: () => void;
   className?: string;
 };
@@ -37,6 +39,7 @@ export function HeaderActionsPanel({
   layout,
   themeLabels,
   sectionLabels,
+  adminNav,
   onNavigate,
   className,
 }: HeaderActionsPanelProps) {
@@ -82,6 +85,13 @@ export function HeaderActionsPanel({
           ) : null}
           <LocaleSwitcher fullWidth onLocaleChange={onNavigate} />
         </div>
+
+        {adminNav ? (
+          <>
+            <Separator decorative />
+            {adminNav}
+          </>
+        ) : null}
 
         {showAccountSection ? (
           <>
