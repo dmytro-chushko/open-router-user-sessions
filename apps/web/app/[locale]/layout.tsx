@@ -1,7 +1,7 @@
 import "@repo/ui/styles.css";
 import "../globals.css";
 
-import { Toaster } from "@repo/ui";
+import { SidebarProvider, Toaster } from "@repo/ui";
 import { ThemeProvider } from "@teispace/next-themes";
 import { getTheme } from "@teispace/next-themes/server";
 import type { Metadata } from "next";
@@ -88,14 +88,14 @@ export default async function LocaleLayout({
             <Toaster />
             <QueryProvider>
               <ModalProvider>
-                <div className="min-h-dvh">
+                <SidebarProvider className="flex min-h-dvh flex-col">
                   <header className="sticky top-0 z-50">
                     <WebTopBar />
                   </header>
                   <main className="h-[calc(100dvh-var(--header-mobile-height))] min-h-0 flex-1 overflow-x-clip overflow-y-auto sm:h-[calc(100dvh-var(--header-tablet-height))] md:h-[calc(100dvh-var(--header-height))]">
                     {children}
                   </main>
-                </div>
+                </SidebarProvider>
               </ModalProvider>
             </QueryProvider>
           </ThemeProvider>

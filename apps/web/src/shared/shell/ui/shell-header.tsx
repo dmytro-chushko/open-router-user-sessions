@@ -1,9 +1,11 @@
 "use client";
 
-import { TopBar } from "@repo/ui";
+import { SidebarTrigger, TopBar } from "@repo/ui";
 
 import { HeaderActionsPanel } from "./header-actions-panel";
 import { MobileHeaderSheet } from "./mobile-header-sheet";
+
+import { useShowAdminNav } from "@/features/admin/hooks/use-show-admin-nav";
 
 type ThemeLabels = {
   darkLabel: string;
@@ -37,6 +39,8 @@ export function ShellHeader({
   mobileMenuLabels,
   sectionLabels,
 }: ShellHeaderProps) {
+  const showAdminNav = useShowAdminNav();
+
   return (
     <TopBar
       className="h-(--header-mobile-height) sm:h-(--header-tablet-height) md:h-(--header-height)"
@@ -55,9 +59,12 @@ export function ShellHeader({
         </>
       }
     >
-      <span className="min-w-0 flex-1 truncate text-sm font-medium text-foreground">
-        {title}
-      </span>
+      <div className="flex min-w-0 flex-1 items-center gap-2">
+        {showAdminNav ? <SidebarTrigger className="-ml-1" /> : null}
+        <span className="min-w-0 flex-1 truncate text-sm font-medium text-foreground">
+          {title}
+        </span>
+      </div>
     </TopBar>
   );
 }

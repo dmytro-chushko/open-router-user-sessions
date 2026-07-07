@@ -5,11 +5,11 @@ import { Badge } from "@repo/ui";
 import { useTranslations } from "next-intl";
 
 type ConnectedAccountsListProps = {
-  connectedProviders: UserMe["connectedProviders"];
+  connectedProviders?: UserMe["connectedProviders"];
 };
 
 export function ConnectedAccountsList({
-  connectedProviders,
+  connectedProviders = [],
 }: ConnectedAccountsListProps) {
   const t = useTranslations("protected.profile.connectedAccounts");
 

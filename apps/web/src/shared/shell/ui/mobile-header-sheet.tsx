@@ -12,6 +12,8 @@ import { Menu } from "lucide-react";
 
 import { HeaderActionsPanel } from "./header-actions-panel";
 
+import { useShowAdminNav } from "@/features/admin/hooks/use-show-admin-nav";
+import { AdminNav } from "@/features/admin/ui/admin-nav";
 import { useMobileHeaderSheet } from "@/shared/shell/hooks/use-mobile-header-sheet";
 
 type ThemeLabels = {
@@ -45,6 +47,8 @@ export function MobileHeaderSheet({
   sectionLabels,
 }: MobileHeaderSheetProps) {
   const { open, setOpen } = useMobileHeaderSheet();
+  const showAdminNav = useShowAdminNav();
+  const handleNavigate = () => setOpen(false);
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>
@@ -71,7 +75,12 @@ export function MobileHeaderSheet({
           layout="stack"
           themeLabels={themeLabels}
           sectionLabels={sectionLabels}
-          onNavigate={() => setOpen(false)}
+          adminNav={
+            showAdminNav ? (
+              <AdminNav variant="sheet" onNavigate={handleNavigate} />
+            ) : undefined
+          }
+          onNavigate={handleNavigate}
         />
       </SheetContent>
     </Sheet>
