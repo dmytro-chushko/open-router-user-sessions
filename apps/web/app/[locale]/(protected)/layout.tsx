@@ -11,5 +11,5 @@ export default async function ProtectedLayout({
 }: ProtectedLayoutProps) {
   await verifySession();
 
-  return children;
+  return <div className="flex min-h-full flex-1">{children}</div>;
 }

@@ -117,10 +117,18 @@
   "protected": {
     "dashboard": {
       "title": "Dashboard",
-      "welcome": "Signed in as {email}"
+      "welcome": "Signed in as {email}",
+      "nav": {
+        "section": "Dashboard",
+        "overview": "Overview"
+      }
     },
     "profile": {
       "title": "Profile",
+      "nav": {
+        "section": "Profile",
+        "overview": "Settings"
+      },
       "avatarSectionTitle": "Profile photo",
       "avatarSectionDescription": "Upload a photo up to 5 MB (JPEG, PNG, or WebP).",
       "detailsSectionTitle": "Account details",

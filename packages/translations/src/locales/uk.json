@@ -117,10 +117,18 @@
   "protected": {
     "dashboard": {
       "title": "Панель",
-      "welcome": "Ви увійшли як {email}"
+      "welcome": "Ви увійшли як {email}",
+      "nav": {
+        "section": "Панель",
+        "overview": "Огляд"
+      }
     },
     "profile": {
       "title": "Профіль",
+      "nav": {
+        "section": "Профіль",
+        "overview": "Налаштування"
+      },
       "avatarSectionTitle": "Фото профілю",
       "avatarSectionDescription": "Завантажте фото до 5 МБ (JPEG, PNG або WebP).",
       "detailsSectionTitle": "Дані облікового запису",
