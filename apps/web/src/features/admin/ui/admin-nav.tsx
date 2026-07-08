@@ -3,10 +3,10 @@
 import { useTranslations } from "next-intl";
 
 import { adminNavItems } from "@/features/admin/config/admin-nav-items";
-import { isAdminNavItemActive } from "@/features/admin/lib/is-admin-nav-item-active";
 import { Link, usePathname } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
 import { stripLocalePrefix } from "@/shared/auth/auth-routes";
+import { isNavItemActive } from "@/shared/shell/lib/is-nav-item-active";
 
 const sectionLabelClassName = "text-sm font-medium text-muted-foreground";
 
@@ -34,7 +34,7 @@ export function AdminNav({ variant, onNavigate, className }: AdminNavProps) {
   const links = (
     <ul className="flex flex-col items-stretch gap-1" role="list">
       {adminNavItems.map((item) => {
-        const isActive = isAdminNavItemActive(item, pathnameWithoutLocale);
+        const isActive = isNavItemActive(item, pathnameWithoutLocale);
         const Icon = item.icon;
 
         return (

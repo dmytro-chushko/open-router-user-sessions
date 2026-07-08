@@ -1,14 +1,10 @@
-import type { LucideIcon } from "lucide-react";
 import { LayoutDashboard, ScrollText, Users } from "lucide-react";
 
 import type { NavItem } from "@/shared/shell/model/nav-types";
 
 export type AdminNavItemId = "overview" | "users" | "auditLogs";
 
-export type AdminNavItem = NavItem & {
-  id: AdminNavItemId;
-  icon: LucideIcon;
-};
+export type AdminNavItem = NavItem<AdminNavItemId>;
 
 export const adminNavItems: AdminNavItem[] = [
   {
@@ -30,8 +26,3 @@ export const adminNavItems: AdminNavItem[] = [
     icon: ScrollText,
   },
 ];
-
-/** Serializable subset for server layouts — icons are resolved in client `AppSidebar`. */
-export const adminNavRoutes: NavItem[] = adminNavItems.map(
-  ({ id, href, match }) => ({ id, href, match }),
-);

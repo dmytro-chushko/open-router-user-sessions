@@ -17,25 +17,24 @@ import type { ComponentProps } from "react";
 import { Link, usePathname } from "@/i18n/navigation";
 import { routing } from "@/i18n/routing";
 import { stripLocalePrefix } from "@/shared/auth/auth-routes";
+import { sidebarNavConfig } from "@/shared/shell/config/sidebar-nav-config";
 import { isNavItemActive } from "@/shared/shell/lib/is-nav-item-active";
-import { resolveNavIcon } from "@/shared/shell/lib/resolve-nav-icon";
-import type { NavItem } from "@/shared/shell/model/nav-types";
+import type { SidebarScope } from "@/shared/shell/model/nav-types";
 
 const sidebarBelowHeaderClassName =
   "top-(--header-mobile-height) h-[calc(100svh-var(--header-mobile-height))]! sm:top-(--header-tablet-height) sm:h-[calc(100svh-var(--header-tablet-height))]! md:top-(--header-height) md:h-[calc(100svh-var(--header-height))]!";
 
 type AppSidebarProps = ComponentProps<typeof Sidebar> & {
-  navItems: NavItem[];
-  labelNamespace: string;
+  scope: SidebarScope;
 };
 
 export function AppSidebar({
-  navItems,
-  labelNamespace,
+  scope,
   collapsible = "icon",
   className,
   ...props
 }: AppSidebarProps) {
+  const { items, labelNamespace } = sidebarNavConfig[scope];
   const t = useTranslations(labelNamespace);
   const pathname = usePathname();
   const pathnameWithoutLocale = stripLocalePrefix(pathname, routing.locales);
@@ -53,8 +52,8 @@ export function AppSidebar({
           <SidebarGroupLabel>{t("section")}</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              {navItems.map((item) => {
-                const Icon = resolveNavIcon(labelNamespace, item.id);
+              {items.map((item) => {
+                const Icon = item.icon;
                 const isActive = isNavItemActive(item, pathnameWithoutLocale);
                 const label = t(item.id);
 
