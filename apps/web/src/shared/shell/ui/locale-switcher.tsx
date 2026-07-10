@@ -9,6 +9,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@repo/ui";
+import { cn } from "@repo/ui/lib/utils";
 import { useLocale, useTranslations } from "next-intl";
 
 import { usePathname, useRouter } from "@/i18n/navigation";
@@ -16,6 +17,8 @@ import { usePathname, useRouter } from "@/i18n/navigation";
 type LocaleSwitcherProps = {
   fullWidth?: boolean;
   onLocaleChange?: () => void;
+  className?: string;
+  size?: "sm" | "default" | "lg";
 };
 
 function getLocaleLabel(
@@ -28,6 +31,8 @@ function getLocaleLabel(
 export function LocaleSwitcher({
   fullWidth = false,
   onLocaleChange,
+  className,
+  size = "default",
 }: LocaleSwitcherProps = {}) {
   const pathname = usePathname();
   const router = useRouter();
@@ -48,11 +53,12 @@ export function LocaleSwitcher({
   return (
     <Select value={activeLocale} onValueChange={handleValueChange}>
       <SelectTrigger
-        size="default"
+        size={size}
         aria-label={t("localeSwitcherLabel")}
-        className={
-          fullWidth ? "w-full bg-muted/30" : "w-17 shrink-0 bg-muted/30 px-2"
-        }
+        className={cn(
+          fullWidth ? "w-full bg-muted/30" : "w-17 shrink-0 bg-muted/30 px-2",
+          className,
+        )}
       >
         <SelectValue />
       </SelectTrigger>

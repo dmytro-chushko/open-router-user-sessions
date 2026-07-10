@@ -63,24 +63,26 @@ export function HeaderActionsPanel({
   return (
     <div className={className}>
       <div className="flex flex-col gap-4 px-4 pb-4">
-        <div className="flex flex-col items-start gap-2">
-          {sectionLabels ? (
-            <p className={sectionLabelClassName} aria-hidden="true">
-              {sectionLabels.theme}
-            </p>
-          ) : null}
-          <ThemeModeToggle {...themeLabels} />
-        </div>
+        <div className="flex items-center gap-2">
+          <div className="flex flex-col items-start gap-2">
+            {sectionLabels ? (
+              <p className={sectionLabelClassName} aria-hidden="true">
+                {sectionLabels.theme}
+              </p>
+            ) : null}
+            <ThemeModeToggle {...themeLabels} />
+          </div>
 
-        <Separator decorative />
+          {/* <Separator decorative /> */}
 
-        <div className="flex w-full flex-col gap-2">
-          {sectionLabels ? (
-            <p className={sectionLabelClassName} aria-hidden="true">
-              {sectionLabels.locale}
-            </p>
-          ) : null}
-          <LocaleSwitcher fullWidth onLocaleChange={onNavigate} />
+          <div className="flex w-full flex-col gap-2">
+            {sectionLabels ? (
+              <p className={sectionLabelClassName} aria-hidden="true">
+                {sectionLabels.locale}
+              </p>
+            ) : null}
+            <LocaleSwitcher fullWidth size="lg" onLocaleChange={onNavigate} />
+          </div>
         </div>
 
         {showAccountSection ? (
