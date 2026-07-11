@@ -6,10 +6,12 @@ import {
   SidebarGroup,
   SidebarGroupContent,
   SidebarGroupLabel,
+  SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarRail,
+  SidebarTrigger,
 } from "@repo/ui";
 import { useTranslations } from "next-intl";
 import type { ComponentProps } from "react";
@@ -47,8 +49,11 @@ export function AppSidebar({
         .join(" ")}
       {...props}
     >
-      <SidebarContent>
-        <SidebarGroup>
+      <SidebarContent className="gap-0">
+        <SidebarHeader className="relative z-10 shrink-0 pb-0">
+          <SidebarTrigger className="mr-auto" />
+        </SidebarHeader>
+        <SidebarGroup className="pt-0">
           <SidebarGroupLabel>{t("section")}</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>

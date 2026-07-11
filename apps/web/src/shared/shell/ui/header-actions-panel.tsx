@@ -51,7 +51,7 @@ export function HeaderActionsPanel({
       <div className={className}>
         <div className="flex items-center gap-2">
           <ThemeModeToggle {...themeLabels} />
-          <LocaleSwitcher onLocaleChange={onNavigate} />
+          <LocaleSwitcher size="lg" onLocaleChange={onNavigate} />
           {showAccountSection ? (
             <AuthHeaderAction presentation={authPresentation} />
           ) : null}

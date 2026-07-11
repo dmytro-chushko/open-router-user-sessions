@@ -1,6 +1,6 @@
 "use client";
 
-import { SidebarTrigger, TopBar } from "@repo/ui";
+import { SidebarTrigger, TopBar, useIsMobile } from "@repo/ui";
 
 import { HeaderActionsPanel } from "./header-actions-panel";
 import { MobileHeaderSheet } from "./mobile-header-sheet";
@@ -40,6 +40,7 @@ export function ShellHeader({
   sectionLabels,
 }: ShellHeaderProps) {
   const showAdminNav = useShowAdminNav();
+  const isMobile = useIsMobile();
 
   return (
     <TopBar
@@ -60,7 +61,7 @@ export function ShellHeader({
       }
     >
       <div className="flex min-w-0 flex-1 items-center gap-2">
-        {showAdminNav ? <SidebarTrigger className="-ml-1" /> : null}
+        {showAdminNav && isMobile ? <SidebarTrigger className="-ml-1" /> : null}
         <span className="min-w-0 flex-1 truncate text-sm font-medium text-foreground">
           {title}
         </span>
