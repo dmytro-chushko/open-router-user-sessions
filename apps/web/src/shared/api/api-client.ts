@@ -7,4 +7,5 @@ export const publicApiClient = initClient(contract, {
   baseUrl: getPublicApiBaseUrl(),
   baseHeaders: { "Content-Type": "application/json" },
   credentials: "include",
+  validateResponse: true,
 });

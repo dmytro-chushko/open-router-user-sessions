@@ -223,6 +223,32 @@
         "overview": "Overview",
         "users": "Users",
         "auditLogs": "Audit logs"
+      },
+      "overview": {
+        "title": "Overview",
+        "description": "Key metrics for your workspace.",
+        "stats": {
+          "totalUsers": {
+            "label": "Total users",
+            "action": "View all users →"
+          },
+          "newUsersLast7Days": {
+            "label": "New users (7d)",
+            "action": "View recent →"
+          },
+          "unverifiedUsers": {
+            "label": "Unverified",
+            "action": "View unverified →"
+          },
+          "adminCount": {
+            "label": "Administrators",
+            "action": "View admins →"
+          },
+          "oauthOnlyUsers": {
+            "label": "OAuth only",
+            "action": "View users →"
+          }
+        }
       }
     }
   },

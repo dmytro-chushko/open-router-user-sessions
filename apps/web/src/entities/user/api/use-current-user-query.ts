@@ -1,7 +1,6 @@
 "use client";
 
 import type { UserMe } from "@repo/api-contracts";
-import { userMeSchema } from "@repo/api-contracts";
 import { useQuery } from "@tanstack/react-query";
 
 import { currentUserQueryKey } from "./current-user-query-key";
@@ -34,7 +33,7 @@ export function useCurrentUserQuery(options: UseCurrentUserQueryOptions = {}) {
         );
       }
 
-      return userMeSchema.parse(result.body);
+      return result.body;
     },
     retry: (failureCount, error) => {
       if (failureCount >= CURRENT_USER_RETRY_COUNT) {

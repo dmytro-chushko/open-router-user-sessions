@@ -223,6 +223,32 @@
         "overview": "Огляд",
         "users": "Користувачі",
         "auditLogs": "Журнал аудиту"
+      },
+      "overview": {
+        "title": "Огляд",
+        "description": "Ключові метрики вашого робочого простору.",
+        "stats": {
+          "totalUsers": {
+            "label": "Усього користувачів",
+            "action": "Переглянути всіх →"
+          },
+          "newUsersLast7Days": {
+            "label": "Нові (7 дн.)",
+            "action": "Переглянути нових →"
+          },
+          "unverifiedUsers": {
+            "label": "Без верифікації",
+            "action": "Переглянути неверифікованих →"
+          },
+          "adminCount": {
+            "label": "Адміністратори",
+            "action": "Переглянути адмінів →"
+          },
+          "oauthOnlyUsers": {
+            "label": "Лише OAuth",
+            "action": "Переглянути користувачів →"
+          }
+        }
       }
     }
   },
