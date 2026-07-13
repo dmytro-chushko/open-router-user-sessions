@@ -89,7 +89,27 @@ export const adminUsersListQuerySchema = z.object({
   sortOrder: z.enum(["asc", "desc"]).default("desc"),
 });
 
-export type AdminUsersListQuery = z.infer<typeof adminUsersListQuerySchema>;
+/** Parsed query (e.g. after Zod validation on the server). */
+export type AdminUsersListQuery = z.output<typeof adminUsersListQuerySchema>;
+
+/** Raw HTTP query params (e.g. ts-rest client `query` argument). */
+export type AdminUsersListQueryParams = z.input<
+  typeof adminUsersListQuerySchema
+>;
+
+export function toAdminUsersListQueryParams(
+  query: AdminUsersListQuery,
+): AdminUsersListQueryParams {
+  return {
+    ...query,
+    verified:
+      query.verified === undefined
+        ? undefined
+        : query.verified
+          ? "true"
+          : "false",
+  };
+}
 
 export const adminUpdateUserRoleBodySchema = z.object({
   role: roleSchema,
