@@ -249,6 +249,58 @@
             "action": "View users →"
           }
         }
+      },
+      "users": {
+        "title": "Users",
+        "description": "Search and manage workspace users.",
+        "searchPlaceholder": "Search by name or email…",
+        "searchAriaLabel": "Search users",
+        "columns": {
+          "user": "User",
+          "role": "Role",
+          "verified": "Verified",
+          "auth": "Auth",
+          "joined": "Joined",
+          "actions": "Actions"
+        },
+        "roleUser": "User",
+        "roleAdmin": "Administrator",
+        "verifiedYes": "Verified",
+        "verifiedNo": "Not verified",
+        "auth": {
+          "google": "Google",
+          "github": "GitHub",
+          "password": "Password",
+          "none": "None"
+        },
+        "filters": {
+          "role": "Role",
+          "roleAll": "All roles",
+          "roleUser": "Users",
+          "roleAdmin": "Administrators",
+          "verified": "Verification",
+          "verifiedAll": "All",
+          "verifiedYes": "Verified",
+          "verifiedNo": "Unverified"
+        },
+        "empty": "No users match your filters.",
+        "clearFilters": "Clear filters",
+        "viewUser": "View",
+        "viewUserAriaLabel": "View user {email}",
+        "retry": "Try again",
+        "loadError": "Could not load users. Please try again.",
+        "pagination": {
+          "previous": "Previous",
+          "next": "Next",
+          "page": "Page {page} of {totalPages}",
+          "previousAriaLabel": "Go to previous page",
+          "nextAriaLabel": "Go to next page"
+        },
+        "sort": {
+          "asc": "Sort ascending",
+          "desc": "Sort descending",
+          "none": "Not sorted"
+        }
       }
     }
   },

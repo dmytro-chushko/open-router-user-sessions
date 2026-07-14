@@ -249,6 +249,58 @@
             "action": "Переглянути користувачів →"
           }
         }
+      },
+      "users": {
+        "title": "Користувачі",
+        "description": "Пошук і керування користувачами робочого простору.",
+        "searchPlaceholder": "Пошук за ім'ям або email…",
+        "searchAriaLabel": "Пошук користувачів",
+        "columns": {
+          "user": "Користувач",
+          "role": "Роль",
+          "verified": "Верифікація",
+          "auth": "Авторизація",
+          "joined": "Дата реєстрації",
+          "actions": "Дії"
+        },
+        "roleUser": "Користувач",
+        "roleAdmin": "Адміністратор",
+        "verifiedYes": "Підтверджено",
+        "verifiedNo": "Не підтверджено",
+        "auth": {
+          "google": "Google",
+          "github": "GitHub",
+          "password": "Пароль",
+          "none": "Немає"
+        },
+        "filters": {
+          "role": "Роль",
+          "roleAll": "Усі ролі",
+          "roleUser": "Користувачі",
+          "roleAdmin": "Адміністратори",
+          "verified": "Верифікація",
+          "verifiedAll": "Усі",
+          "verifiedYes": "Підтверджені",
+          "verifiedNo": "Без верифікації"
+        },
+        "empty": "Жоден користувач не відповідає фільтрам.",
+        "clearFilters": "Скинути фільтри",
+        "viewUser": "Переглянути",
+        "viewUserAriaLabel": "Переглянути користувача {email}",
+        "retry": "Спробувати знову",
+        "loadError": "Не вдалося завантажити користувачів. Спробуйте ще раз.",
+        "pagination": {
+          "previous": "Назад",
+          "next": "Далі",
+          "page": "Сторінка {page} з {totalPages}",
+          "previousAriaLabel": "Перейти на попередню сторінку",
+          "nextAriaLabel": "Перейти на наступну сторінку"
+        },
+        "sort": {
+          "asc": "Сортування за зростанням",
+          "desc": "Сортування за спаданням",
+          "none": "Без сортування"
+        }
       }
     }
   },
