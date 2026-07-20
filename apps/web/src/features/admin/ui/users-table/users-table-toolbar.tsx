@@ -13,6 +13,8 @@ import {
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 
+import { hasAdminUsersActiveFilters } from "@/features/admin/lib/has-admin-users-active-filters";
+
 const SEARCH_DEBOUNCE_MS = 300;
 
 type UsersTableToolbarProps = {
@@ -20,15 +22,6 @@ type UsersTableToolbarProps = {
   onParamsChange: (patch: Partial<AdminUsersListQuery>) => void;
   onClearFilters: () => void;
 };
-
-function hasActiveFilters(params: AdminUsersListQuery): boolean {
-  return (
-    params.search !== undefined ||
-    params.role !== undefined ||
-    params.verified !== undefined ||
-    params.createdAfter !== undefined
-  );
-}
 
 export function UsersTableToolbar({
   params,
@@ -117,7 +110,7 @@ export function UsersTableToolbar({
           <SelectItem value="false">{t("filters.verifiedNo")}</SelectItem>
         </SelectContent>
       </Select>
-      {hasActiveFilters(params) ? (
+      {hasAdminUsersActiveFilters(params) ? (
         <Button type="button" variant="outline" onClick={onClearFilters}>
           {t("clearFilters")}
         </Button>
