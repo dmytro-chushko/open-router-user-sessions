@@ -21,6 +21,25 @@ import { UsersTableToolbar } from "@/features/admin/ui/users-table/users-table-t
 const SKELETON_ROW_COUNT = 5;
 const SKELETON_COLUMN_COUNT = 6;
 
+function getHeaderAriaSort(
+  canSort: boolean,
+  sorted: false | "asc" | "desc",
+): "ascending" | "descending" | "none" | undefined {
+  if (!canSort) {
+    return undefined;
+  }
+
+  if (sorted === "asc") {
+    return "ascending";
+  }
+
+  if (sorted === "desc") {
+    return "descending";
+  }
+
+  return "none";
+}
+
 function UsersTableSkeleton() {
   return (
     <div className="space-y-2" aria-hidden="true">
@@ -92,7 +111,13 @@ export function UsersTable() {
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => (
-                  <TableHead key={header.id}>
+                  <TableHead
+                    key={header.id}
+                    aria-sort={getHeaderAriaSort(
+                      header.column.getCanSort(),
+                      header.column.getIsSorted(),
+                    )}
+                  >
                     {header.isPlaceholder
                       ? null
                       : flexRender(

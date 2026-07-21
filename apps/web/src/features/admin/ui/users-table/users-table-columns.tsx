@@ -4,6 +4,7 @@ import type { AdminUserListItem } from "@repo/api-contracts";
 import { Badge } from "@repo/ui";
 import { createColumnHelper, type ColumnDef } from "@tanstack/react-table";
 
+import { UsersTableColumnHeader } from "@/features/admin/ui/users-table/users-table-column-header";
 import { Link } from "@/i18n/navigation";
 import { UserAvatar } from "@/shared/ui/user-avatar";
 
@@ -66,7 +67,9 @@ export function createUsersTableColumns({
   return [
     columnHelper.accessor("email", {
       id: "user",
-      header: t("columns.user"),
+      header: ({ column }) => (
+        <UsersTableColumnHeader column={column} title={t("columns.user")} />
+      ),
       enableSorting: true,
       cell: ({ row }) => {
         const user = row.original;
@@ -93,7 +96,9 @@ export function createUsersTableColumns({
       },
     }),
     columnHelper.accessor("role", {
-      header: t("columns.role"),
+      header: ({ column }) => (
+        <UsersTableColumnHeader column={column} title={t("columns.role")} />
+      ),
       enableSorting: false,
       cell: ({ getValue }) => (
         <Badge variant="secondary">
@@ -103,7 +108,9 @@ export function createUsersTableColumns({
     }),
     columnHelper.accessor("emailVerifiedAt", {
       id: "verified",
-      header: t("columns.verified"),
+      header: ({ column }) => (
+        <UsersTableColumnHeader column={column} title={t("columns.verified")} />
+      ),
       enableSorting: false,
       cell: ({ getValue }) => {
         const isVerified = getValue() !== null;
@@ -117,7 +124,9 @@ export function createUsersTableColumns({
     }),
     columnHelper.display({
       id: "auth",
-      header: t("columns.auth"),
+      header: ({ column }) => (
+        <UsersTableColumnHeader column={column} title={t("columns.auth")} />
+      ),
       enableSorting: false,
       cell: ({ row }) => (
         <UsersTableAuthBadges
@@ -129,7 +138,9 @@ export function createUsersTableColumns({
     }),
     columnHelper.accessor("createdAt", {
       id: "joined",
-      header: t("columns.joined"),
+      header: ({ column }) => (
+        <UsersTableColumnHeader column={column} title={t("columns.joined")} />
+      ),
       enableSorting: true,
       cell: ({ getValue }) => (
         <span className="tabular-nums text-muted-foreground">
@@ -139,7 +150,9 @@ export function createUsersTableColumns({
     }),
     columnHelper.display({
       id: "actions",
-      header: t("columns.actions"),
+      header: ({ column }) => (
+        <UsersTableColumnHeader column={column} title={t("columns.actions")} />
+      ),
       enableSorting: false,
       cell: ({ row }) => (
         <Link
