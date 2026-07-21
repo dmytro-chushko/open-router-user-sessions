@@ -97,6 +97,7 @@ export function useAdminUsersTable() {
     manualPagination: true,
     manualSorting: true,
     manualFiltering: true,
+    enableSortingRemoval: false,
     getCoreRowModel: getCoreRowModel(),
     onPaginationChange: (updater) => {
       const next = resolveUpdater(updater, pagination);
