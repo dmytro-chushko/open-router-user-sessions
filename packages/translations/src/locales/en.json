@@ -283,6 +283,10 @@
           "verifiedYes": "Verified",
           "verifiedNo": "Unverified"
         },
+        "filtersButton": "Filters",
+        "filtersButtonWithCount": "Filters ({count})",
+        "filtersTitle": "Filters",
+        "filtersDone": "Done",
         "empty": "No users match your filters.",
         "clearFilters": "Clear filters",
         "viewUser": "View",

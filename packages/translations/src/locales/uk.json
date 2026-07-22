@@ -283,6 +283,10 @@
           "verifiedYes": "Підтверджені",
           "verifiedNo": "Без верифікації"
         },
+        "filtersButton": "Фільтри",
+        "filtersButtonWithCount": "Фільтри ({count})",
+        "filtersTitle": "Фільтри",
+        "filtersDone": "Готово",
         "empty": "Жоден користувач не відповідає фільтрам.",
         "clearFilters": "Скинути фільтри",
         "viewUser": "Переглянути",
