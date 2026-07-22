@@ -22,15 +22,16 @@ export function UsersTablePagination({
   const canNext = page < totalPages;
 
   return (
-    <div className="flex flex-wrap items-center justify-between gap-2">
+    <div className="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between">
       <p className="text-sm text-muted-foreground">
         {t("pagination.page", { page, totalPages })}
       </p>
-      <div className="flex items-center gap-2">
+      <div className="grid grid-cols-2 gap-2 sm:flex sm:items-center">
         <Button
           type="button"
           variant="outline"
           size="sm"
+          className="w-full sm:w-auto"
           disabled={!canPrevious}
           aria-label={t("pagination.previousAriaLabel")}
           onClick={() => {
@@ -43,6 +44,7 @@ export function UsersTablePagination({
           type="button"
           variant="outline"
           size="sm"
+          className="w-full sm:w-auto"
           disabled={!canNext}
           aria-label={t("pagination.nextAriaLabel")}
           onClick={() => {
