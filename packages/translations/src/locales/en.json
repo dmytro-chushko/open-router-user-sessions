@@ -305,6 +305,43 @@
           "desc": "Sort descending",
           "none": "Not sorted"
         }
+      },
+      "userDetail": {
+        "title": "User",
+        "backToUsers": "Back to users",
+        "notFound": "User not found.",
+        "loadError": "Could not load user. Please try again.",
+        "retry": "Try again",
+        "profile": {
+          "title": "Profile",
+          "name": "Name",
+          "email": "Email",
+          "role": "Role",
+          "verified": "Email status",
+          "memberSince": "Member since",
+          "updatedAt": "Last updated",
+          "noName": "No name"
+        },
+        "auth": {
+          "title": "Sign-in methods",
+          "providers": "Connected accounts",
+          "password": "Password",
+          "hasPassword": "Yes",
+          "noPassword": "No",
+          "none": "None"
+        },
+        "sessions": {
+          "title": "Sessions",
+          "empty": "No sessions.",
+          "userAgent": "Device / browser",
+          "ip": "IP",
+          "createdAt": "Created",
+          "expiresAt": "Expires",
+          "status": "Status",
+          "active": "Active",
+          "expired": "Expired",
+          "unknownAgent": "Unknown device"
+        }
       }
     }
   },
