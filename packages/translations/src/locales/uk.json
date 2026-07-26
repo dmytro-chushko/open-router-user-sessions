@@ -342,6 +342,34 @@
           "expired": "Прострочена",
           "unknownAgent": "Невідомий пристрій"
         }
+      },
+      "actions": {
+        "title": "Дії",
+        "changeRole": "Змінити роль",
+        "saveRole": "Зберегти роль",
+        "savingRole": "Збереження…",
+        "roleUpdateSuccess": "Роль оновлено.",
+        "revokeSessions": "Відкликати всі сесії",
+        "revokingSessions": "Відкликання…",
+        "revokeSessionsSuccess": "Усі сесії відкликано.",
+        "revokeSessionsConfirmTitle": "Відкликати всі сесії?",
+        "revokeSessionsConfirmDescription": "Цей користувач вийде з усіх пристроїв.",
+        "deleteUser": "Видалити користувача",
+        "deletingUser": "Видалення…",
+        "deleteUserSuccess": "Користувача видалено.",
+        "deleteConfirmTitle": "Видалити користувача?",
+        "deleteConfirmDescription": "Цю дію не можна скасувати. Введіть email для підтвердження.",
+        "deleteConfirmEmailLabel": "Email",
+        "deleteConfirmEmailPlaceholder": "user@example.com",
+        "cancel": "Скасувати",
+        "confirm": "Підтвердити"
+      },
+      "errors": {
+        "cannotChangeOwnRole": "Ви не можете змінити власну роль.",
+        "cannotDemoteLastAdmin": "Не можна зняти роль з останнього адміністратора.",
+        "cannotDeleteSelf": "Ви не можете видалити власний акаунт з адмін-панелі.",
+        "cannotDeleteLastAdmin": "Не можна видалити останнього адміністратора.",
+        "generic": "Щось пішло не так. Спробуйте ще раз."
       }
     }
   },

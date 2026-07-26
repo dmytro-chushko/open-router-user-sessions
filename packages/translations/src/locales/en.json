@@ -342,6 +342,34 @@
           "expired": "Expired",
           "unknownAgent": "Unknown device"
         }
+      },
+      "actions": {
+        "title": "Actions",
+        "changeRole": "Change role",
+        "saveRole": "Save role",
+        "savingRole": "Saving…",
+        "roleUpdateSuccess": "Role updated.",
+        "revokeSessions": "Revoke all sessions",
+        "revokingSessions": "Revoking…",
+        "revokeSessionsSuccess": "All sessions revoked.",
+        "revokeSessionsConfirmTitle": "Revoke all sessions?",
+        "revokeSessionsConfirmDescription": "This user will be signed out on every device.",
+        "deleteUser": "Delete user",
+        "deletingUser": "Deleting…",
+        "deleteUserSuccess": "User deleted.",
+        "deleteConfirmTitle": "Delete user?",
+        "deleteConfirmDescription": "This cannot be undone. Type the email to confirm.",
+        "deleteConfirmEmailLabel": "Email",
+        "deleteConfirmEmailPlaceholder": "user@example.com",
+        "cancel": "Cancel",
+        "confirm": "Confirm"
+      },
+      "errors": {
+        "cannotChangeOwnRole": "You cannot change your own role.",
+        "cannotDemoteLastAdmin": "Cannot remove the last administrator.",
+        "cannotDeleteSelf": "You cannot delete your own account from the admin panel.",
+        "cannotDeleteLastAdmin": "Cannot delete the last administrator.",
+        "generic": "Something went wrong. Please try again."
       }
     }
   },
