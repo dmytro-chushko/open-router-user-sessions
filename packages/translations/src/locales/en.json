@@ -361,6 +361,7 @@
         "deleteConfirmDescription": "This cannot be undone. Type the email to confirm.",
         "deleteConfirmEmailLabel": "Email",
         "deleteConfirmEmailPlaceholder": "user@example.com",
+        "deleteConfirmEmailMismatch": "Email does not match.",
         "cancel": "Cancel",
         "confirm": "Confirm"
       },

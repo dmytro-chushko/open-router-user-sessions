@@ -1,4 +1,8 @@
-export type ModalName = "profile-deletion" | "avatar-deletion";
+export type ModalName =
+  | "profile-deletion"
+  | "avatar-deletion"
+  | "admin-revoke-sessions"
+  | "admin-user-deletion";
 
 export type ModalPayloads = {
   "profile-deletion": {
@@ -6,4 +10,12 @@ export type ModalPayloads = {
     hasPassword: boolean;
   };
   "avatar-deletion": Record<string, never>;
+  "admin-revoke-sessions": {
+    userId: string;
+    email: string;
+  };
+  "admin-user-deletion": {
+    userId: string;
+    email: string;
+  };
 };
