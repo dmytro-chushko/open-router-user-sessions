@@ -361,6 +361,7 @@
         "deleteConfirmDescription": "Цю дію не можна скасувати. Введіть email для підтвердження.",
         "deleteConfirmEmailLabel": "Email",
         "deleteConfirmEmailPlaceholder": "user@example.com",
+        "deleteConfirmEmailMismatch": "Введений email не збігається.",
         "cancel": "Скасувати",
         "confirm": "Підтвердити"
       },
