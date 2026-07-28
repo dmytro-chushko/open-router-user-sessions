@@ -14,13 +14,11 @@ import {
 } from "@repo/ui";
 import { useFormatter, useTranslations } from "next-intl";
 
+import { isAdminUserSessionActive } from "@/features/admin/lib/is-admin-user-session-active";
+
 type AdminUserSessionsListProps = {
   sessions: AdminUserSessionSummary[];
 };
-
-function isSessionActive(expiresAt: Date): boolean {
-  return expiresAt.getTime() > Date.now();
-}
 
 function SessionStatusBadge({
   isActive,
@@ -58,7 +56,7 @@ export function AdminUserSessionsList({
     <>
       <ul className="space-y-3 md:hidden" role="list">
         {sessions.map((session) => {
-          const isActive = isSessionActive(session.expiresAt);
+          const isActive = isAdminUserSessionActive(session.expiresAt);
 
           return (
             <li key={session.id}>
@@ -120,7 +118,7 @@ export function AdminUserSessionsList({
           </TableHeader>
           <TableBody>
             {sessions.map((session) => {
-              const isActive = isSessionActive(session.expiresAt);
+              const isActive = isAdminUserSessionActive(session.expiresAt);
 
               return (
                 <TableRow key={session.id}>

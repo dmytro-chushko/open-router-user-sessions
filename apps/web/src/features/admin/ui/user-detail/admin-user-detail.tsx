@@ -7,6 +7,7 @@ import { useFormatter, useTranslations } from "next-intl";
 import { useEffect } from "react";
 
 import { useAdminUserQuery } from "@/entities/admin/api/use-admin-user-query";
+import { AdminUserActions } from "@/features/admin/ui/user-detail/admin-user-actions";
 import { AdminUserSessionsList } from "@/features/admin/ui/user-detail/admin-user-sessions-list";
 import { ApiRequestError } from "@/shared/api/api-request-error";
 import { UserAvatar } from "@/shared/ui/user-avatar";
@@ -153,6 +154,8 @@ function AdminUserDetailContent({ user }: { user: AdminUserDetailData }) {
         <h2 className="text-lg font-semibold">{t("sessions.title")}</h2>
         <AdminUserSessionsList sessions={user.sessions} />
       </section>
+
+      <AdminUserActions user={user} />
     </div>
   );
 }

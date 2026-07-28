@@ -74,7 +74,7 @@ export default async function LocaleLayout({
       suppressHydrationWarning
     >
       <body className={geist.className}>
-        <NextIntlClientProvider messages={messages}>
+        <NextIntlClientProvider locale={locale} messages={messages}>
           <ThemeProvider
             attribute="class"
             defaultTheme="system"
