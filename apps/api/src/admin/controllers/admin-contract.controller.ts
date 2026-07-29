@@ -133,6 +133,8 @@ export class AdminContractController {
           targetUserId: query.targetUserId,
           from: query.from,
           to: query.to,
+          sortBy: query.sortBy,
+          sortOrder: query.sortOrder,
         }),
       ),
     }));
