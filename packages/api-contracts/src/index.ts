@@ -105,6 +105,7 @@ export type {
   AuditLogListResult,
   AuditLogUserSummary,
   AuditLogsListQuery,
+  AuditLogsListQueryParams,
 } from "./schemas/admin.js";
 export {
   USER_DELETION_ERROR_MESSAGES,

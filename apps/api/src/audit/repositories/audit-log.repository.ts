@@ -38,7 +38,7 @@ export class AuditLogRepository {
     const [items, total] = await Promise.all([
       this.prisma.auditLog.findMany({
         where,
-        orderBy: { createdAt: 'desc' },
+        orderBy: { [query.sortBy]: query.sortOrder },
         skip,
         take: query.pageSize,
         include: {

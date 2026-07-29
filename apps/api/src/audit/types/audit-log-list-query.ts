@@ -1,5 +1,8 @@
 import type { AuditAction } from '@generated/prisma/client';
 
+export type AuditLogListSortBy = 'createdAt' | 'action';
+export type AuditLogListSortOrder = 'asc' | 'desc';
+
 export type AuditLogListQuery = {
   page: number;
   pageSize: number;
@@ -8,4 +11,6 @@ export type AuditLogListQuery = {
   targetUserId?: string;
   from?: Date;
   to?: Date;
+  sortBy: AuditLogListSortBy;
+  sortOrder: AuditLogListSortOrder;
 };

@@ -306,6 +306,61 @@
           "none": "Без сортування"
         }
       },
+      "auditLogs": {
+        "title": "Журнал аудиту",
+        "description": "Події безпеки у вашому робочому просторі.",
+        "columns": {
+          "createdAt": "Час",
+          "action": "Дія",
+          "actor": "Виконавець",
+          "target": "Об'єкт",
+          "success": "Результат",
+          "details": "Деталі"
+        },
+        "actions": {
+          "LOGIN_SUCCESS": "Успішний вхід",
+          "LOGIN_FAILED": "Невдалий вхід",
+          "LOGOUT": "Вихід",
+          "ADMIN_ACCESS_DENIED": "Відмовлено в доступі до адмінки",
+          "USER_ROLE_CHANGED": "Змінено роль",
+          "USER_DELETED": "Користувача видалено",
+          "SESSIONS_REVOKED": "Сесії відкликано",
+          "ACCOUNT_SELF_DELETED": "Акаунт видалено власником"
+        },
+        "filters": {
+          "action": "Дія",
+          "actionAll": "Усі дії",
+          "from": "Дата від",
+          "to": "Дата до"
+        },
+        "filtersButton": "Фільтри",
+        "filtersButtonWithCount": "Фільтри ({count})",
+        "filtersTitle": "Фільтри",
+        "filtersDone": "Готово",
+        "empty": "Жодна подія не відповідає фільтрам.",
+        "clearFilters": "Скинути фільтри",
+        "anonymous": "Анонімно",
+        "targetNone": "Немає",
+        "successYes": "Успішно",
+        "successNo": "Помилка",
+        "detailsToggle": "Показати деталі",
+        "detailsEmpty": "Немає деталей",
+        "viewTargetAriaLabel": "Переглянути користувача {email}",
+        "retry": "Спробувати знову",
+        "loadError": "Не вдалося завантажити журнал аудиту. Спробуйте ще раз.",
+        "pagination": {
+          "previous": "Назад",
+          "next": "Далі",
+          "page": "Сторінка {page} з {totalPages}",
+          "previousAriaLabel": "Перейти на попередню сторінку",
+          "nextAriaLabel": "Перейти на наступну сторінку"
+        },
+        "sort": {
+          "asc": "Сортування за зростанням",
+          "desc": "Сортування за спаданням",
+          "none": "Без сортування"
+        }
+      },
       "userDetail": {
         "title": "Користувач",
         "backToUsers": "Назад до користувачів",

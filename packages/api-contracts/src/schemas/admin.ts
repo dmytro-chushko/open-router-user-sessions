@@ -160,6 +160,12 @@ export const auditLogsListQuerySchema = z.object({
   targetUserId: z.string().optional(),
   from: z.coerce.date().optional(),
   to: z.coerce.date().optional(),
+  sortBy: z.enum(["createdAt", "action"]).default("createdAt"),
+  sortOrder: z.enum(["asc", "desc"]).default("desc"),
 });
 
-export type AuditLogsListQuery = z.infer<typeof auditLogsListQuerySchema>;
+/** Parsed query (e.g. after Zod validation on the server). */
+export type AuditLogsListQuery = z.output<typeof auditLogsListQuerySchema>;
+
+/** Raw HTTP query params (e.g. ts-rest client `query` argument). */
+export type AuditLogsListQueryParams = z.input<typeof auditLogsListQuerySchema>;

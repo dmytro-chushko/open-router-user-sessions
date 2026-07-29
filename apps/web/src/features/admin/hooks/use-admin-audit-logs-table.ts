@@ -1,6 +1,6 @@
 "use client";
 
-import type { AdminUsersListQuery } from "@repo/api-contracts";
+import type { AuditLogsListQuery } from "@repo/api-contracts";
 import {
   getCoreRowModel,
   useReactTable,
@@ -10,46 +10,35 @@ import {
 import { useFormatter, useTranslations } from "next-intl";
 import { useMemo } from "react";
 
-import { useAdminUsersQuery } from "@/entities/admin/api/use-admin-users-query";
-import { DEFAULT_ADMIN_USERS_LIST_QUERY } from "@/entities/admin/model/admin-users-list-query";
-import { useAdminUsersListParams } from "@/features/admin/hooks/use-admin-users-list-params";
-import { createUsersTableColumns } from "@/features/admin/ui/users-table/users-table-columns";
+import { useAdminAuditLogsQuery } from "@/entities/admin/api/use-admin-audit-logs-query";
+import { DEFAULT_ADMIN_AUDIT_LOGS_LIST_QUERY } from "@/entities/admin/model/admin-audit-logs-list-query";
+import { useAdminAuditLogsListParams } from "@/features/admin/hooks/use-admin-audit-logs-list-params";
+import { createAuditLogsTableColumns } from "@/features/admin/ui/audit-logs/audit-logs-table-columns";
 import { resolveTableUpdater } from "@/shared/lib/resolve-table-updater";
 
-type AdminUsersSortColumnId = "user" | "joined";
-
-function resolveSortColumnId(
-  sortBy: AdminUsersListQuery["sortBy"],
-): AdminUsersSortColumnId {
-  return sortBy === "email" ? "user" : "joined";
-}
-
+/** Sortable column ids match the API sort keys one to one. */
 function resolveSortBy(
   columnId: string,
-): AdminUsersListQuery["sortBy"] | undefined {
-  if (columnId === "user") {
-    return "email";
-  }
-
-  if (columnId === "joined") {
-    return "createdAt";
+): AuditLogsListQuery["sortBy"] | undefined {
+  if (columnId === "createdAt" || columnId === "action") {
+    return columnId;
   }
 
   return undefined;
 }
 
-export function useAdminUsersTable() {
-  const t = useTranslations("protected.admin.users");
+export function useAdminAuditLogsTable() {
+  const t = useTranslations("protected.admin.auditLogs");
   const format = useFormatter();
-  const { params, setParams, clearFilters } = useAdminUsersListParams();
-  const query = useAdminUsersQuery({ params });
+  const { params, setParams, clearFilters } = useAdminAuditLogsListParams();
+  const query = useAdminAuditLogsQuery({ params });
 
   const columns = useMemo(
     () =>
-      createUsersTableColumns({
+      createAuditLogsTableColumns({
         t,
-        formatJoinedDate: (value) =>
-          format.dateTime(value, { dateStyle: "medium" }),
+        formatCreatedAt: (value) =>
+          format.dateTime(value, { dateStyle: "medium", timeStyle: "short" }),
       }),
     [format, t],
   );
@@ -65,7 +54,7 @@ export function useAdminUsersTable() {
   const sorting = useMemo<SortingState>(
     () => [
       {
-        id: resolveSortColumnId(params.sortBy),
+        id: params.sortBy,
         desc: params.sortOrder === "desc",
       },
     ],
@@ -107,8 +96,8 @@ export function useAdminUsersTable() {
 
       if (primarySort === undefined) {
         setParams({
-          sortBy: DEFAULT_ADMIN_USERS_LIST_QUERY.sortBy,
-          sortOrder: DEFAULT_ADMIN_USERS_LIST_QUERY.sortOrder,
+          sortBy: DEFAULT_ADMIN_AUDIT_LOGS_LIST_QUERY.sortBy,
+          sortOrder: DEFAULT_ADMIN_AUDIT_LOGS_LIST_QUERY.sortOrder,
         });
 
         return;

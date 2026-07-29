@@ -2,7 +2,11 @@ import type { AuditAction } from '@generated/prisma/client';
 import { Injectable, Logger } from '@nestjs/common';
 
 import { AuditLogRepository } from '@/audit/repositories';
-import type { AuditLogListQuery } from '@/audit/types/audit-log-list-query';
+import type {
+  AuditLogListQuery,
+  AuditLogListSortBy,
+  AuditLogListSortOrder,
+} from '@/audit/types/audit-log-list-query';
 import type { AuditLogRecordInput } from '@/audit/types/audit-log-record-input';
 import type {
   AuditLogListResult,
@@ -15,6 +19,8 @@ const DEFAULT_PAGE_SIZE = 20;
 const MAX_PAGE_SIZE = 100;
 const DEFAULT_USER_LIST_LIMIT = 10;
 const MAX_USER_LIST_LIMIT = 50;
+const DEFAULT_SORT_BY: AuditLogListSortBy = 'createdAt';
+const DEFAULT_SORT_ORDER: AuditLogListSortOrder = 'desc';
 
 export type AuditLogListForAdminInput = {
   page?: number;
@@ -24,6 +30,8 @@ export type AuditLogListForAdminInput = {
   targetUserId?: string;
   from?: Date;
   to?: Date;
+  sortBy?: AuditLogListSortBy;
+  sortOrder?: AuditLogListSortOrder;
 };
 
 /**
@@ -61,6 +69,8 @@ export class AuditLogService {
           targetUserId: input.targetUserId,
           from: input.from,
           to: input.to,
+          sortBy: input.sortBy ?? DEFAULT_SORT_BY,
+          sortOrder: input.sortOrder ?? DEFAULT_SORT_ORDER,
         };
         const { items, total } =
           await this.auditLogRepository.findManyPaginated(query);
