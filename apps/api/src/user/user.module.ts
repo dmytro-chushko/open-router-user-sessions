@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 
+import { AuditModule } from '@/audit/audit.module';
 import { CommonModule } from '@/common/common.module';
 import { PrismaModule } from '@/prisma/prisma.module';
 import { SessionsModule } from '@/sessions/sessions.module';
@@ -14,7 +15,13 @@ import {
 import { UserController } from '@/user/user.controller';
 
 @Module({
-  imports: [PrismaModule, CommonModule, SupabaseStorageModule, SessionsModule],
+  imports: [
+    PrismaModule,
+    CommonModule,
+    AuditModule,
+    SupabaseStorageModule,
+    SessionsModule,
+  ],
   controllers: [UserController],
   providers: [
     UsersRepository,

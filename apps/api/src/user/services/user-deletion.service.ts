@@ -1,3 +1,4 @@
+import { AuditAction } from '@generated/prisma/client';
 import {
   BadRequestException,
   ForbiddenException,
@@ -7,6 +8,7 @@ import {
 } from '@nestjs/common';
 import { USER_DELETION_ERROR_MESSAGES } from '@repo/api-contracts';
 
+import { AuditLogService } from '@/audit/audit-log.service';
 import { withErrorHandling } from '@/common/utils/error/error-handler';
 import { UserAvatarService } from '@/user/services/user-avatar.service';
 import { UsersService } from '@/user/services/users.service';
@@ -18,6 +20,7 @@ export class UserDeletionService {
   constructor(
     private readonly usersService: UsersService,
     private readonly userAvatarService: UserAvatarService,
+    private readonly auditLogService: AuditLogService,
   ) {}
 
   deleteAccount(input: {
@@ -76,6 +79,16 @@ export class UserDeletionService {
 
         await this.userAvatarService.cleanupManagedAvatarForUser(input.userId);
         await this.usersService.deleteById(input.userId);
+        await this.auditLogService.record({
+          action: AuditAction.ACCOUNT_SELF_DELETED,
+          actorId: null,
+          targetUserId: null,
+          success: true,
+          metadata: {
+            email: user.email,
+            userId: input.userId,
+          },
+        });
       },
       { logger: this.logger, context: 'UserDeletionService.deleteAccount' },
     );

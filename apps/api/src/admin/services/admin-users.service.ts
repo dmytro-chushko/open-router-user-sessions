@@ -157,13 +157,14 @@ export class AdminUsersService {
         await this.auditLogService.record({
           action: AuditAction.USER_DELETED,
           actorId: input.adminId,
-          targetUserId: input.targetUserId,
+          targetUserId: null,
           success: true,
           ipAddress: input.ipAddress ?? null,
           userAgent: input.userAgent ?? null,
           metadata: {
             email: target.email,
             role: target.role,
+            userId: input.targetUserId,
           },
         });
       },
