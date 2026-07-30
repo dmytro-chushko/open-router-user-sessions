@@ -4,6 +4,10 @@ import type { AuditLogItem } from "@repo/api-contracts";
 import { Badge } from "@repo/ui";
 import { createColumnHelper, type ColumnDef } from "@tanstack/react-table";
 
+import {
+  readAuditLogMetadataEmail,
+  readAuditLogTargetMetadataEmail,
+} from "@/features/admin/lib/read-audit-log-metadata-email";
 import { AuditLogsTableColumnHeader } from "@/features/admin/ui/audit-logs/audit-logs-table-column-header";
 import { Link } from "@/i18n/navigation";
 
@@ -89,15 +93,21 @@ export function createAuditLogsTableColumns({
       cell: ({ row }) => {
         const actor = row.original.actor;
 
-        if (actor === null) {
-          return (
-            <span className="text-muted-foreground text-sm">
-              {t("anonymous")}
-            </span>
-          );
+        if (actor !== null) {
+          return <span className="truncate">{actor.email}</span>;
         }
 
-        return <span className="truncate">{actor.email}</span>;
+        const metadataEmail = readAuditLogMetadataEmail(row.original.metadata);
+
+        if (metadataEmail !== null) {
+          return <span className="truncate">{metadataEmail}</span>;
+        }
+
+        return (
+          <span className="text-muted-foreground text-sm">
+            {t("anonymous")}
+          </span>
+        );
       },
     }),
     columnHelper.display({
@@ -112,22 +122,28 @@ export function createAuditLogsTableColumns({
       cell: ({ row }) => {
         const targetUser = row.original.targetUser;
 
-        if (targetUser === null) {
+        if (targetUser !== null) {
           return (
-            <span className="text-muted-foreground text-sm">
-              {t("targetNone")}
-            </span>
+            <Link
+              href={`/admin/users/${targetUser.id}`}
+              className="font-medium text-primary hover:underline"
+              aria-label={t("viewTargetAriaLabel", { email: targetUser.email })}
+            >
+              {targetUser.email}
+            </Link>
           );
         }
 
+        const metadataEmail = readAuditLogTargetMetadataEmail(row.original);
+
+        if (metadataEmail !== null) {
+          return <span className="truncate">{metadataEmail}</span>;
+        }
+
         return (
-          <Link
-            href={`/admin/users/${targetUser.id}`}
-            className="font-medium text-primary hover:underline"
-            aria-label={t("viewTargetAriaLabel", { email: targetUser.email })}
-          >
-            {targetUser.email}
-          </Link>
+          <span className="text-muted-foreground text-sm">
+            {t("targetNone")}
+          </span>
         );
       },
     }),
